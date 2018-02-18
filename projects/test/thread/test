@@ -1,0 +1,1 @@
+thread -syslogname CON:0/384/1200/240/Log/CLOSE/WAIT -sysdebug 3

@@ -1,0 +1,42 @@
+
+Foo foo0
+*** constructed Foo instance 0 via Foo()
+Foo instance 0={0,0}
+
+Foo foo1 = Foo(0,1)
+*** constructed Foo instance 1 via Foo(int, int)
+Foo instance 1={0,1}
+
+Foo foo2(2,3)
+*** constructed Foo instance 2 via Foo(int, int)
+Foo instance 2={2,3}
+
+Foo foo3 = foo1
+*** constructed Foo instance 3 via copy construction of Foo instance 1
+Foo instance 3={0,1}
+
+foo2 = foo3
+*** Foo::operator=(), copied Foo instance 3 data to Foo instance 2
+Foo instance 2={0,1}
+
+foo1 = foo1
+*** Foo::operator=() - skipped copy due to self-assignment of Foo instance 1
+Foo instance 1={0,1}
+
+Foo foo4 = 10
+*** construced Foo instance 4 via Foo(int)
+Foo instance 4={10,0}
+
+foo3 = 5
+*** construced Foo instance 5 via Foo(int)
+*** Foo::operator=(), copied Foo instance 5 data to Foo instance 3
+*** destroyed Foo instance 5
+Foo instance 3={5,0}
+
+-------------
+
+*** destroyed Foo instance 4
+*** destroyed Foo instance 3
+*** destroyed Foo instance 2
+*** destroyed Foo instance 1
+*** destroyed Foo instance 0

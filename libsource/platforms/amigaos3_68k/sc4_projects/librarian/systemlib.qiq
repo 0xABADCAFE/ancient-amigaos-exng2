@@ -1,0 +1,40 @@
+STORMDOC1
+1;
+DOCE
+Implement thread classes
+0,0,1,0,0,0;
+HIST
+3;
+
+
+0,1165680682,0,0;
+
+Implement thread classes
+8,1165680710,0,0;
+
+
+7,1165701529,0,0;
+TEXT
+317;
+Need to implement classes to support multithreaded code.
+Requires (pending design resolution):
+
+
+Threaded
+  +Thread
+  
+exceptions
+RuntimeError
+ +ThreadError
+   +ThreadStateViolation
+   +ThreadStartupFailure
+   +ThreadSecurityViolation
+   
+Lockable
+  +Lock
+  +LockReadOnly
+  
+exceptions
+RuntimeError
+  +ObjectDestroyed
+
