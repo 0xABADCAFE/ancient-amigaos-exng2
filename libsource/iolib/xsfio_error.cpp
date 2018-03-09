@@ -11,7 +11,7 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,42 +21,60 @@
 
 using namespace EXNGPrivate;
 
-DECLARE_MIN_RTTI(XSF::XSFError)
-DECLARE_MIN_RTTI(XSF::IncompatibleVersionError)
-DECLARE_MIN_RTTI(XSF::IncompatibleFormatError)
-DECLARE_MIN_RTTI(XSF::IncompatibleSubformatError)
+DECLARE_MIN_RTTI(XSF::Error)
+DECLARE_MIN_RTTI(XSF::InvalidStreamTypeError)
+DECLARE_MIN_RTTI(XSF::VersionError)
+DECLARE_MIN_RTTI(XSF::PayloadTypeError)
+DECLARE_MIN_RTTI(XSF::PayloadVersionError)
 DECLARE_MIN_RTTI(XSF::BadStorableError)
 DECLARE_MIN_RTTI(XSF::UnreadyStorableError)
 
+#ifdef EXNG2_BUILD_AVOID_BLOAT
 extern "C" {
-	void throwXSFError(void)
-	{
-		throw XSF::XSFError();
-	}
+  void throwXSFError(void)
+  {
+    throw XSF::Error();
+  }
 
-	void throwIncompatibleVersionError(void)
-	{
-		throw XSF::IncompatibleVersionError();
-	}
+  void throwXSFInvalidStreamTypeError(void)
+  {
+    throw XSF::InvalidStreamTypeError();
+  }
 
-	void throwIncompatibleFormatError(void)
-	{
-		throw XSF::IncompatibleFormatError();
-	}
+  void throwXSFVersionError(void)
+  {
+    throw XSF::VersionError();
+  }
 
-	void throwIncompatibleSubformatError(void)
-	{
-		throw XSF::IncompatibleSubformatError();
-	}
+  void throwXSFPayloadTypeError(void)
+  {
+    throw XSF::PayloadTypeError();
+  }
 
-	void throwBadStorableError(void)
-	{
-		throw XSF::BadStorableError();
-	}
+  void throwXSFPayloadVersionError(void)
+  {
+    throw XSF::PayloadVersionError();
+  }
 
-	void throwUnreadyStorableError(void)
-	{
-		throw XSF::UnreadyStorableError();
-	}
+  void throwXSFBadStorableError(void)
+  {
+    throw XSF::BadStorableError();
+  }
+
+  void throwXSFUnreadyStorableError(void)
+  {
+    throw XSF::UnreadyStorableError();
+  }
 };
 
+namespace {
+  const char* xsf       = "xsf";
+  const char* payload   = "payload";
+};
+
+XSF::InvalidStreamTypeError::InvalidStreamTypeError() : ResourceInvalid(xsf) {}
+XSF::VersionError::VersionError()                     : ResourceVersion(xsf) {}
+XSF::PayloadTypeError::PayloadTypeError()             : ResourceInvalid(payload) {}
+XSF::PayloadVersionError::PayloadVersionError()       : ResourceVersion(payload) {}
+
+#endif

@@ -11,76 +11,132 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #ifndef _EXNG2_IOLIB_XSFIO_HPP_
-#	define _EXNG2_IOLIB_XSFIO_HPP_
+# define _EXNG2_IOLIB_XSFIO_HPP_
 
-#	include <iolib/streamio.hpp>
+# include <systemlib/reflist.hpp>
+# include <iolib/streamio.hpp>
+# include <private/iolib/xsfio.hpp>
+# include <utilitylib/hashkeys.hpp>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  Base definitions
+//  XSF namespace
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class XSF {
-	public:
-		class XSFError;
-		class IncompatibleVersionError;
-		class IncompatibleFormatError;
-		class IncompatibleSubformatError;
-		class BadStorableError;
-		class UnreadyStorableError;
+namespace XSF {
 
+  // Main Participants
+  class Loader;
+  class Storable;
+  class StreamIn;
+  class StreamOut;
+
+  class Error;
+  class InvalidStreamTypeError;
+  class VersionError;
+  class PayloadTypeError;
+  class PayloadVersionError;
+  class BadStorableError;
+  class UnreadyStorableError;
+  class MachineLimitError;
+
+  enum {
+    VERSION         = 1,
+    REVISION        = 0,
+    IMPLEMENTATION  = VERSION<<16 | REVISION
+  };
+
+  enum {
+    STREAM_DIRECT       = 0x00000000,
+    STREAM_SWAPBYTES    = 0x00000001,
+    STREAM_CONVERT_NEG  = 0x00000002
+  };
+
+  class StreamIn;
+  class StreamOut;
+  class StreamUser;
+  class StreamHeader;
+  class ItemHeader;
 };
 
-class XSF::XSFError										: public RuntimeError { DEFINE_MIN_RTTI };
-class XSF::IncompatibleVersionError		: public XSF::XSFError { DEFINE_MIN_RTTI };
-class XSF::IncompatibleFormatError		: public XSF::XSFError { DEFINE_MIN_RTTI };
-class XSF::IncompatibleSubformatError	: public XSF::XSFError { DEFINE_MIN_RTTI };
-class XSF::BadStorableError						: public XSF::XSFError { DEFINE_MIN_RTTI };
-class XSF::UnreadyStorableError				: public XSF::XSFError { DEFINE_MIN_RTTI };
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  Auxilliaries
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include "xsf_error.hpp"
+#include "xsf_headers.hpp"
+#include "xsf_stream.hpp"
 
-class XSFStream {
-	DEFINE_MIN_RTTI
-	protected:
-		class XSFHeader : protected EXNGPrivate::StreamUser {
-			private:
-				// basic XSF data
-				static char	xsfId[4];
-				uint8				xsfVersion;
-				uint8				xsfRevision;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  Storeable
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-				// payload data
-				char				payloadId[6];
-				uint8				payloadVersion;
-				uint8				payloadRevision;
+class XSF::Storable : private XSF::StreamUser {
+  DEFINE_MIN_RTTI
 
-				// stream data
-				uint8				machineFlags;
-				uint8				accessorFlags;
+  private:
+    XSF::ItemHeader header;
 
-				void	init();
+  protected:
+    virtual bool    readyForWrite()                 = 0;
+    virtual bool    readyForRead()                  = 0;
+    virtual size_t  writePayload(XSF::StreamOut *f) = 0;
+    virtual size_t  readPayload(XSF::StreamIn* f)   = 0;
 
-			public:
-				void	read(StreamIn* in);
-				void	read(StreamOut* out);
-				void	write(StreamOut* out);
-				uint8	getXSFVersion()				const { return xsfVersion; }
-				uint8	getXSFRevision()			const { return xsfRevision; }
-				uint8	getPayloadVersion()		const { return payloadVersion; }
-				uint8	getPayloadRevision()	const { return payloadRevision; }
-				uint8	getMachineFlags()			const { return machineFlags; }
-				uint8 getAccessorFlags()		const { return accessorFlags; }
+  public:
+    size_t  write(XSF::StreamOut* f); // returns total bytes written
+    size_t  read(XSF::StreamIn* f);   // returns total bytes read
 
+  public:
+    Storable();
+    Storable(const char* desc, uint16 super, uint16 sub, uint8 ver, uint8 rev);
 
-		};
-
+    virtual ~Storable() {}
 };
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  Loader
+//
+//  Manages a set of factory methods for unserializing various Storeable object types from an input stream
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+class XSF::Loader {
+  public:
+    // Factory method
+    typedef XSF::Storable* (*StorableFactory)(XSF::StreamIn*);
+
+    static void                       addFactory(StorableFactory factory, uint32 classId, uint32 subClassId);
+
+    // Inspect a file
+    // An item is unloadable if there is no factory method for it or if it contains data that exceeds the host
+    // machine capability
+    static RefList<XSF::ItemHeader>*  getLoadableItemList(XSF::StreamIn*);
+    static RefList<XSF::ItemHeader>*  getUnLoadableItemList(XSF::StreamIn*);
+    static RefList<XSF::Storable>*    readAllLoadable(XSF::StreamIn*);
+
+  private:
+    typedef struct {
+      StorableFactory   factory;
+      uint32            classId;
+      uint32            subClassId;
+    } RegisteredLoader;
+
+    static RegisteredLoader* loaders;
+};
+
 
 #endif

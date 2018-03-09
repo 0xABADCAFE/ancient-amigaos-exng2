@@ -11,7 +11,7 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,9 +25,9 @@
 using namespace OSNative;
 using namespace EXNGPrivate;
 
-SystemLog::Verbosity	SystemLog::verbosity		= SystemLog::QUIET;
-std::FILE*						SystemLog::logFile			= 0;
-SignalSemaphore*			SystemLog::logSemaphore	= 0;
+SystemLog::Verbosity  SystemLog::verbosity    = SystemLog::QUIET;
+std::FILE*            SystemLog::logFile      = 0;
+SignalSemaphore*      SystemLog::logSemaphore = 0;
 
 LOGGING_DECLARE_CLASSNAME(SystemLog)
 
@@ -35,100 +35,102 @@ LOGGING_DECLARE_CLASSNAME(SystemLog)
 
 void SystemLog::init()
 {
-	sint32			debugLevel		= Application::getArgInteger("-sysdebug", 0, Application::ARG_CASE_SENSITIVE);
-	const char*	logName				= Application::getArgString("-syslogname", 0, Application::ARG_CASE_SENSITIVE);
-	const char* usingLogName	= 0;
-	std::FILE*	customLog			= 0;
+  sint32      debugLevel    = Application::getArgInteger("-sysdebug", 0, Application::ARG_CASE_SENSITIVE);
+  const char* logName       = Application::getArgString("-syslog", 0, Application::ARG_CASE_SENSITIVE);
+  const char* usingLogName  = 0;
+  std::FILE*  customLog     = 0;
 
-	logSemaphore = (SignalSemaphore*) AllocMem(sizeof(SignalSemaphore), MEMF_PUBLIC);
-	if (!logSemaphore) {
-		throwResourceExhausted("memory [logbuffer]");
-	}
-	else {
-		InitSemaphore(logSemaphore);
-	}
-	if (debugLevel>=QUIET && debugLevel <= INFO) {
-		verbosity = (Verbosity) debugLevel;
-	}
-	if (logName && (customLog = std::fopen(logName,"a")) ) {
-		logFile 			= customLog;
-		usingLogName	= logName;
-	} else {
-		logFile				= stdout;
-		usingLogName	= "<standard output>";
-	}
-	#ifdef EXNG2_BUILD_LOGGED
-	write(INFO, "%s - opened logfile %s at verbosity level %d\n", loggingClassName, usingLogName, verbosity);
-	#endif
+  if (!(logSemaphore = (SignalSemaphore*) AllocMem(sizeof(SignalSemaphore), MEMF_PUBLIC))) {
+    THROW_NSX(Error, ResourceExhausted("logbuffer"));
+  }
+  InitSemaphore(logSemaphore);
+
+  if (debugLevel>=QUIET && debugLevel <= INFO) {
+    verbosity = (Verbosity) debugLevel;
+  }
+  if (logName && (customLog = std::fopen(logName,"a")) ) {
+    logFile       = customLog;
+    usingLogName  = logName;
+  } else {
+    logFile       = stdout;
+    usingLogName  = "<standard output>";
+  }
+  #ifdef EXNG2_BUILD_LOGGED
+  write(INFO, "%s - opened logfile %s at verbosity level %d\n", loggingClassName, usingLogName, verbosity);
+  #endif
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void SystemLog::done()
 {
-	#ifdef EXNG2_BUILD_LOGGED
-	write(INFO, "%s - closing logfile\n", loggingClassName);
-	#endif
-	if (logFile && logFile != stdout) {
-		std::fclose(logFile);
-	}
-	if (logSemaphore) {
-		FreeMem(logSemaphore, sizeof(SignalSemaphore));
-	}
+  #ifdef EXNG2_BUILD_LOGGED
+  write(INFO, "%s - closing logfile\n", loggingClassName);
+  #endif
+  if (logFile && logFile != stdout) {
+    std::fclose(logFile);
+  }
+  if (logSemaphore) {
+    FreeMem(logSemaphore, sizeof(SignalSemaphore));
+  }
 
-	#ifdef EXNG2_BUILD_PARANOID
-	logFile				= 0;
-	logSemaphore	= 0;
-	#endif
+  #ifdef EXNG2_BUILD_PARANOID
+  logFile       = 0;
+  logSemaphore  = 0;
+  #endif
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 SystemLog::Verbosity SystemLog::setVerbosity(SystemLog::Verbosity v)
 {
-	Verbosity oldV = verbosity;
-	verbosity = v;
-	return oldV;
+  Verbosity oldV = verbosity;
+  verbosity = v;
+  return oldV;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void SystemLog::write(Level level, const char* msg, ...)
 {
-	static const char* levelName[] = {
-		"",
-		"Error",
-		"Warning",
-		"Info"
-	};
+  static const char levels[] = {' ','E','W','I'};
 
-	ObtainSemaphore(logSemaphore);
+  static time_t last = 0;
 
-	if (logFile && ((int)level <= (int)verbosity)) {
-		tm*			timeData;
-		time_t	sysTime;
-		time(&sysTime);
-		timeData = localtime(&sysTime);
+  ObtainSemaphore(logSemaphore);
 
-		va_list argList;
-		va_start(argList, msg);
-		std::fprintf(logFile, "[%s %8s]: ", asctime(timeData), levelName[level]);
-		std::vfprintf(logFile, msg, argList);
-		std::fflush(logFile);
-		va_end(argList);
-	}
-	ReleaseSemaphore(logSemaphore);
+  if (logFile && ((int)level <= (int)verbosity)) {
+    tm*     timeData;
+    time_t  sysTime;
+    time(&sysTime);
 
+    if (sysTime!=last) {
+      timeData = localtime(&sysTime);
+      last = sysTime;
+      std::fprintf(logFile, "%s\n", asctime(timeData));
+    }
+
+    va_list argList;
+    va_start(argList, msg);
+    std::fprintf(logFile, "[%c]: ", (int)levels[level]);
+    std::vfprintf(logFile, msg, argList);
+    std::fflush(logFile);
+    va_end(argList);
+
+  }
+  ReleaseSemaphore(logSemaphore);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void SystemLog::printf(Level level, const char* msg, ...)
 {
-	va_list argList;
-	va_start(argList, msg);
-	std::vfprintf(logFile, msg, argList);
-	va_end(argList);
+  if (logFile && ((int)level <= (int)verbosity)) {
+    va_list argList;
+    va_start(argList, msg);
+    std::vfprintf(logFile, msg, argList);
+    va_end(argList);
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

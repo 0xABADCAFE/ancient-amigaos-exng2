@@ -11,129 +11,129 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 inline sint32 Thread::getNumThreads()
 {
-	return numThreads;
+  return numThreads;
 }
 
 inline sint32 Thread::getNumActive()
 {
-	return numActive;
+  return numActive;
 }
 
 inline uint32 Thread::getStates() const
 {
-	return stateFlags;
+  return stateFlags;
 }
 
 inline bool Thread::hasStarted() const
 {
-	return stateFlags & STATE_STARTED;
+  return stateFlags & STATE_STARTED;
 }
 
 inline bool Thread::hasCompleted() const
 {
-	return stateFlags & STATE_COMPLETED;
+  return stateFlags & STATE_COMPLETED;
 }
 
 inline bool Thread::hasThrown() const
 {
-	return stateFlags & STATE_THROWN;
+  return stateFlags & STATE_THROWN;
 }
 
 inline bool Thread::isRunning() const
 {
-	return stateFlags == STATE_STARTED;
+  return stateFlags == STATE_STARTED;
 }
 
 inline bool Thread::isSleeping() const
 {
-	return stateFlags == (STATE_STARTED|STATE_SLEEPING);
+  return stateFlags == (STATE_STARTED|STATE_SLEEPING);
 }
 
 inline const char* Thread::getResourceName() const
 {
-	return name;
+  return name;
 }
 
 inline bool Thread::stopRequested() const
 {
-	return (taskState & (TASKSTATE_STOP|TASKSTATE_KILL));
+  return (taskState & (TASKSTATE_STOP|TASKSTATE_KILL));
 }
 
-inline Thread::Priority	Thread::getPriority() const
+inline Thread::Priority Thread::getPriority() const
 {
-	return (Thread::Priority)priority;
+  return (Thread::Priority)priority;
 }
 
 inline uint32 Thread::getStackSize() const
 {
-	return stackSize;
+  return stackSize;
 }
 
 inline Thread* Thread::getParent() const
 {
-	return parent;
+  return parent;
 }
 
 inline Thread* Thread::getCurrent()
 {
-	return threadForTask(OSNative::FindTask(0));
+  return threadForTask(OSNative::FindTask(0));
 }
 
 // mutators
-inline void Thread::setRunObserver(ThreadRunObserver* o)
+inline void Thread::setRunObserver(Thread::RunObserver* o)
 {
-	runObs = o;
+  runObs = o;
 }
 
-inline void Thread::setStateObserver(ThreadStateObserver* o)
+inline void Thread::setStateObserver(Thread::StateObserver* o)
 {
-	stateObs = o;
+  stateObs = o;
 }
 
 inline void Thread::setRealStackSize()
 {
-	stackSize = ((uint32)(internal->pr_Task.tc_SPUpper)) -
-							((uint32)(internal->pr_Task.tc_SPLower)) - 2;
+  stackSize = ((uint32)(internal->pr_Task.tc_SPUpper)) -
+              ((uint32)(internal->pr_Task.tc_SPLower)) - 2;
 }
 
 // Protectors
 inline void Thread::protectFromSelf() const
 {
-	if (/*OSNative::FindTask(0)*/findTask() == &(internal->pr_Task)) {
-		EXNGPrivate::throwThreadSecurityViolation();
-	}
+  if (findTask() == &(internal->pr_Task)) {
+    THROW_NSX(Thread, SecurityViolation());
+  }
 }
 
-inline void	Thread::protectFromOther() const
+inline void Thread::protectFromOther() const
 {
-	if (/*OSNative::FindTask(0)*/findTask() != &(internal->pr_Task)) {
-		EXNGPrivate::throwThreadSecurityViolation();
-	}
+  if (findTask() != &(internal->pr_Task)) {
+    THROW_NSX(Thread, SecurityViolation());
+  }
 }
 
 inline void Thread::protectStartedState() const
 {
-	if (hasStarted()) {
-		EXNGPrivate::throwThreadStateViolation();
-	}
+  if (hasStarted()) {
+    THROW_NSX(Thread, StateViolation());
+  }
 }
 
 inline void Thread::protectStoppedState() const
 {
-	if (!hasStarted()) {
-		EXNGPrivate::throwThreadStateViolation();
-	}
+  if (!hasStarted()) {
+    THROW_NSX(Thread, StateViolation());
+  }
 }
 
 inline uint32 EXNGPrivate::ThreadImplementor::await(uint32 trigger)
 {
-	return OSNative::Wait(trigger);
+  return OSNative::Wait(trigger);
 }
 

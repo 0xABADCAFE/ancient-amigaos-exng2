@@ -11,7 +11,7 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,19 +21,14 @@
 #include <cstdio>
 
 namespace OSNative {
-	extern "C" {
-		#include <clib/alib_protos.h>
-	}
+  extern "C" {
+    #include <clib/alib_protos.h>
+  }
 };
 
-/*
-#ifdef EXNG2_BUILD_LOGGED
-#undef EXNG2_BUILD_LOGGED
-#undef LOGGING_DECLARE_FUNCNAME
-#define LOGGING_DECLARE_FUNCNAME(x)
-#endif
-*/
+
 using namespace OSNative;
+using namespace Time;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -52,126 +47,126 @@ Thread::Sleeper::Sleeper() : timerPort(0), timerIO(0), timerSignal(0), req(0), f
 
 bool Thread::Sleeper::init()
 {
-	LOGGING_DECLARE_FUNCNAME(init)
+  LOGGING_DECLARE_FUNCNAME(init)
 
-	if ( !(timerPort = CreateMsgPort()) ) {
-		flags |= PORT_FAIL;
+  if ( !(timerPort = CreateMsgPort()) ) {
+    flags |= PORT_FAIL;
 
-		#ifdef EXNG2_BUILD_LOGGED
-		SystemLog::write(
-			SystemLog::ERROR, "%s::%s - failed to create MsgPort\n",
-			loggingClassName, loggingFuncName
-		);
-		#endif
+    #ifdef EXNG2_BUILD_LOGGED
+    SystemLog::write(
+      SystemLog::ERROR, "%s::%s - failed to create MsgPort\n",
+      loggingClassName, loggingFuncName
+    );
+    #endif
 
-		return false;
-	}
-	timerSignal = 1<<timerPort->mp_SigBit;
-	if ( !(timerIO = CreateExtIO(timerPort, sizeof(timerequest))) )	{
-		flags |= IORQ_FAIL;
+    return false;
+  }
+  timerSignal = 1<<timerPort->mp_SigBit;
+  if ( !(timerIO = CreateExtIO(timerPort, sizeof(timerequest))) ) {
+    flags |= IORQ_FAIL;
 
-		#ifdef EXNG2_BUILD_LOGGED
-		SystemLog::write(
-			SystemLog::ERROR, "%s::%s - failed to create IORequest\n",
-			loggingClassName, loggingFuncName
-		);
-		#endif
+    #ifdef EXNG2_BUILD_LOGGED
+    SystemLog::write(
+      SystemLog::ERROR, "%s::%s - failed to create IORequest\n",
+      loggingClassName, loggingFuncName
+    );
+    #endif
 
-		return false;
-	}
-	if (OpenDevice(TIMERNAME, UNIT_MICROHZ, timerIO, 0)!=0)	{
-		flags |= OPDV_FAIL;
+    return false;
+  }
+  if (OpenDevice(TIMERNAME, UNIT_MICROHZ, timerIO, 0)!=0) {
+    flags |= OPDV_FAIL;
 
-		#ifdef EXNG2_BUILD_LOGGED
-		SystemLog::write(
-			SystemLog::ERROR, "%s::%s - failed to open %s\n",
-			loggingClassName, loggingFuncName, TIMERNAME
-		);
-		#endif
+    #ifdef EXNG2_BUILD_LOGGED
+    SystemLog::write(
+      SystemLog::ERROR, "%s::%s - failed to open %s\n",
+      loggingClassName, loggingFuncName, TIMERNAME
+    );
+    #endif
 
-		return false;
-	}
+    return false;
+  }
 
-	return true;
+  return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Thread::Sleeper::done()
 {
-	//LOGGING_DECLARE_FUNCNAME(done)
+  //LOGGING_DECLARE_FUNCNAME(done)
 
-	if (timerIO) {
-		if (flags & IORQ_USED) {
-			AbortIO(timerIO);
-			WaitIO(timerIO);
-			SetSignal(0, timerSignal);
-		}
-		CloseDevice(timerIO);
-		DeleteExtIO(timerIO);
-	}
-	if (timerPort) {
-		DeleteMsgPort(timerPort);
-	}
+  if (timerIO) {
+    if (flags & IORQ_USED) {
+      AbortIO(timerIO);
+      WaitIO(timerIO);
+      SetSignal(0, timerSignal);
+    }
+    CloseDevice(timerIO);
+    DeleteExtIO(timerIO);
+  }
+  if (timerPort) {
+    DeleteMsgPort(timerPort);
+  }
 
-	timerPort = 0;
-	timerIO = 0;
-	timerSignal = 0;
-	flags = 0;
+  timerPort = 0;
+  timerIO = 0;
+  timerSignal = 0;
+  flags = 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Thread::Sleeper::abortDelay()
 {
-	//LOGGING_DECLARE_FUNCNAME(abortDelay)
+  //LOGGING_DECLARE_FUNCNAME(abortDelay)
 
-	// Cancels a scheduled wake up
-	if (timerIO && (flags & IORQ_USED))	{
-		AbortIO(timerIO);
-		WaitIO(timerIO);
-		SetSignal(0, timerSignal);
-		flags &= ~IORQ_USED;
-	}
+  // Cancels a scheduled wake up
+  if (timerIO && (flags & IORQ_USED)) {
+    AbortIO(timerIO);
+    WaitIO(timerIO);
+    SetSignal(0, timerSignal);
+    flags &= ~IORQ_USED;
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 uint32 Thread::Sleeper::suspend(uint32 millis, uint32 trigger)
 {
-	req = trigger;
-	if (!(millis|trigger)) {
-		return 0;
-	}
-	abortDelay();
-	if (millis)	{
-		timerReq->tr_node.io_Command	= TR_ADDREQUEST;
-		timerReq->tr_time.tv_secs			= (millis/1000);
-		timerReq->tr_time.tv_micro		= 1000*(millis%1000);
-		SendIO(timerIO);
-		flags |= IORQ_USED;
-		flags &= ~IORQ_4EVR;
-	}
-	else {
-		flags |= IORQ_4EVR;
-	}
-	return Wait(timerSignal|trigger);
+  req = trigger;
+  if (!(millis|trigger)) {
+    return 0;
+  }
+  abortDelay();
+  if (millis) {
+    timerReq->tr_node.io_Command  = TR_ADDREQUEST;
+    timerReq->tr_time.tv_secs     = (millis/1000);
+    timerReq->tr_time.tv_micro    = 1000*(millis%1000);
+    SendIO(timerIO);
+    flags |= IORQ_USED;
+    flags &= ~IORQ_4EVR;
+  }
+  else {
+    flags |= IORQ_4EVR;
+  }
+  return Wait(timerSignal|trigger);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 uint32 Thread::Sleeper::suspend()
 {
-	if (req) {
-		if (timerIO && (flags & IORQ_USED)) {
-			if (CheckIO(timerIO)==0) {
-				return Wait(req|timerSignal);
-			}
-			else {
-				return timerSignal;
-			}
-		}
-	}
-	return 0;
+  if (req) {
+    if (timerIO && (flags & IORQ_USED)) {
+      if (CheckIO(timerIO)==0) {
+        return Wait(req|timerSignal);
+      }
+      else {
+        return timerSignal;
+      }
+    }
+  }
+  return 0;
 }
 

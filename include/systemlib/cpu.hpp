@@ -11,7 +11,7 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -19,36 +19,38 @@
 
 
 #ifndef _EXNG2_SYSTEMLIB_CPU_HPP_
-#	define _EXNG2_SYSTEMLIB_CPU_HPP_
+# define _EXNG2_SYSTEMLIB_CPU_HPP_
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//
+//  ProcessorInfo
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#	if defined(XP_AMIGAOS3_68K)
-#		include "platforms/amigaos3_68k/systemlib/cpu_native.hpp"
-#	elif defined(XP_AMIGAOS3_PPC)
-#		include "platforms/amigaos3_wos/systemlib/cpu_native.hpp"
-#	elif defined(XP_AMIGAOS4)
-#		include "platforms/amigaos4/systemlib/cpu_native.hpp"
-#	elif defined(XP_AROS_X86)
-#		include "platforms/aros_i386/systemlib/cpu_native.hpp"
-#	elif defined(XP_MORPHOS)
-#		include "platforms/morphos/systemlib/cpu_native.hpp"
-#	elif defined(XP_LINUX_PPC)
-#		include "platforms/linux_ppc/systemlib/cpu_native.hpp"
-#	elif defined(XP_LINUX_X86)
-#		include "platforms/linux_i386/systemlib/cpu_native.hpp"
-#	elif defined(XP_WIN9X)
-#		include "platforms/win9x/systemlib/cpu_native.hpp"
-#	elif defined(XP_WIN2K)
-#		include "platforms/win2k/systemlib/cpu_native.hpp"
-#	elif defined(XP_MACOSX)
-#		include "platforms/macosx/systemlib/cpu_native.hpp"
-#	else
-#		error "Platform implementation not defined"
-#	endif
+namespace Machine {
+  class ProcessorInfo;
+};
+
+# include <systemlib/cpu_native.hpp>
+
+//# include XP_INCLUDE_PLATFORM("systemlib/cpu_native.hpp")
+
+class Machine::ProcessorInfo : private EXNGPrivate::CPU {
+  public:
+    static uint32         getProcessorCount()
+    {
+      return CPU::getCPUCount();
+    }
+
+    static const char*    getProcessorName(uint32 cpu)
+    {
+      return CPU::getCPUName(cpu);
+    }
+
+    static float64        getProcessorSpeed(uint32 cpu)
+    {
+      return CPU::getCPUSpeed(cpu);
+    }
+};
 
 #endif

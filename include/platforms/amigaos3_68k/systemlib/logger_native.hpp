@@ -11,63 +11,63 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #ifndef _EXNG2_SYSTEMLIB_LOGGER_NATIVE_HPP_
-#	define _EXNG2_SYSTEMLIB_LOGGER_NATIVE_HPP_
+# define _EXNG2_SYSTEMLIB_LOGGER_NATIVE_HPP_
 
-#	include <cstdio>
+# include <cstdio>
 
 class SystemLog {
 
-	public:
-		typedef enum {
-			QUIET				= 0,
-			ERRORS			= 1,
-			WARNINGS		= 2,
-			ALL					= 3,
-		} Verbosity;
+  public:
+    typedef enum {
+      QUIET       = 0,
+      ERRORS      = 1,
+      WARNINGS    = 2,
+      ALL         = 3,
+    } Verbosity;
 
-		typedef enum {
-			ERROR 	= 1,
-			WARNING	= 2,
-			INFO		= 3
-		} Level;
+    typedef enum {
+      ERROR   = 1,
+      WARNING = 2,
+      INFO    = 3
+    } Level;
 
-		static void				write(Level l, const char* msg, ...);
-		static Verbosity	setVerbosity(Verbosity v);
+    static void       write(Level l, const char* msg, ...);
+    static Verbosity  setVerbosity(Verbosity v);
 
-	protected:
-		static void				lock();
-		static void				printf(Level l, const char* msg, ...);
-		static void				unlock();
+  protected:
+    static void       lock();
+    static void       printf(Level l, const char* msg, ...);
+    static void       unlock();
 
 
-	private:
-		static void				init();
-		static void				done();
+  private:
+    static void       init();
+    static void       done();
 
-		static Verbosity	verbosity;
-		static std::FILE*	logFile;
-		static OSNative::SignalSemaphore* logSemaphore;
+    static Verbosity  verbosity;
+    static std::FILE* logFile;
+    static OSNative::SignalSemaphore* logSemaphore;
 
-		friend class Startup;
+    friend class Startup;
 
-		LOGGING_DEFINE_CLASSNAME
+    LOGGING_DEFINE_CLASSNAME
 };
 
 inline void SystemLog::lock()
 {
-	OSNative::ObtainSemaphore(logSemaphore);
+  OSNative::ObtainSemaphore(logSemaphore);
 }
 
 inline void SystemLog::unlock()
 {
-	std::fflush(logFile);
-	OSNative::ReleaseSemaphore(logSemaphore);
+  std::fflush(logFile);
+  OSNative::ReleaseSemaphore(logSemaphore);
 }
 
 

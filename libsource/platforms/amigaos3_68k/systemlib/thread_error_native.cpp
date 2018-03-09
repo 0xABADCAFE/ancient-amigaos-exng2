@@ -11,31 +11,26 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <systemlib/thread.hpp>
 #include <systemlib/logger.hpp>
-/*
-#ifdef EXNG2_BUILD_LOGGED
-#undef EXNG2_BUILD_LOGGED
-#undef LOGGING_DECLARE_FUNCNAME
-#define LOGGING_DECLARE_FUNCNAME(x)
-#endif
-*/
+#include <private/systemlib/error.hpp>
+
 using namespace OSNative;
 using namespace EXNGPrivate;
 
 namespace EXNGPrivate {
-	class Unhandled68KTrap : public RuntimeError { DEFINE_MIN_RTTI };
+  class Unhandled68KTrap : public Error::Runtime { DEFINE_MIN_RTTI };
 };
 
-DECLARE_MIN_RTTI(Thread::ThreadError)
-DECLARE_MIN_RTTI(Thread::ThreadSecurityViolation)
-DECLARE_MIN_RTTI(Thread::ThreadStateViolation)
-DECLARE_MIN_RTTI(Thread::ThreadStartupFailure)
+DECLARE_MIN_RTTI(Thread::Error)
+DECLARE_MIN_RTTI(Thread::SecurityViolation)
+DECLARE_MIN_RTTI(Thread::StateViolation)
+DECLARE_MIN_RTTI(Thread::StartupFailure)
 DECLARE_MIN_RTTI(EXNGPrivate::Unhandled68KTrap)
 
 
@@ -46,11 +41,19 @@ DECLARE_MIN_RTTI(EXNGPrivate::Unhandled68KTrap)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 extern "C" {
-	void trapCPU68K(void);	// assembler
-	void throw68K(void)
-	{
-		throw Unhandled68KTrap();
-	}
-
+  void trapCPU68K(void);  // assembler
+  void throw68K(void)               { throw Unhandled68KTrap(); }
 }
+
+#ifndef EXNG2_BUILD_AVOID_BLOAT
+# include <private/systemlib/error.hpp>
+extern "C" {
+  // needed by assembler components
+  void throwErrorNullPointer(void)       { throw Error::NullPointer(); }
+  void throwErrorZeroDivide(void)        { throw Error::ZeroDivide(); }
+  void throwErrorIllegalAddress(void)    { throw Error::IllegalAddress(); }
+  void throwErrorBadAlignment(void)      { throw Error::BadAlignment(); }
+  void throwErrorRange(void)             { throw Error::Range(); }
+}
+#endif
 

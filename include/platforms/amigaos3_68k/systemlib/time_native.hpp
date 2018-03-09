@@ -11,51 +11,67 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #ifndef _EXNG2_SYSTEMLIB_TIME_NATIVE_HPP_
-#	define _EXNG2_SYSTEMLIB_TIME_NATIVE_HPP_
+# define _EXNG2_SYSTEMLIB_TIME_NATIVE_HPP_
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  MilliClock
+//  Time::MilliClock
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace OSNative {
-	extern "C" {
-		#include <proto/timer.h>
-	}
+  extern "C" {
+    #include <proto/timer.h>
+  }
 };
 
-class MilliClock {
-	public:
-		void			set();
-		uint32		elapsed() const;
-		float64		elapsedFrac() const;
-	public:
-		MilliClock();
+class Time::MilliClock {
+  public:
+    void      set();
+    uint32    elapsed() const;
+    float64   elapsedFrac() const;
+  public:
+    MilliClock();
 
-	private:
-		static uint32				clockFreq;
-		OSNative::EClockVal	mark;
+  private:
+    static uint32       clockFreq;
+    OSNative::EClockVal mark;
 };
 
-class Clock {
-	public:
-		void						set();
-		const Interval&	elapsed() const;
-		const Interval&	last()		const { return t; }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  Time::Clock
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public:
-		Clock();
+class Time::Clock {
+  public:
+    void                  set();
+    const Time::Interval& elapsed() const;
+    const Time::Interval& last()    const { return t; }
 
-	private:
-		OSNative::timeval	mark;
-		mutable Interval	t;
+  public:
+    Clock();
+
+  private:
+    OSNative::timeval       mark;
+    mutable Time::Interval  t;
+
+    static void init();
+
+    friend class Startup;
 };
+
+#ifdef __STORMGCC__
+#undef YEAR_ZERO
+#define YEAR_ZERO 0
+#endif
+
 
 #endif

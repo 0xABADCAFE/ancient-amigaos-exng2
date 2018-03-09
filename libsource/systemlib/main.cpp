@@ -11,7 +11,7 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,75 +28,82 @@
 
 #include <systemlib/logger.hpp>
 
+// Verbose logging
+// We aim to be able to report untrapped exceptions arising at each
+// distinct stage
+
 int main (int argN, char** argV)
 {
-	static const char* errorString[] = {
-		"Unhandled %s in startup: argument '%s' %s\n",
-		"Unhandled %s in startup: resource '%s' %s\n",
-		"Unhandled %s in startup\n",
-		"Unhandled %s in cleanup\n"
-	};
-	Application*	app = 0;
-	sint32				returnVal = 0;
+  static const char* errorTemplate = "Unspecified exception during %s\n";
+  Application*  app       = 0;
+  sint32        returnVal = 0;
 
-	try {
-		Startup::init(argN, argV);
-		SystemLog::write(SystemLog::INFO, "eXtropia C++ framework compiled with EXNG2_BUILD_LOGGED option\n");
-		SystemLog::write(SystemLog::INFO, "Startup complete, creating application instance\n");
-		app = Application::createInstance();
-		SystemLog::write(SystemLog::INFO, "Application instance created, invoking run()\n");
-		returnVal = app->run();
-	}
-	catch (Application::MissingArgument& arg) {
-		SystemLog::write(SystemLog::ERROR, errorString[0], arg.getClass(), arg.getName(), "is required");
-	}
-	catch (Application::InvalidArgument& arg) {
-		SystemLog::write(SystemLog::ERROR, errorString[0], arg.getClass(), arg.getName(), "is invalid");
-	}
-	catch (ResourceUnavailable& res) {
-		SystemLog::write(SystemLog::ERROR, errorString[1], res.getClass(), res.getResourceName(), " is unavailable");
-	}
-	catch (ResourceError& err) {
-		SystemLog::write(SystemLog::ERROR, errorString[1], err.getClass(), err.getResourceName(), " encountered a problem");
-	}
-	catch (RuntimeError& err) {
-		SystemLog::write(SystemLog::ERROR, errorString[2], err.getClass());
-	}
-	catch (...) {
-		SystemLog::write(SystemLog::ERROR, errorString[2], "exception");
-	}
-	try {
-		SystemLog::write(SystemLog::INFO, "Destroying application\n");
-		Application::destroyInstance(app);
-	}
-	catch (RuntimeError& err) {
-		SystemLog::write(SystemLog::ERROR, errorString[3], err.getClass());
-	}
-	catch (...) {
-		SystemLog::write(SystemLog::ERROR, errorString[3], "exception");
-	}
-	Startup::done();
-	return (int)returnVal;
+  try {
+    Startup::init(argN, argV);
+    SystemLog::write(SystemLog::INFO, "eXtropia C++ framework compiled with EXNG2_BUILD_LOGGED option\n");
+    SystemLog::write(SystemLog::INFO, "Startup complete, creating application instance\n");
+
+    Application::setStage(Application::APP_STARTUP);
+    app = Application::createInstance();
+
+    SystemLog::write(SystemLog::INFO, "Application instance created, invoking run()\n");
+
+    Application::setStage(Application::APP_RUNTIME);
+    returnVal = app->run();
+  }
+  catch (Error::Runtime& err) {
+    err.log();
+  }
+  catch (...) {
+    SystemLog::write(
+      SystemLog::ERROR,
+      errorTemplate,
+      Application::getStage()
+    );
+  }
+
+  // cleanup
+  try {
+    SystemLog::write(SystemLog::INFO, "Destroying application\n");
+    Application::setStage(Application::APP_CLEANUP);
+    Application::destroyInstance(app);
+  }
+  catch (Error::Runtime& err) {
+    err.log();
+  }
+  catch (...) {
+    SystemLog::write(
+      SystemLog::ERROR,
+      errorTemplate,
+      Application::getStage()
+    );
+  }
+  SystemLog::write(SystemLog::INFO, "Freeing framework\n");
+  Startup::done();
+  return (int)returnVal;
 }
 
 #else
 
 int main (int argN, char** argV)
 {
-	Application*	app = 0;
-	sint32				returnVal = 0;
-	try {
-		Startup::init(argN, argV);
-		app = Application::createInstance();
-		returnVal = app->run();
-	}
-	catch (...) {	}
-	try {
-		Application::destroyInstance(app);
-	}
-	catch (...) { }
-	Startup::done();
-	return (int)returnVal;
+  Application*  app = 0;
+  sint32        returnVal = 0;
+  try {
+    Startup::init(argN, argV);
+    Application::setStage(Application::APP_STARTUP);
+    app = Application::createInstance();
+    Application::setStage(Application::APP_RUNTIME);
+    returnVal = app->run();
+  }
+  catch (...) { }
+  try {
+    Application::setStage(Application::APP_CLEANUP);
+    Application::destroyInstance(app);
+  }
+  catch (...) { }
+  Startup::done();
+  return (int)returnVal;
 }
 
 #endif

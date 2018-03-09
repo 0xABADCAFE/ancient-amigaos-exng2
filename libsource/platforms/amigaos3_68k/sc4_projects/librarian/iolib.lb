@@ -1,7 +1,13 @@
 StormLibrarian Document (0003)
-lib/iolib020_060.lib
+exng2:lib/amigaos3_68k/iolib020_060.lib
 1 0 0
-Developer:eXtropia/exng2/libsource/platforms/amigaos3_68k/sc4_projects/obj/iolib/streamio_error.o
-Developer:eXtropia/exng2/libsource/platforms/amigaos3_68k/sc4_projects/obj/iolib/streamio_native.o
 Developer:eXtropia/exng2/libsource/platforms/amigaos3_68k/sc4_projects/obj/iolib/inputdevices.o
+Developer:eXtropia/exng2/libsource/platforms/amigaos3_68k/sc4_projects/obj/iolib/streamio_error.o
+Developer:Extropia/exng2/libsource/platforms/amigaos3_68k/sc4_projects/obj/iolib/stream_buffer_native.o
+Developer:Extropia/exng2/libsource/platforms/amigaos3_68k/sc4_projects/obj/iolib/stream_in_native.o
+Developer:Extropia/exng2/libsource/platforms/amigaos3_68k/sc4_projects/obj/iolib/stream_out_native.o
+Developer:eXtropia/exng2/libsource/platforms/amigaos3_68k/sc4_projects/obj/iolib/xsfio.o
+Developer:eXtropia/exng2/libsource/platforms/amigaos3_68k/sc4_projects/obj/iolib/xsfio_error.o
+Developer:Extropia/exng2/libsource/platforms/amigaos3_68k/sc4_projects/obj/iolib/xsf_headers.o
+Developer:Extropia/exng2/libsource/platforms/amigaos3_68k/sc4_projects/obj/iolib/xsf_stream.o
 EOD

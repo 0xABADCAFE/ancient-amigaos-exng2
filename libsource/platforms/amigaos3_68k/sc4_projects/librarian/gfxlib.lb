@@ -1,0 +1,24 @@
+StormLibrarian Document (0003)
+exng2:lib/amigaos3_68k/gfxlib020_060.lib
+1 0 0
+obj/gfxlib/colour.o
+obj/gfxlib/display.o
+obj/gfxlib/display_db.o
+obj/gfxlib/display_db_native.o
+obj/gfxlib/display_flipbuffered.o
+obj/gfxlib/display_native.o
+obj/gfxlib/display_screen_native.o
+obj/gfxlib/display_unbuffered.o
+obj/gfxlib/display_windowed.o
+obj/gfxlib/display_windowed_native.o
+obj/gfxlib/gfx.o
+obj/gfxlib/gfx_native.o
+obj/gfxlib/palette.o
+obj/gfxlib/pixel.o
+obj/gfxlib/pixelmap.o
+obj/gfxlib/surface_native.o
+obj/gfxlib/display_input_dispatch_native.o
+obj/gfxlib/draw.o
+obj/gfxlib/draw_amiga.o
+obj/gfxlib/draw_amiga_render.o
+EOD

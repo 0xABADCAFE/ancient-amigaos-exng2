@@ -11,13 +11,13 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #ifndef _EXNG2_SYSTEMLIB_ERROR_HPP_
-#	define _EXNG2_SYSTEMLIB_ERROR_HPP_
+# define _EXNG2_SYSTEMLIB_ERROR_HPP_
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -25,11 +25,31 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RuntimeError
+namespace Error {
+  class Runtime;
+  class InvalidValue;
+  class NullPointer;
+  class ZeroDivide;
+  class IllegalAddress;
+  class BadAlignment;
+  class Range;
+  class ObjectModified;
+  class ObjectDestroyed;
+  class ObjectStateViolation;
+  class Resource;
+  class ResourceInvalid;
+  class ResourceExhausted;
+  class ResourceUnavailable;
+  class ResourceLocked;
+  class ResourceVersion;
+};
+
+class Error::Runtime
 {
-	DEFINE_MIN_RTTI
-	public:
-		virtual const char* getClass() const;
+  DEFINE_MIN_RTTI
+  public:
+    virtual const char* getClass() const;
+    virtual void log() const;
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,14 +58,15 @@ class RuntimeError
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class InvalidValue		: public RuntimeError { DEFINE_MIN_RTTI };
-class NullPointer			: public RuntimeError { DEFINE_MIN_RTTI };
-class ZeroDivide			: public RuntimeError { DEFINE_MIN_RTTI };
-class IllegalAddress	: public RuntimeError { DEFINE_MIN_RTTI };
-class BadAlignment		: public RuntimeError { DEFINE_MIN_RTTI };
-class RangeError			: public RuntimeError { DEFINE_MIN_RTTI };
-class ObjectModified	: public RuntimeError { DEFINE_MIN_RTTI };
-class ObjectDestroyed : public RuntimeError { DEFINE_MIN_RTTI };
+class Error::InvalidValue          : virtual public Error::Runtime  { DEFINE_MIN_RTTI };
+class Error::Range                 : public Error::InvalidValue     { DEFINE_MIN_RTTI };
+class Error::IllegalAddress        : public Error::InvalidValue     { DEFINE_MIN_RTTI };
+class Error::NullPointer           : public Error::IllegalAddress   { DEFINE_MIN_RTTI };
+class Error::BadAlignment          : public Error::IllegalAddress   { DEFINE_MIN_RTTI };
+class Error::ZeroDivide            : virtual public Error::Runtime  { DEFINE_MIN_RTTI };
+class Error::ObjectModified        : virtual public Error::Runtime  { DEFINE_MIN_RTTI };
+class Error::ObjectDestroyed       : virtual public Error::Runtime  { DEFINE_MIN_RTTI };
+class Error::ObjectStateViolation  : virtual public Error::Runtime  { DEFINE_MIN_RTTI };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -53,15 +74,18 @@ class ObjectDestroyed : public RuntimeError { DEFINE_MIN_RTTI };
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class ResourceError : public RuntimeError
+class Error::Resource : virtual public Error::Runtime
 {
-	DEFINE_MIN_RTTI
-	private:
-		const char* resName;
+  DEFINE_MIN_RTTI
+  private:
+    const char* resName;
 
-	public:
-		const char* getResourceName() const { return resName; }
-		ResourceError(const char* resName) : resName(resName) {};
+  public:
+    const char* getName() const { return resName; }
+    void        log()     const;
+
+  public:
+    Resource(const char* resName) : resName(resName) {};
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,43 +95,44 @@ class ResourceError : public RuntimeError
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-class ResourceInvalid : public ResourceError
+class Error::ResourceInvalid : public Error::Resource
 {
-	DEFINE_MIN_RTTI
-	public:
-		ResourceInvalid(const char* resName) : ResourceError(resName) {}
+  DEFINE_MIN_RTTI
+  public:
+    ResourceInvalid(const char* resName) : Resource(resName) {}
 };
 
-class ResourceExhausted : public ResourceError
+class Error::ResourceExhausted : public Error::Resource
 {
-	DEFINE_MIN_RTTI
-	public:
-		ResourceExhausted(const char* resName) : ResourceError(resName) {}
+  DEFINE_MIN_RTTI
+  public:
+    ResourceExhausted(const char* resName) : Resource(resName) {}
 };
 
-class ResourceUnavailable	: public ResourceError
+class Error::ResourceUnavailable : public Error::Resource
 {
-	DEFINE_MIN_RTTI
-	public:
-		ResourceUnavailable(const char* resName) : ResourceError(resName) {}
+  DEFINE_MIN_RTTI
+  public:
+    ResourceUnavailable(const char* resName) : Resource(resName) {}
 };
 
-class ResourceLocked : public ResourceError
+class Error::ResourceLocked : public Error::Resource
 {
-	DEFINE_MIN_RTTI
-	public:
-		ResourceLocked(const char* resName) : ResourceError(resName) {}
+  DEFINE_MIN_RTTI
+  public:
+    ResourceLocked(const char* resName) : Resource(resName) {}
 };
 
-class ResourceVersion : public ResourceError
+class Error::ResourceVersion : public Error::Resource
 {
-	DEFINE_MIN_RTTI
-	public:
-		ResourceVersion(const char* resName) : ResourceError(resName) {}
+  DEFINE_MIN_RTTI
+  public:
+    ResourceVersion(const char* resName) : Resource(resName) {}
 };
 
-#	ifdef EXNG2_BUILD_AVOID_BLOAT
-#		include <private/systemlib/error.hpp>
-#	endif
+
+# ifdef EXNG2_BUILD_AVOID_BLOAT
+#   include <private/systemlib/error.hpp>
+# endif
 
 #endif

@@ -11,59 +11,86 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <xbase.hpp>
+#include <systemlib/logger.hpp>
+#include <private/systemlib/error.hpp>
 #include <typeinfo>
 
-DECLARE_MIN_RTTI(RuntimeError)
-DECLARE_MIN_RTTI(InvalidValue)
-DECLARE_MIN_RTTI(NullPointer)
-DECLARE_MIN_RTTI(ZeroDivide)
-DECLARE_MIN_RTTI(IllegalAddress)
-DECLARE_MIN_RTTI(BadAlignment)
-DECLARE_MIN_RTTI(RangeError)
-DECLARE_MIN_RTTI(ObjectModified)
-DECLARE_MIN_RTTI(ObjectDestroyed)
-DECLARE_MIN_RTTI(ResourceError)
-DECLARE_MIN_RTTI(ResourceInvalid)
-DECLARE_MIN_RTTI(ResourceExhausted)
-DECLARE_MIN_RTTI(ResourceUnavailable)
-DECLARE_MIN_RTTI(ResourceLocked)
-DECLARE_MIN_RTTI(ResourceVersion)
+DECLARE_MIN_RTTI(Error::Runtime)
+DECLARE_MIN_RTTI(Error::InvalidValue)
+DECLARE_MIN_RTTI(Error::NullPointer)
+DECLARE_MIN_RTTI(Error::ZeroDivide)
+DECLARE_MIN_RTTI(Error::IllegalAddress)
+DECLARE_MIN_RTTI(Error::BadAlignment)
+DECLARE_MIN_RTTI(Error::Range)
+DECLARE_MIN_RTTI(Error::ObjectModified)
+DECLARE_MIN_RTTI(Error::ObjectDestroyed)
+DECLARE_MIN_RTTI(Error::ObjectStateViolation)
+DECLARE_MIN_RTTI(Error::Resource)
+DECLARE_MIN_RTTI(Error::ResourceInvalid)
+DECLARE_MIN_RTTI(Error::ResourceExhausted)
+DECLARE_MIN_RTTI(Error::ResourceUnavailable)
+DECLARE_MIN_RTTI(Error::ResourceLocked)
+DECLARE_MIN_RTTI(Error::ResourceVersion)
 
-
-const char* RuntimeError::getClass() const
+const char* Error::Runtime::getClass() const
 {
-	return typeid(*this).name();
+  return typeid(*this).name();
 }
 
+void Error::Runtime::log() const
+{
+  SystemLog::write(
+    SystemLog::ERROR,
+    "%s in %s\n",
+    getClass(),
+    Application::getStage()
+  );
+}
+
+void Error::Resource::log() const
+{
+  SystemLog::write(
+    SystemLog::ERROR,
+    "%s <%s> in %s\n",
+    getClass(),
+    getName(),
+    Application::getStage()
+  );
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  Private Exception throwers - Given C linkage as used by asm code. Also used to avoid inline exception bloat
+//  Private Exception throwers, Used to avoid inline exception bloat on older gcc
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#ifdef EXNG2_BUILD_AVOID_BLOAT
 extern "C" {
-	void throwInvalidValue(void)										{ throw InvalidValue(); }
-	void throwNullPointer(void)											{ throw NullPointer(); }
-	void throwZeroDivide(void)											{ throw ZeroDivide(); }
-	void throwIllegalAddress(void)									{ throw IllegalAddress(); }
-	void throwBadAlignment(void) 										{ throw BadAlignment(); }
-	void throwRangeError(void)											{ throw RangeError(); }
-	void throwObjectModified(void)									{ throw ObjectModified(); }
-	void throwObjectDestroyed(void)									{ throw ObjectDestroyed(); }
-	void throwResourceError(const char* name) 			{ throw ResourceError(name); }
-	void throwResourceInvalid(const char* name) 		{ throw ResourceInvalid(name); }
-	void throwResourceExhausted(const char* name) 	{ throw ResourceExhausted(name); }
-	void throwResourceUnavailable(const char* name) { throw ResourceUnavailable(name); }
-	void throwResourceLocked(const char* name) 			{ throw ResourceLocked(name); }
-	void throwResourceVersion(const char* name) 		{ throw ResourceVersion(name); }
+  void throwErrorInvalidValue(void)                     { throw Error::InvalidValue(); }
+  void throwErrorNullPointer(void)                      { throw Error::NullPointer(); }
+  void throwErrorZeroDivide(void)                       { throw Error::ZeroDivide(); }
+  void throwErrorIllegalAddress(void)                   { throw Error::IllegalAddress(); }
+  void throwErrorBadAlignment(void)                     { throw Error::BadAlignment(); }
+  void throwErrorRange(void)                            { throw Error::Range(); }
+  void throwErrorObjectModified(void)                   { throw Error::ObjectModified(); }
+  void throwErrorObjectDestroyed(void)                  { throw Error::ObjectDestroyed(); }
+  void throwErrorObjectStateViolation(void)             { throw Error::ObjectStateViolation(); }
+  void throwErrorResourceError(const char* name)        { throw Error::Resource(name); }
+  void throwErrorResourceInvalid(const char* name)      { throw Error::ResourceInvalid(name); }
+  void throwErrorResourceExhausted(const char* name)    { throw Error::ResourceExhausted(name); }
+  void throwErrorResourceUnavailable(const char* name)  { throw Error::ResourceUnavailable(name); }
+  void throwErrorResourceLocked(const char* name)       { throw Error::ResourceLocked(name); }
+  void throwErrorResourceVersion(const char* name)      { throw Error::ResourceVersion(name); }
 }
+#endif
 

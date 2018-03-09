@@ -1,0 +1,32 @@
+include common.mk
+OBJDIR   = obj/systemlib/
+LIB			 = libexng2system_thread.so
+VER			 = 1
+REV			 = 0.1
+OBJ      =	$(OBJDIR)thread.o \
+						$(OBJDIR)thread_native.o \
+						$(OBJDIR)thread_error_native.o \
+						$(OBJDIR)lockable_native.o \
+						$(OBJDIR)thread_sleeper_native.o
+
+$(LIB): $(OBJ) Makefile_systemlib_thread
+	$(CXX) -shared -Wl,-soname,$(LIB) -o $(LIBDIR)$(LIB) $(OBJ); \
+
+$(OBJDIR)thread.o: $(SRCDIR)systemlib/thread.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+$(OBJDIR)thread_native.o: $(SRCDIR)platforms/amigaos41_ppc/systemlib/thread_native.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+$(OBJDIR)thread_error_native.o: $(SRCDIR)platforms/amigaos41_ppc/systemlib/thread_error_native.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+$(OBJDIR)lockable_native.o: $(SRCDIR)platforms/amigaos41_ppc/systemlib/lockable_native.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+$(OBJDIR)thread_sleeper_native.o: $(SRCDIR)platforms/amigaos41_ppc/systemlib/thread_sleeper_native.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+clean:
+	$(RM) $(OBJDIR)*.o \
+	$(RM) $(LIBDIR)$(LIB)*

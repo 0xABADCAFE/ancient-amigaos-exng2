@@ -1,0 +1,36 @@
+include common.mk
+OBJDIR   = obj/iolib/
+LIB			 = libexng2io.so
+VER			 = 1
+REV			 = 0.1
+OBJ      =	$(OBJDIR)inputdevices.o \
+						$(OBJDIR)streamio_error.o \
+						$(OBJDIR)streamio_native.o
+#					 	$(OBJDIR)xsfio.o \
+#						$(OBJDIR)xsfio_error.o
+
+$(LIB): $(OBJ) Makefile_iolib
+	$(CXX) -shared -Wl,-soname,$(LIB).$(VER) -o $(LIBDIR)$(LIB).$(VER).$(REV) $(OBJ); \
+	cd $(LIBDIR); \
+	$(LN) $(LIB).$(VER).$(REV) $(LIB); \
+	$(LN) $(LIB).$(VER).$(REV) $(LIB).$(VER); \
+	cd ../
+
+$(OBJDIR)inputdevices.o: $(SRCDIR)iolib/inputdevices.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+$(OBJDIR)streamio_error.o: $(SRCDIR)iolib/streamio_error.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+$(OBJDIR)streamio_native.o: $(SRCDIR)platforms/linux_noarch/iolib/streamio_native.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+#$(OBJDIR)xsfio.o: $(SRCDIR)iolib/xsfio.cpp
+#	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+#$(OBJDIR)xsfio_error.o: $(SRCDIR)iolib/xsfio_error.cpp
+#	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+clean:
+	$(RM) $(OBJDIR)*.o; \
+	$(RM) $(LIBDIR)$(LIB)*

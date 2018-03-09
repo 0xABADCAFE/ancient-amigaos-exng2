@@ -1,5 +1,7 @@
 StormLibrarian Document (0003)
-lib/utilitylib020_060.lib
+exng2:lib/amigaos3_68k/utilitylib020_060.lib
 1 0 0
 obj/utilitylib/hashkeys.o
+obj/utilitylib/poll.o
+obj/utilitylib/debug.o
 EOD

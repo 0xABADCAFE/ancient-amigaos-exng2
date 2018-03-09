@@ -1,0 +1,6 @@
+failat 100
+echo >ram:buildsystemlib "prompt*ncd exng2:libsource/platforms/amigaos41_ppc"
+lab forever
+newshell tcp:31337 from ram:buildsystemlib
+wait 10
+skip back forever

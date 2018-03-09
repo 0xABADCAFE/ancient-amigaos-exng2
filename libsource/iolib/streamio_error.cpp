@@ -11,7 +11,7 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,42 +21,50 @@
 
 using namespace EXNGPrivate;
 
-DECLARE_MIN_RTTI(IO::IOError)
-DECLARE_MIN_RTTI(IO::StreamOpenError)
-DECLARE_MIN_RTTI(IO::StreamCreateError)
-DECLARE_MIN_RTTI(IO::StreamReadError)
-DECLARE_MIN_RTTI(IO::StreamWriteError)
-DECLARE_MIN_RTTI(IO::StreamSeekError)
+DECLARE_MIN_RTTI(IO::Error)
+DECLARE_MIN_RTTI(IO::OpenError)
+DECLARE_MIN_RTTI(IO::CreateError)
+DECLARE_MIN_RTTI(IO::ReadError)
+DECLARE_MIN_RTTI(IO::WriteError)
+DECLARE_MIN_RTTI(IO::SeekError)
+DECLARE_MIN_RTTI(IO::TimeoutError)
 
+#ifdef EXNG2_BUILD_AVOID_BLOAT
 extern "C" {
-	void throwIOError(void)
-	{
-		throw IO::IOError();
-	}
+  void throwIOError(void)
+  {
+    throw IO::Error();
+  }
 
-	void throwStreamOpenError(void)
-	{
-		throw IO::StreamOpenError();
-	}
+  void throwIOOpenError(void)
+  {
+    throw IO::OpenError();
+  }
 
-	void throwStreamCreateError(void)
-	{
-		throw IO::StreamCreateError();
-	}
+  void throwIOCreateError(void)
+  {
+    throw IO::CreateError();
+  }
 
-	void throwStreamReadError(void)
-	{
-		throw IO::StreamReadError();
-	}
+  void throwIOReadError(void)
+  {
+    throw IO::ReadError();
+  }
 
-	void throwStreamWriteError(void)
-	{
-		throw IO::StreamWriteError();
-	}
+  void throwIOWriteError(void)
+  {
+    throw IO::WriteError();
+  }
 
-	void throwStreamSeekError(void)
-	{
-		throw IO::StreamSeekError();
-	}
+  void throwIOSeekError(void)
+  {
+    throw IO::SeekError();
+  }
+
+  void throwIOTimeoutError(void)
+  {
+    throw IO::TimeoutError();
+  }
 };
+#endif
 

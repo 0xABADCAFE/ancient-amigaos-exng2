@@ -1,0 +1,2 @@
+execute S:shell-startup
+CD exng2:bin/amigaos3_68k/

@@ -1,0 +1,416 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  File:         gfxlib/surface_native.cpp
+//  Tab Size:     2
+//  Max Line:     120
+//  Description:
+//  Comment(s):
+//  Library:      System
+//  Created:      2006-10-08
+//  Updated:      2006-10-08
+//  Author(s):    Karl Churchill
+//  Note(s):
+//  Copyright:    (C)2006+, eXtropia Studios
+//                Karl Churchill
+//                All Rights Reserved.
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include <gfxlib/display.hpp>
+#include <gfxlib/colour.hpp>
+#include <systemlib/memory.hpp>
+#include <systemlib/logger.hpp>
+
+namespace OSNative {
+  extern "C" {
+    #include <cybergraphx/cybergraphics.h>
+  }
+}
+
+using namespace EXNGPrivate;
+using namespace OSNative;
+
+namespace {
+  const char* rtgBitMap = "RTG BitMap";
+}
+
+LOGGING_DECLARE_CLASSNAME(Display::Surface);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Display::Surface::Surface() : AbstractPixelMap()
+{
+  init();
+}
+/*
+Display::Surface::Surface(bool i) : AbstractPixelMap()
+{
+  if (i) {
+    init();
+  }
+}*/
+
+
+void Display::Surface::init()
+{
+  width       = 0;  height      = 0;
+  winUser     = 0;
+  bitMap      = 0;  gfxAddr     = 0;
+  lockAddr    = 0;  properties  = 0;
+  hwWidth     = 0;  hwHeight    = 0;
+  modulus     = 0;  depth       = 0;
+  pixFormat   = Pixel::INVALID_FMT;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const Pixel::Layout*  Display::Surface::getDescriptor() const
+{
+  assertAllocated();
+  return Pixel::getDescriptor(pixFormat);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Display::Surface::queryBitMap()
+{
+  LOGGING_DECLARE_FUNCNAME(queryBitMap)
+
+  hwWidth   = GetCyberMapAttr(bitMap, CYBRMATTR_WIDTH);
+  hwHeight  = GetCyberMapAttr(bitMap, CYBRMATTR_HEIGHT);
+  depth     = GetCyberMapAttr(bitMap, CYBRMATTR_DEPTH);
+  modulus   = hwWidth - width;
+
+  if (GetCyberMapAttr(bitMap, CYBRMATTR_ISLINEARMEM)) {
+    properties |= SP_LINEAR_MEM;
+  }
+  else
+  {
+    properties &= ~SP_LINEAR_MEM;
+    #ifdef EXNG2_BUILD_LOGGED
+    SystemLog::write(
+      SystemLog::INFO,
+      "%s::%s - BitMap memory is not linear\n",
+      loggingClassName, loggingFuncName
+    );
+    #endif
+  }
+
+  pixFormat = (Pixel::FBType)GfxResource::nativeToAbstract[GetCyberMapAttr(bitMap, CYBRMATTR_PIXFMT)];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+void Display::Surface::create(sint16 w, sint16 h, OSNative::BitMap* clone)
+{
+  LOGGING_DECLARE_FUNCNAME(create)
+
+  assertFree();
+  assertRTG(clone);
+
+  if (w < 0 || h < 0) {
+    THROW_NSX(Error, Range());
+  }
+  uint32 bmf = BMF_MINPLANES | BMF_DISPLAYABLE;
+
+  if (!w) {
+    w = GetCyberMapAttr(clone, CYBRMATTR_WIDTH);
+  }
+  if (!h) {
+    h = GetCyberMapAttr(clone, CYBRMATTR_HEIGHT);
+  }
+
+  if (GetCyberMapAttr(clone, CYBRMATTR_DEPTH)<=8) {
+    bitMap = AllocBitMap(w, h, 8, bmf, clone);
+  }
+  else {
+    #define BIZZARE_PLANES_FIX 9
+    bitMap = AllocBitMap(w, h, BIZZARE_PLANES_FIX, bmf, clone);
+    #undef BIZZARE_PLANES_FIX
+  }
+  if (!bitMap) {
+    #ifdef EXNG2_BUILD_LOGGED
+    SystemLog::write(
+      SystemLog::WARNING,
+      "%s::%s - AllocBitmap(%" XPF_S16 ", %" XPF_S16 ", 8, 0x%08X, %p) failed\n",
+      loggingClassName, loggingFuncName,
+      w, h, (unsigned)bmf, clone
+    );
+    #endif
+    THROW_NSX(Error, ResourceUnavailable(rtgBitMap));
+  }
+  else if (!GetCyberMapAttr(bitMap, CYBRMATTR_ISCYBERGFX)) {
+    #ifdef EXNG2_BUILD_LOGGED
+    SystemLog::write(
+      SystemLog::WARNING,
+      "%s::%s - AllocBitmap(%" XPF_S16 ", %" XPF_S16 ", 8, 0x%08X, %p) returned non CGX BitMap\n",
+      loggingClassName, loggingFuncName,
+      w, h, (unsigned)bmf, clone
+    );
+    #endif
+    FreeBitMap(bitMap);
+    init();
+  }
+
+  width   = w;
+  height  = h;
+  queryBitMap();
+  properties |= SP_OWN_BITMAP;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Display::Surface::destroy()
+{
+  if (bitMap) {
+    if (lockAddr) {
+      UnLockBitMap(lockAddr);
+    }
+    if (properties & SP_OWN_BITMAP) {
+      FreeBitMap(bitMap);
+    }
+  }
+  init();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Display::Surface::blitCopy(Display::Surface* dst, sint16 x1, sint16 y1, Display::Surface* src, sint16 x2, sint16 y2, sint16 w, sint16 h)
+{
+
+/*                  +---+
+    +--------+      |X+-+---+
+    |        |      +-+-+   |
+  +-+-+      |        |   S |
+  |X+-+  D   |        +-----+
+  +-+-+      |
+    +--------+
+*/
+
+
+  if ((!dst) || (!src)) {
+    THROW_NSX(Error, NullPointer());
+  }
+  if ((!dst->bitMap) || (!src->bitMap)) {
+    THROW_NSX(Error, ObjectStateViolation());
+  }
+
+
+  // make sure the clip rectangle actually overlaps both source and destination
+  if (
+    // check area
+    w<1 || h<1 ||
+    // check source selection overlaps source image
+    x2 >= src->width  || (x2+w)<0 ||
+    y2 >= src->height || (y2+h)<0
+  ) {
+    // nothing to do
+    return;
+  }
+
+  // Clip transfer area to source image. If the coordinates are negative
+  // we add their magnitude to the target coordinates to preserve the relative position.
+  if (x2<0)               { w += x2; x1 -= x2; x2=0; }
+  if (x2+w > src->width)  { w = src->width - x2; }
+  if (y2<0)               { h += y2; y1 -= y2; y2=0; }
+  if (y2+h > src->height) { h = src->height - y2; }
+
+  if (
+    // check destination selection overlaps image
+    x1 >= dst->width  || (x1+w)<0 ||
+    y2 >= dst->height || (y1+h)<0
+  ) {
+    return;
+  }
+
+
+  // Source and destination must be of the same pixel format
+//   if (src->pixFormat != dst->pixFormat) {
+//     return ERR_RSC_TYPE;
+//   }
+  // Source coords must not be negative, width and height must be positive and
+
+  // clip left, right, top then bottom until the transfer area is within the
+  // destination surface area
+  if (x1<0)               { w += x1; x2 -= x1; x1 = 0; }
+  if (x1+w > dst->width)  { w = dst->width - x1; }
+  if (y1<0)               { h += y1; y2 -= y1; y1 = 0; }
+  if (y1+h > dst->height) { h = dst->height - y1; }
+
+  // Perform an basic blit now that area is cropped
+  BltBitMap(src->bitMap, x2, y2, dst->bitMap, x1, y1, w, h, 0xC0, 0xFF, 0);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void* Display::Surface::lockData()
+{
+  if (bitMap) {
+    if (lockAddr) {
+      return gfxAddr;
+    }
+    TagItem t[2] = {
+      {LBMI_BASEADDRESS, (uint32)(&gfxAddr)},
+      {TAG_DONE, 0}
+    };
+    lockAddr = LockBitMapTagList(bitMap, t);
+    return gfxAddr; // may be 0 if couldnt lock
+  }
+  else {
+    return 0;
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Display::Surface::unlockData()
+{
+  if (bitMap && lockAddr) {
+    UnLockBitMap(lockAddr);
+    lockAddr = 0;
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Display::Surface::clear(Colour32 c)
+{
+  if (winUser) {
+    RastPort rPort;
+    InitRastPort(&rPort);
+    rPort.BitMap = bitMap;
+    ViewPort* view = &(winUser->WScreen->ViewPort);
+    uint32 pen = ObtainBestPen(
+      view->ColorMap, c.red()<<24, c.green()<<24, c.blue()<<24,
+      OBP_Precision, PRECISION_EXACT
+    );
+    SetAPen(&rPort, pen);
+    RectFill(&rPort, 0, 0, width-1, height-1);
+    ReleasePen(view->ColorMap, pen);
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include <new>
+
+Display::Surface* Display::Surface::transferToNew(Display::Surface* surf)
+{
+  Display::Surface* newSurf = new(nothrow) Display::Surface();
+  if (!newSurf) {
+    THROW_NSX(Mem, Exhausted(sizeof(Display::Surface)));
+  }
+  surf->transferToNew(newSurf);
+  return newSurf;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Display::Surface* Display::Surface::create(sint16 w, sint16 h, Display::Surface* clone)
+{
+  // This is the surface factory. Users can only create a surface based on
+  // one already existing. There is no method available to create an arbitarty
+  // surface since the allocation of resources at the OS level may not allow
+  // this.
+  // To create a surface, a user must use this factory and a handle to an
+  // existing surface, such as a displays draw surface.
+  // Only the dimensions of the new surface are under user control, the pixel
+  // format is decided by the OS.
+
+  if (!clone) {
+    THROW_NSX(Error, NullPointer());
+  }
+  Surface temp;
+  temp.create(w, h, clone->bitMap); // may throw
+  return transferToNew(&temp);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Display::Surface::assertAllocated() const
+{
+  // we assume a Display::Surface may never have a non RTG bitMap when allocated
+  if (!bitMap) {
+    THROW_NSX(Error, ObjectStateViolation());
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Display::Surface::assertFree() const
+{
+  if (bitMap) {
+    THROW_NSX(Error, ObjectStateViolation());
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Display::Surface::assertRTG(OSNative::BitMap* bmp)
+{
+  // make sure the pointer points to a valid RTG bitmap
+  if (!bmp) {
+    THROW_NSX(Error, NullPointer());
+  }
+  if (!GetCyberMapAttr(bmp, CYBRMATTR_ISCYBERGFX)) {
+    THROW_NSX(Error, ResourceInvalid(rtgBitMap));
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool SurfaceUser::checkCompatible(Display::Surface* srf, OSNative::BitMap* bmp)
+{
+  if (!srf) {
+    THROW_NSX(Error, NullPointer());
+  }
+  Display::Surface::assertRTG(bmp);
+  srf->assertAllocated();
+  return GetCyberMapAttr(bmp, CYBRMATTR_PIXFMT)==GetCyberMapAttr(srf->bitMap, CYBRMATTR_PIXFMT);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void SurfaceProvider::assignBitMapToSurface(Display::Surface* srf, OSNative::BitMap* bmp)
+{
+  if (!srf) {
+    THROW_NSX(Error, NullPointer());
+  }
+  Display::Surface::assertRTG(bmp);
+  srf->assertAllocated();
+
+  // Get inital data directly from bitmap
+  srf->bitMap = bmp;
+  srf->width        = GetCyberMapAttr(bmp, CYBRMATTR_WIDTH);
+  srf->height       = GetCyberMapAttr(bmp, CYBRMATTR_HEIGHT);
+  // Set up Display::Surface by internal queryBitMap() call
+  srf->queryBitMap();
+  srf->properties   &= ~Display::Surface::SP_OWN_BITMAP;
+  srf->properties   |= Display::Surface::SP_EXT_BITMAP;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Display::Surface* SurfaceProvider::createNewSurfaceFromBitMap(OSNative::BitMap* bmp)
+{
+  Display::Surface* newSurf = new (nothrow) Display::Surface( );
+  if (newSurf) {
+    assignBitMapToSurface(newSurf, bmp);
+  } else {
+    THROW_NSX(Mem, Exhausted(sizeof(Display::Surface)));
+  }
+  return newSurf;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Display::Surface* SurfaceProvider::createNewSurfaceLikeBitMap(OSNative::BitMap* bmp, sint16 w, sint16 h)
+{
+  Display::Surface temp;
+  temp.create(w, h, bmp);
+  return Display::Surface::transferToNew(&temp);
+}
+

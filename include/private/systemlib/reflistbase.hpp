@@ -11,14 +11,14 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 #ifndef _EXNG2_UTILITYLIB_REFLISTBASE_HPP_
-#	define _EXNG2_UTILITYLIB_REFLISTBASE_HPP_
+# define _EXNG2_UTILITYLIB_REFLISTBASE_HPP_
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -60,169 +60,170 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#	include <systemlib/logger.hpp>
+# include <systemlib/logger.hpp>
 
 namespace EXNGPrivate {
 
-	class VoidList /*: private SystemLog */ {
+  class VoidList /*: private SystemLog */ {
 
-		friend class VLFwdItr;
-		friend class VLRevItr;
-		friend class VLChkFwdItr;
-		friend class VLChkRevItr;
-
-
-		private:
-			enum {
-				NULL_LINK			= -1,
-				DEFAULT_DELTA	= 256
-			};
-
-			struct Link {
-				sint32	prev;
-				sint32	next;
-				sint32	nextFree;
-				void*		item;
-			};
-
-			// Link cacheing system
-			static Link*	linkCache;
-			static sint32	linkCacheSize;		// the current size (in links)
-			static sint32	linkCacheDelta;		// the number of links to expand / shrink
-			static sint32 linkCacheCount;		// current number of links
-			static sint32 nextFreeLink;			// the next freely available link
-
-			static sint32	createLink();
-			static void		destroyLink(sint32 l);
-			static bool		expandCache();
-
-			static void		releaseCache();
-
-			sint32	head;
-			sint32	tail;
-			sint32	numLinks;
-			sint32	revision;								// updated each time the list is modified
-
-			sint32	find(void* p);
-
-		protected:
-			bool		pushFront(void* p);
-			bool		pushBack(void* p);
-			void*		popFront();
-			void*		popBack();
-			bool		contains(void *p) 			{ return (find(p)!=NULL_LINK); }
-			sint32	length()					const { return numLinks; }
-			bool		remove(void* p);
-			//void		debug();
-
-			VoidList();
-
-		public:
-			static	sint32	setLinkDelta(sint32 d);
-			static	sint32	getLinkCacheSize()	{ return linkCacheSize; }
-			static	sint32	getLinkCacheDelta()	{ return linkCacheDelta; }
-			static	sint32	getLinkCacheUsed()	{ return linkCacheCount; }
-
-			~VoidList();
-
-		private:
-			LOGGING_DEFINE_CLASSNAME
-	};
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//
-	//  Basic iterators (consistency unchecked)
-	//
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	class VLFwdItr {
-		private:
-			const VoidList* list;
-			sint32					curr;
-
-		protected:
-			void* first();
-			void* next();
-
-		protected:
-			VLFwdItr(const VoidList* vlist) : list(vlist), curr(VoidList::NULL_LINK) {}
-	};
-
-	class VLRevItr {
-		private:
-			const VoidList* list;
-			sint32					curr;
-
-		protected:
-			void*	first();
-			void*	next();
-
-		protected:
-			VLRevItr(const VoidList* vlist) : list(vlist), curr(VoidList::NULL_LINK) {}
-	};
-
-	class VLChkFwdItr {
-		private:
-			const VoidList* list;
-			sint32					curr;
-			sint32					revision;
-
-		protected:
-			void* first();
-			void* next();
-
-		protected:
-			VLChkFwdItr(const VoidList* vlist) : list(vlist), curr(VoidList::NULL_LINK) {}
-	};
-
-	class VLChkRevItr {
-		private:
-			const VoidList* list;
-			sint32					curr;
-			sint32					revision;
-		protected:
-			void*	first();
-			void*	next();
-
-		protected:
-			VLChkRevItr(const VoidList* vlist) : list(vlist), curr(VoidList::NULL_LINK) {}
-	};
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//
-	//  Inlines
-	//
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    friend class VLFwdItr;
+    friend class VLRevItr;
+    friend class VLChkFwdItr;
+    friend class VLChkRevItr;
 
 
-	inline void* VLFwdItr::next() {
-		if (curr>=0) {
-			void* item = VoidList::linkCache[curr].item;
-			curr = VoidList::linkCache[curr].next;
-			return item;
-		}
-		return 0;
-	}
+    private:
+      enum {
+        NULL_LINK     = -1,
+        DEFAULT_DELTA = 256
+      };
 
-	inline void* VLFwdItr::first() {
-		curr = list->head;
-		return next();
-	}
+      struct Link {
+        sint32  prev;
+        sint32  next;
+        sint32  nextFree;
+        void*   item;
+      };
+
+      // Link cacheing system
+      static Link*  linkCache;
+      static sint32 linkCacheSize;    // the current size (in links)
+      static sint32 linkCacheDelta;   // the number of links to expand / shrink
+      static sint32 linkCacheCount;   // current number of links
+      static sint32 nextFreeLink;     // the next freely available link
+
+      static sint32 createLink();
+      static void   destroyLink(sint32 l);
+      static void   expandCache();
+
+      static void   releaseCache();
+
+      sint32  head;
+      sint32  tail;
+      sint32  numLinks;
+      sint32  revision;               // updated each time the list is modified
+
+      sint32  find(void* p);
+
+    protected:
+      void    clear();
+      void    pushFront(void* p);
+      void    pushBack(void* p);
+      void*   popFront();
+      void*   popBack();
+      bool    contains(void *p)       { return (find(p)!=NULL_LINK); }
+      sint32  length()          const { return numLinks; }
+      bool    remove(void* p);
+      //void    debug();
+
+      VoidList();
+
+    public:
+      static  sint32  setLinkDelta(sint32 d);
+      static  sint32  getLinkCacheSize()  { return linkCacheSize; }
+      static  sint32  getLinkCacheDelta() { return linkCacheDelta; }
+      static  sint32  getLinkCacheUsed()  { return linkCacheCount; }
+
+      ~VoidList();
+
+    private:
+      LOGGING_DEFINE_CLASSNAME
+  };
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  Basic iterators (consistency unchecked)
+  //
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  class VLFwdItr {
+    private:
+      const VoidList* list;
+      sint32          curr;
+
+    protected:
+      void* first();
+      void* next();
+
+    protected:
+      VLFwdItr(const VoidList* vlist) : list(vlist), curr(VoidList::NULL_LINK) {}
+  };
+
+  class VLRevItr {
+    private:
+      const VoidList* list;
+      sint32          curr;
+
+    protected:
+      void* first();
+      void* next();
+
+    protected:
+      VLRevItr(const VoidList* vlist) : list(vlist), curr(VoidList::NULL_LINK) {}
+  };
+
+  class VLChkFwdItr {
+    private:
+      const VoidList* list;
+      sint32          curr;
+      sint32          revision;
+
+    protected:
+      void* first();
+      void* next();
+
+    protected:
+      VLChkFwdItr(const VoidList* vlist) : list(vlist), curr(VoidList::NULL_LINK) {}
+  };
+
+  class VLChkRevItr {
+    private:
+      const VoidList* list;
+      sint32          curr;
+      sint32          revision;
+    protected:
+      void* first();
+      void* next();
+
+    protected:
+      VLChkRevItr(const VoidList* vlist) : list(vlist), curr(VoidList::NULL_LINK) {}
+  };
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  Inlines
+  //
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	inline void* VLRevItr::next() {
-		if (curr>=0) {
-			void* item = VoidList::linkCache[curr].item;
-			curr = VoidList::linkCache[curr].prev;
-			return item;
-		}
-		return 0;
-	}
+  inline void* VLFwdItr::next() {
+    if (curr>=0) {
+      void* item = VoidList::linkCache[curr].item;
+      curr = VoidList::linkCache[curr].next;
+      return item;
+    }
+    return 0;
+  }
 
-	inline void* VLRevItr::first() {
-		curr = list->tail;
-		return next();
-	}
+  inline void* VLFwdItr::first() {
+    curr = list->head;
+    return next();
+  }
+
+
+  inline void* VLRevItr::next() {
+    if (curr>=0) {
+      void* item = VoidList::linkCache[curr].item;
+      curr = VoidList::linkCache[curr].prev;
+      return item;
+    }
+    return 0;
+  }
+
+  inline void* VLRevItr::first() {
+    curr = list->tail;
+    return next();
+  }
 
 };
 

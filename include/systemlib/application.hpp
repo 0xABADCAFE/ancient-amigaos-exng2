@@ -11,18 +11,17 @@
 //  Author(s):    Karl Churchill
 //  Note(s):
 //  Copyright:    (C)2006+, eXtropia Studios
-//                Karl Churchill, Serkan YAZICI
+//                Karl Churchill
 //                All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
 #ifndef _EXNG2_SYSTEMLIB_APPLICATION_HPP_
-#	define _EXNG2_SYSTEMLIB_APPLICATION_HPP_
+# define _EXNG2_SYSTEMLIB_APPLICATION_HPP_
 
-#	include <systemlib/runnable.hpp>
-#	include <systemlib/startup.hpp>
+# include <systemlib/runnable.hpp>
+# include <systemlib/startup.hpp>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -61,37 +60,63 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class Application : public Runnable, private Startup {
-	DEFINE_MIN_RTTI
-	public:
-		// application exceptions
-		class TooFewArguments;
-		class MissingArgument;
-		class InvalidArgument;
+  DEFINE_MIN_RTTI
+  public:
+    // application exceptions
+    class TooFewArguments;
+    class MissingArgument;
+    class InvalidArgument;
 
-		// startup argument flags
-		enum {
-			ARG_CASE_SENSITIVE	= 1,
-			ARG_MANDATORY				= 2
-		};
+    // startup argument flags
+    enum {
+      ARG_CASE_SENSITIVE  = 1,
+      ARG_MANDATORY       = 2,
 
-		static sint32				getNumArgs();
-		static const char*	getArg(uint32 argNum);
-		static const char*	getArgString(const char* name, const char* defVal, uint16 flags);
-		static sint32				getArgInteger(const char* name, sint32 defVal, uint16 flags);
-		static uint32				getArgHex(const char* name, uint32 defVal, uint16 flags);
-		static uint32				getArgOct(const char* name, uint32 defVal, uint16 flags);
-		static float64			getArgReal(const char* name, float64 defVal, uint16 flags);
-		static bool					getArgSwitch(const char* name, uint16 flags);
+      ARG_MIN_BASE        = 2,
+      ARG_MAX_BASE        = 36
+    };
 
-		// factory and cleanup
-		static Application*	createInstance();
-		static void					destroyInstance(Application* app);
+    static sint32       getNumArgs();
+    static const char*  getArg(uint32 argNum);
+    static const char*  getArgString(const char* name, const char* defVal, uint16 flags);
+    static sint64       getArgInteger(const char* name, sint64 defVal, uint16 base, uint16 flags);
+    static uint64       getArgUnsigned(const char* name, uint64 defVal, uint16 base, uint16 flags);
 
-	protected:
-		Application() {}
-	private:
-		Application(const Application&) : Runnable() {}
-		Application& operator=(const Application&)	{ return *this; }
+    static sint64       getArgInteger(const char* name, sint64 defVal, uint16 flags);
+    static uint64       getArgHex(const char* name, uint64 defVal, uint16 flags);
+    static uint64       getArgOct(const char* name, uint64 defVal, uint16 flags);
+    static uint64       getArgBin(const char* name, uint64 defVal, uint16 flags);
+    static float64      getArgReal(const char* name, float64 defVal, uint16 flags);
+    static bool         getArgSwitch(const char* name, uint16 flags);
+
+    // factory and cleanup
+    static Application* createInstance();
+    static void         destroyInstance(Application* app);
+
+    // logging assist
+    static const char*  getStage()
+    {
+      return stages[currentStage];
+    }
+
+  protected:
+    Application() {}
+  private:
+    Application(const Application&) : Runnable() {}
+    Application& operator=(const Application&)  { return *this; }
+
+    typedef enum {
+      LIB_INIT    = 0,
+      APP_STARTUP = 1,
+      APP_RUNTIME = 2,
+      APP_CLEANUP = 3,
+      LIB_EXIT    = 4
+    } AppStage;
+
+    static void         setStage(AppStage stage) { currentStage = stage; }
+    static AppStage     currentStage;
+    static const char*  stages[LIB_EXIT+1];
+    friend int main(int, char**);
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,65 +126,93 @@ class Application : public Runnable, private Startup {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-class Application::TooFewArguments : public RuntimeError { DEFINE_MIN_RTTI };
-class Application::MissingArgument : public RuntimeError {
-	DEFINE_MIN_RTTI
-	private:
-		const char* argName;
-
-	public:
-		const char* getName() const { return argName; }
-		MissingArgument(const char* argName) : argName(argName) {}
+class Application::TooFewArguments : virtual public ::Error::Runtime { DEFINE_MIN_RTTI };
+class Application::MissingArgument : public ::Error::Resource {
+  DEFINE_MIN_RTTI
+  public:
+    MissingArgument(const char* argName) : Resource(argName) {}
 };
 
-class Application::InvalidArgument : public RuntimeError {
-	DEFINE_MIN_RTTI
-	private:
-		const char* argName;
-
-	public:
-		const char* getName() const { return argName; }
-		InvalidArgument(const char* argName) : argName(argName) {}
+class Application::InvalidArgument : public ::Error::Resource, public ::Error::InvalidValue {
+  DEFINE_MIN_RTTI
+  public:
+    InvalidArgument(const char* argName) : Resource(argName) {}
 };
 
-inline sint32				Application::getNumArgs()
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+inline sint32       Application::getNumArgs()
 {
-	return Startup::getNumArgs();
+  return Startup::getNumArgs();
 }
 
-inline const char*	Application::getArg(uint32 argNum)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+inline const char*  Application::getArg(uint32 argNum)
 {
-	return Startup::getArg(argNum);
+  return Startup::getArg(argNum);
 }
 
-inline const char*	Application::getArgString(const char* name, const char* defVal, uint16 flags)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+inline const char*  Application::getArgString(const char* name, const char* defVal, uint16 flags)
 {
-	return Startup::getArgString(name, defVal, flags);
+  return Startup::getArgString(name, defVal, flags);
 }
 
-inline sint32				Application::getArgInteger(const char* name, sint32 defVal, uint16 flags)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+inline sint64       Application::getArgInteger(const char* name, sint64 defVal, uint16 base, uint16 flags)
 {
-	return Startup::getArgInteger(name, defVal, flags);
+  return Startup::getArgInteger(name, defVal, base, flags);
 }
 
-inline uint32				Application::getArgHex(const char* name, uint32 defVal, uint16 flags)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+inline sint64       Application::getArgInteger(const char* name, sint64 defVal, uint16 flags)
 {
-	return Startup::getArgHex(name, defVal, flags);
+  return Startup::getArgInteger(name, defVal, 10, flags);
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+inline uint64       Application::getArgUnsigned(const char* name, uint64 defVal, uint16 base, uint16 flags)
+{
+  return Startup::getArgInteger(name, defVal, base, flags);
 }
 
-inline uint32				Application::getArgOct(const char* name, uint32 defVal, uint16 flags)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+inline uint64       Application::getArgHex(const char* name, uint64 defVal, uint16 flags)
 {
-	return Startup::getArgOct(name, defVal, flags);
+  return Startup::getArgUnsigned(name, defVal, 16, flags);
 }
 
-inline float64			Application::getArgReal(const char* name, float64 defVal, uint16 flags)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+inline uint64       Application::getArgOct(const char* name, uint64 defVal, uint16 flags)
 {
-	return Startup::getArgReal(name, defVal, flags);
+  return Startup::getArgUnsigned(name, defVal, 8, flags);
 }
 
-inline bool					Application::getArgSwitch(const char* name, uint16 flags)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+inline uint64       Application::getArgBin(const char* name, uint64 defVal, uint16 flags)
 {
-	return Startup::getArgSwitch(name, flags);
+  return Startup::getArgUnsigned(name, defVal, 2, flags);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+inline float64      Application::getArgReal(const char* name, float64 defVal, uint16 flags)
+{
+  return Startup::getArgReal(name, defVal, flags);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+inline bool         Application::getArgSwitch(const char* name, uint16 flags)
+{
+  return Startup::getArgSwitch(name, flags);
 }
 
 
