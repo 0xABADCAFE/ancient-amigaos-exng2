@@ -100,15 +100,15 @@ typedef OSNative::float32  floatF;
 
 # define  ALIGN_STACK_STRUCT_32(T, name)                      \
           uint8 __ass32##name[sizeof(T)+3];                   \
-          T &name = *( (T*)((uint32)(__ass32##name+3)&~3) );
+          T &name = *( (T*)((uint32)(__ass32##name+3) & ~3) );
 
 # define  ALIGN_STACK_STRUCT_64(T, name)                      \
           uint8 __ass64##name[sizeof(T)+7];                   \
-          T &name = *( (T*)((uint32)(__ass64##name+7)&~7) );
+          T &name = *( (T*)((uint32)(__ass64##name+7) & ~7) );
 
 # define  ALIGN_STACK_STRUCT_CACHELINE(T, name)               \
-          uint8 __assCh##name[sizeof(T)+15];                  \
-          T &name = *( (T*)((uint32)(__assCh##name+15)&~15) );
+          uint8 __assCh##name[sizeof(T)+31];                  \
+          T &name = *( (T*)((uint32)(__assCh##name+15) & ~31) );
 
 # define  ALIGN_STACK_BLOCK_32(T,name,num)                    \
           uint8 __assb32##name[3+((num)*sizeof(T))];          \
@@ -119,10 +119,8 @@ typedef OSNative::float32  floatF;
           T *name = (T*)((uint32)(__assb64##name+7) & ~7);
 
 # define  ALIGN_STACK_BLOCK_CACHELINE(T,name,num)             \
-          uint8 __assb32##name[15+((num)*sizeof(T))];           \
-          T *name = (T*)((uint32)(__assb32##name+7) & ~7);
-
-
+          uint8 __assb32##name[31+((num)*sizeof(T))];         \
+          T *name = (T*)((uint32)(__assb32##name+7) & ~31);
 
 
 # define ALIGNSTACKOBJ32(T, name) uint8 __a32##name[sizeof(T)+3]; \

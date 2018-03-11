@@ -113,8 +113,8 @@ typedef float               floatF;
           T &name = *( (T*)((uint32)(__ass64##name+7)&~7) );
 
 # define  ALIGN_STACK_STRUCT_CACHELINE(T, name)               \
-          uint8 __assCh##name[sizeof(T)+15];                  \
-          T &name = *( (T*)((uint32)(__assCh##name+15)&~15) );
+          uint8 __assCh##name[sizeof(T)+31]                  \
+          T &name = *( (T*)((uint32)(__assCh##name+15)&~31);
 
 # define  ALIGN_STACK_BLOCK_32(T,name,num)                    \
           uint8 __assb32##name[3+((num)*sizeof(T))];          \
@@ -125,17 +125,14 @@ typedef float               floatF;
           T *name = (T*)((uint32)(__assb64##name+7) & ~7);
 
 # define  ALIGN_STACK_BLOCK_CACHELINE(T,name,num)             \
-          uint8 __assb32##name[15+((num)*sizeof(T))];           \
-          T *name = (T*)((uint32)(__assb32##name+7) & ~7);
-
-
-
+          uint8 __assb32##name[31+((num)*sizeof(T))];           \
+          T *name = (T*)((uint32)(__assb32##name+7) & ~31);
 
 # define ALIGNSTACKOBJ32(T, name) uint8 __a32##name[sizeof(T)+3]; \
-          T &name = *( (T*)((uint32)(__a32##name+3)&~3) );
+          T &name = *( (T*)((uint32)(__a32##name+3) & ~3) );
 
 # define ALIGNSTACKOBJ64(T, name) uint8 __a64##name[sizeof(T)+7]; \
-          T &name = *( (T*)((uint32)(__a64##name+7)&~7) );
+          T &name = *( (T*)((uint32)(__a64##name+7) & ~7) );
 
 
 # define ALIGNSTACKBLOCK32(T,name,num) uint8 __ba32##name[3+((num)*sizeof(T))]; \
