@@ -20,7 +20,6 @@
 # define _EXNG2_GFXLIB_GFX_HPP_
 
 # include <xbase.hpp>
-# include <gfxlib/gfx_native.hpp>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -28,11 +27,11 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class Graphics : private EXNGPrivate::GfxResource {
-  public:
-    static void init();
-    static void done();
-};
+# include <gfxlib/gfx_native.hpp>
 
+namespace Graphics {
+  void init();
+  void done();
+};
 
 #endif

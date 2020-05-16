@@ -27,7 +27,7 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class Mouse {
+class HID::Mouse {
   public:
     // mouse button enumerations
     typedef enum {
@@ -91,7 +91,7 @@ class Mouse {
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class Mouse::Filter : protected EventMask {
+class HID::Mouse::Filter : protected EventMask {
   DEFINE_MIN_RTTI
   public:
     uint32  enableMouseEvents(uint32 mask);
@@ -104,7 +104,7 @@ class Mouse::Filter : protected EventMask {
 };
 
 
-class Mouse::Observer : public Mouse::Filter {
+class HID::Mouse::Observer : public Mouse::Filter {
   DEFINE_MIN_RTTI
   private:
     static uint32 nextId;
@@ -133,7 +133,7 @@ class Mouse::Observer : public Mouse::Filter {
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class Mouse::Dispatcher : public Mouse::Filter {
+class HID::Mouse::Dispatcher : public Mouse::Filter {
   DEFINE_MIN_RTTI
   private:
     static uint32 nextId;

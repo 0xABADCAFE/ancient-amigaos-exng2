@@ -28,33 +28,36 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace IO {
+  namespace Stream {
 
-  typedef enum {
-    MODE_READ       = 0,
-    MODE_READTEXT
-  } ReadMode;
+    typedef enum {
+      MODE_READ       = 0,
+      MODE_READTEXT
+    } ReadMode;
 
-  typedef enum {
-    MODE_WRITE      = 0,
-    MODE_WRITETEXT,
-    MODE_APPEND,
-    MODE_APPENDTEXT
-  } WriteMode;
+    typedef enum {
+      MODE_WRITE      = 0,
+      MODE_WRITETEXT,
+      MODE_APPEND,
+      MODE_APPENDTEXT
+    } WriteMode;
 
-  typedef enum {
-    FROM_START,
-    FROM_CURRENT,
-    FROM_END
-  } SeekMode;
+    typedef enum {
+      FROM_START,
+      FROM_CURRENT,
+      FROM_END
+    } SeekMode;
 
-  typedef long SeekPos;
+    typedef long SeekPos;
 
-  enum {
-    DEFAULT_BUFFSIZE  = 2048
+    enum {
+      DEFAULT_BUFFSIZE  = 2048
+    };
+
+    class In;
+    class Out;
+
   };
-
-  class StreamIn;
-  class StreamOut;
 };
 
 # include <iolib/streamio_native.hpp>

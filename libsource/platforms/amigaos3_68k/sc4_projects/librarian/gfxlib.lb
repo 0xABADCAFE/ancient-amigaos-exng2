@@ -21,4 +21,9 @@ obj/gfxlib/display_input_dispatch_native.o
 obj/gfxlib/draw.o
 obj/gfxlib/draw_amiga.o
 obj/gfxlib/draw_amiga_render.o
+obj/gfxlib/pixel15_native_asm.o
+obj/gfxlib/pixel16_native_asm.o
+obj/gfxlib/pixel24_native_asm.o
+obj/gfxlib/pixel32_native_asm.o
+Developer:Extropia/exng2/libsource/platforms/amigaos3_68k/sc4_projects/obj/gfxlib/pixelmap_native.o
 EOD

@@ -29,6 +29,7 @@ namespace OSNative {
   extern "C" {
     #include <proto/timer.h>
   }
+  #include <library_inlines/timer.hpp>
 };
 
 class Time::MilliClock {

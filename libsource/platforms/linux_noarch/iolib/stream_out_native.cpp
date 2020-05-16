@@ -29,19 +29,19 @@ using namespace EXNGPrivate;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  IO::StreamOut
+//  IO::Stream::Out
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-size_t      IO::StreamOut::rawReadBytes(void* buffer, size_t n, sint32 filePos)
+size_t IO::Stream::Out::rawReadBytes(void* buffer, size_t n, IO::Stream::SeekPos filePos)
 {
   return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void        IO::StreamOut::open(const char* fileName, IO::WriteMode mode, size_t size)
+void IO::Stream::Out::open(const char* fileName, IO::Stream::WriteMode mode, size_t size)
 {
   if (!fileName) {
     THROW_NSX(Error, InvalidValue());
@@ -50,12 +50,12 @@ void        IO::StreamOut::open(const char* fileName, IO::WriteMode mode, size_t
     close();
   }
   switch(mode) {
-    case IO::MODE_WRITE:
-    case IO::MODE_WRITETEXT:
+    case IO::Stream::MODE_WRITE:
+    case IO::Stream::MODE_WRITETEXT:
       file = std::fopen(fileName, "w+");
       break;
-    case IO::MODE_APPEND:
-    case IO::MODE_APPENDTEXT:
+    case IO::Stream::MODE_APPEND:
+    case IO::Stream::MODE_APPENDTEXT:
       file = std::fopen(fileName, "a+");
       break;
 
@@ -72,7 +72,7 @@ void        IO::StreamOut::open(const char* fileName, IO::WriteMode mode, size_t
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void        IO::StreamOut::close()
+void IO::Stream::Out::close()
 {
   if (file) {
     std::fclose(file);
@@ -83,7 +83,7 @@ void        IO::StreamOut::close()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void        IO::StreamOut::flush()
+void IO::Stream::Out::flush()
 {
   assertWriteable();
   std::fflush(file);
@@ -91,7 +91,7 @@ void        IO::StreamOut::flush()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t      IO::StreamOut::writeBytes(const void* buffer, size_t n)
+size_t IO::Stream::Out::writeBytes(const void* buffer, size_t n)
 {
   assertWriteable();
   assertPointer(buffer);
@@ -100,7 +100,7 @@ size_t      IO::StreamOut::writeBytes(const void* buffer, size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t      IO::StreamOut::write16Swap(const void* buffer, size_t n)
+size_t IO::Stream::Out::write16Swap(const void* buffer, size_t n)
 {
   assertWriteable();
   assertPointer(buffer);
@@ -121,7 +121,7 @@ size_t      IO::StreamOut::write16Swap(const void* buffer, size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t      IO::StreamOut::write32Swap(const void* buffer, size_t n)
+size_t IO::Stream::Out::write32Swap(const void* buffer, size_t n)
 {
   assertWriteable();
   assertPointer(buffer);
@@ -142,7 +142,7 @@ size_t      IO::StreamOut::write32Swap(const void* buffer, size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t      IO::StreamOut::write64Swap(const void* buffer, size_t n)
+size_t IO::Stream::Out::write64Swap(const void* buffer, size_t n)
 {
   assertWriteable();
   assertPointer(buffer);
@@ -163,7 +163,7 @@ size_t      IO::StreamOut::write64Swap(const void* buffer, size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t      IO::StreamOut::writeText(const char* format,...)
+size_t IO::Stream::Out::writeText(const char* format,...)
 {
   assertWriteable();
   assertPointer(format);

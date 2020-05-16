@@ -19,48 +19,42 @@
 #ifndef _EXNG2_GFXLIB_PIXEL15BIT_HPP_
 # define _EXNG2_GFXLIB_PIXEL15BIT_HPP_
 
-void copy16(PIXCONV_ARGS);
-void swap16(PIXCONV_ARGS);
+extern "C" {
+  void convCopy16(PIXCONV_ARGS);
+  void convSwap16(PIXCONV_ARGS);
 
-// XYG -> YGX are symmetrical for RGB <-> BGR
+  // 15 -> 15                                   // Big Endian Host  Little Endian Host
+  void convXGY_555B_To_YGX_555B(PIXCONV_ARGS);  // T                B T B
+  void convXGY_555B_To_YGX_555L(PIXCONV_ARGS);  // T B              B T
+  void convXGY_555L_To_YGX_555B(PIXCONV_ARGS);  // B T              T B
+  void convXGY_555L_To_YGX_555L(PIXCONV_ARGS);  // B T B            T
 
-// T: Transpose RGB <-> BGR
-// B: Byteswap word order
-// X: Extend width
-// R: Reduce width
+  // 15 -> 16
+  void convXGY_555B_To_XGY_565B(PIXCONV_ARGS);  // X                B X B
+  void convXGY_555B_To_XGY_565L(PIXCONV_ARGS);  // X B              B X
+  void convXGY_555L_To_XGY_565B(PIXCONV_ARGS);  // B X              X B
+  void convXGY_555L_To_XGY_565L(PIXCONV_ARGS);  // B X B            X
 
-// 15 -> 15                                   // Big Endian Host  Little Endian Host
-void convXGY_555B_To_YGX_555B(PIXCONV_ARGS);  // T                B T B
-void convXGY_555B_To_YGX_555L(PIXCONV_ARGS);  // T B              B T
-void convXGY_555L_To_YGX_555B(PIXCONV_ARGS);  // B T              T B
-void convXGY_555L_To_YGX_555L(PIXCONV_ARGS);  // B T B            T
+  void convXGY_555B_To_YGX_565B(PIXCONV_ARGS);  // T X              B X T B
+  void convXGY_555B_To_YGX_565L(PIXCONV_ARGS);  // T X B            B X T
+  void convXGY_555L_To_YGX_565B(PIXCONV_ARGS);  // B T X            T X B
+  void convXGY_555L_To_YGX_565L(PIXCONV_ARGS);  // B T X B          T X
 
-// 15 -> 16
-void convXGY_555B_To_XGY_565B(PIXCONV_ARGS);  // X                B X B
-void convXGY_555B_To_XGY_565L(PIXCONV_ARGS);  // X B              B X
-void convXGY_555L_To_XGY_565B(PIXCONV_ARGS);  // B X              X B
-void convXGY_555L_To_XGY_565L(PIXCONV_ARGS);  // B X B            X
+  // 15 -> 24
+  void convXGY_555B_To_XGY_888(PIXCONV_ARGS);   // X                B X
+  void convXGY_555L_To_XGY_888(PIXCONV_ARGS);   // B X              X
+  void convXGY_555B_To_YGX_888(PIXCONV_ARGS);   // T X              B T X
+  void convXGY_555L_To_YGX_888(PIXCONV_ARGS);   // B T X            X T
 
-void convXGY_555B_To_YGX_565B(PIXCONV_ARGS);  // T X              B X T B
-void convXGY_555B_To_YGX_565L(PIXCONV_ARGS);  // T X B            B X T
-void convXGY_555L_To_YGX_565B(PIXCONV_ARGS);  // B T X            T X B
-void convXGY_555L_To_YGX_565L(PIXCONV_ARGS);  // B T X B          T X
-
-// 15 -> 24
-void convXGY_555B_To_XGY_888(PIXCONV_ARGS);   // X                B X
-void convXGY_555L_To_XGY_888(PIXCONV_ARGS);   // B X              X
-void convXGY_555B_To_YGX_888(PIXCONV_ARGS);   // T X              B T X
-void convXGY_555L_To_YGX_888(PIXCONV_ARGS);   // B T X            X T
-
-// 15 -> 32
-void convXGY_555B_To_AXGY_8888(PIXCONV_ARGS); // X
-void convXGY_555B_To_AYGX_8888(PIXCONV_ARGS); // T X
-void convXGY_555B_To_YGXA_8888(PIXCONV_ARGS); // B T
-void convXGY_555B_To_XGYA_8888(PIXCONV_ARGS); // X
-void convXGY_555L_To_AXGY_8888(PIXCONV_ARGS); // B X
-void convXGY_555L_To_AYGX_8888(PIXCONV_ARGS); // B T X
-void convXGY_555L_To_YGXA_8888(PIXCONV_ARGS); // B T X
-void convXGY_555L_To_XGYA_8888(PIXCONV_ARGS); // B X
-
+  // 15 -> 32
+  void convXGY_555B_To_AXGY_8888(PIXCONV_ARGS); // X
+  void convXGY_555B_To_AYGX_8888(PIXCONV_ARGS); // T X
+  void convXGY_555B_To_YGXA_8888(PIXCONV_ARGS); // B T
+  void convXGY_555B_To_XGYA_8888(PIXCONV_ARGS); // X
+  void convXGY_555L_To_AXGY_8888(PIXCONV_ARGS); // B X
+  void convXGY_555L_To_AYGX_8888(PIXCONV_ARGS); // B T X
+  void convXGY_555L_To_YGXA_8888(PIXCONV_ARGS); // B T X
+  void convXGY_555L_To_XGYA_8888(PIXCONV_ARGS); // B X
+}
 
 #endif

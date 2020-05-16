@@ -33,8 +33,8 @@ DECLARE_MIN_RTTI(AppDisplay::FlipBuffered)
 DECLARE_MIN_RTTI(AppDisplay::Windowed)
 
 AppDisplay::AppDisplay(uint32 keyMask, uint32 mouseMask) :
-  Key::Dispatcher(keyMask),
-  Mouse::Dispatcher(mouseMask)
+  HID::Key::Dispatcher(keyMask),
+  HID::Mouse::Dispatcher(mouseMask)
 {
 
 }

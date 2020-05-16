@@ -25,6 +25,7 @@
 
 using namespace OSNative;
 using namespace EXNGPrivate;
+//using namespace IO::Stream;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -32,18 +33,18 @@ using namespace EXNGPrivate;
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-LOGGING_DECLARE_CLASSNAME(IO::StreamIn)
+LOGGING_DECLARE_CLASSNAME(IO::Stream::In)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-IO::StreamIn::~StreamIn()
+IO::Stream::In::~In()
 {
   close();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-sint32 IO::StreamIn::getNextCharIO()
+sint32 IO::Stream::In::getNextCharIO()
 {
   sint32 bytesArrived = waitPacket();
   if (bytesArrived <= 0) {
@@ -71,7 +72,7 @@ sint32 IO::StreamIn::getNextCharIO()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void IO::StreamIn::open(const char* fileName, IO::ReadMode m, size_t reqSize)
+void IO::Stream::In::open(const char* fileName, IO::Stream::ReadMode m, size_t reqSize)
 {
   LOGGING_DECLARE_FUNCNAME(open)
 
@@ -119,7 +120,7 @@ void IO::StreamIn::open(const char* fileName, IO::ReadMode m, size_t reqSize)
         sendPacket(buffers[0]);
       }
       flags |= FILE_GOOD;
-      if (m==IO::MODE_READTEXT) {
+      if (m==MODE_READTEXT) {
         flags |= FILE_TEXT;
       }
       return;
@@ -143,7 +144,7 @@ void IO::StreamIn::open(const char* fileName, IO::ReadMode m, size_t reqSize)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void IO::StreamIn::close()
+void IO::Stream::In::close()
 {
   if (file) {
     waitPacket();
@@ -156,7 +157,7 @@ void IO::StreamIn::close()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void IO::StreamIn::flush()
+void IO::Stream::In::flush()
 {
   if (file) {
     waitPacket();
@@ -165,7 +166,7 @@ void IO::StreamIn::flush()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-IO::SeekPos IO::StreamIn::tell()
+IO::Stream::SeekPos IO::Stream::In::tell()
 {
   if (!file) {
     THROW_NSX(IO, SeekError());
@@ -174,12 +175,12 @@ IO::SeekPos IO::StreamIn::tell()
   if (bytesArrived < 0) {
     THROW_NSX(IO, SeekError());
   }
-  return (IO::SeekPos)Seek(file, 0, OFFSET_CURRENT)-(bytesLeft+bytesArrived)+seekOffset;
+  return (IO::Stream::SeekPos)Seek(file, 0, OFFSET_CURRENT)-(bytesLeft+bytesArrived)+seekOffset;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-IO::SeekPos IO::StreamIn::seek(sint32 position, IO::SeekMode mode)
+IO::Stream::SeekPos IO::Stream::In::seek(IO::Stream::SeekPos position, IO::Stream::SeekMode mode)
 {
   if (!file) {
     THROW_NSX(IO, SeekError());
@@ -201,15 +202,15 @@ IO::SeekPos IO::StreamIn::seek(sint32 position, IO::SeekMode mode)
   // figure out the absolute offset within the file where we must seek to
 
   switch (mode) {
-    case IO::FROM_START:
+    case IO::Stream::FROM_START:
       target = position;
       break;
 
-    case IO::FROM_CURRENT:
+    case IO::Stream::FROM_CURRENT:
       target = current + position;
       break;
 
-    case IO::FROM_END: {
+    case IO::Stream::FROM_END: {
         ALIGNSTACKOBJ32(FileInfoBlock, fib);
         if ( !ExamineFH(file, &fib) ) {
           recordSyncFailure();
@@ -254,12 +255,12 @@ IO::SeekPos IO::StreamIn::seek(sint32 position, IO::SeekMode mode)
     seekOffset  = 0;
     currentBuf  ^= 1;
   }
-  return (IO::SeekPos) current;
+  return (IO::Stream::SeekPos) current;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t IO::StreamIn::readBytes(void* buffer, size_t n)
+size_t IO::Stream::In::readBytes(void* buffer, size_t n)
 {
   if (!file) {
     //throwStreamReadError();
@@ -301,7 +302,7 @@ size_t IO::StreamIn::readBytes(void* buffer, size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t IO::StreamIn::read16Swap(void* buffer,size_t n)
+size_t IO::Stream::In::read16Swap(void* buffer,size_t n)
 {
   if (!file) {
     THROW_NSX(IO, ReadError());
@@ -346,7 +347,7 @@ size_t IO::StreamIn::read16Swap(void* buffer,size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t IO::StreamIn::read32Swap(void* buffer,size_t n)
+size_t IO::Stream::In::read32Swap(void* buffer,size_t n)
 {
   if (!file) {
     THROW_NSX(IO, ReadError());
@@ -390,7 +391,7 @@ size_t IO::StreamIn::read32Swap(void* buffer,size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t IO::StreamIn::read64Swap(void* buffer,size_t n)
+size_t IO::Stream::In::read64Swap(void* buffer,size_t n)
 {
   if (!file) {
     THROW_NSX(IO, ReadError());
@@ -436,17 +437,19 @@ size_t IO::StreamIn::read64Swap(void* buffer,size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t IO::StreamIn::readText(char* buf, sint32 max, char mark, sint32 num)
+size_t IO::Stream::In::readText(char* buf, sint32 max, char mark, sint32 num)
 {
   if (!file) {
     THROW_NSX(IO, ReadError());
   }
   char* p = buf;
   rsint32 i = max;
-  while (--i && num) {
+  while (i && num) {
     rsint32 c = getChar();
     if (c==EOF) { // terminate if error
       break;
+    } else {
+      --i;
     }
     if (c==(sint32)mark) {
       num--;
@@ -459,7 +462,7 @@ size_t IO::StreamIn::readText(char* buf, sint32 max, char mark, sint32 num)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t IO::StreamIn::rawWriteBytes(const void* buffer, size_t n, sint32 filePos)
+size_t IO::Stream::In::rawWriteBytes(const void* buffer, size_t n, IO::Stream::SeekPos filePos)
 {
   return 0;
 }

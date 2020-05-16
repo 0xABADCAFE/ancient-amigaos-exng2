@@ -32,10 +32,16 @@ namespace Machine {
   {
     if (__builtin_constant_p(bits)) {
       if (bits&7) {
-        asm("rol.b %1, %0" : "=d"(val) : "I"(bits&7), "0"(val) : "cc");
+        asm(
+          "rol.b %1, %0\n"
+          : "=d"(val) : "I"(bits&7), "0"(val) : "cc"
+        );
       }
     } else {
-      asm("rol.b %1, %0" : "=d"(val) : "d"(bits), "0"(val) : "cc");
+      asm(
+        "rol.b %1, %0\n"
+        : "=d"(val) : "d"(bits), "0"(val) : "cc"
+      );
     }
     return val;
   }
@@ -47,16 +53,25 @@ namespace Machine {
       if (bits&15) {
         // only rotate when modulus 16 > 0
         if ((bits&15) < 9) {
-          asm("rol.w %1, %0" : "=d"(val) : "I"(bits&15), "0"(val) : "cc");
+          asm(
+            "rol.w %1, %0\n"
+            : "=d"(val) : "I"(bits&15), "0"(val) : "cc"
+          );
         }
         else {
           // use opposite rotate for N > 8
-          asm("ror.w %1, %0" : "=d"(val) : "I"(16-(bits&15)), "0"(val) : "cc");
+          asm(
+            "ror.w %1, %0\n"
+            : "=d"(val) : "I"(16-(bits&15)), "0"(val) : "cc"
+          );
         }
       }
     }
     else {
-      asm("rol.w %1, %0" : "=d"(val) : "d"(bits), "0"(val) : "cc");
+      asm(
+        "rol.w %1, %0\n"
+        : "=d"(val) : "d"(bits), "0"(val) : "cc"
+      );
     }
     return val;
   }
@@ -67,11 +82,17 @@ namespace Machine {
     if (__builtin_constant_p(bits)) {
       if (bits&7) {
         // only rotate when modulus 8 > 0
-        asm("ror.b %1, %0" : "=d"(val) : "I"(bits&7), "0"(val) : "cc");
+        asm(
+          "ror.b %1, %0\n"
+          : "=d"(val) : "I"(bits&7), "0"(val) : "cc"
+        );
       }
     }
     else {
-      asm("ror.b %1, %0" : "=d"(val) : "d"(bits), "0"(val) : "cc");
+      asm(
+        "ror.b %1, %0\n"
+        : "=d"(val) : "d"(bits), "0"(val) : "cc"
+      );
     }
     return val;
   }
@@ -83,16 +104,25 @@ namespace Machine {
       if (bits&15) {
         // only rotate when modulus 16 > 0
         if ((bits&15) < 9) {
-          asm("ror.w %1, %0" : "=d"(val) : "I"(bits&15), "0"(val) : "cc");
+          asm(
+            "ror.w %1, %0\n"
+            : "=d"(val) : "I"(bits&15), "0"(val) : "cc"
+          );
         }
         else {
           // use opposite rotate for N > 8
-          asm("rol.w %1, %0" : "=d"(val) : "I"(16-(bits&15)), "0"(val) : "cc");
+          asm(
+            "rol.w %1, %0\n"
+            : "=d"(val) : "I"(16-(bits&15)), "0"(val) : "cc"
+          );
         }
       }
     }
     else {
-      asm("ror.w %1, %0" : "=d"(val) : "d"(bits), "0"(val) : "cc");
+      asm(
+        "ror.w %1, %0\n"
+        : "=d"(val) : "d"(bits), "0"(val) : "cc"
+      );
     }
     return val;
   }
@@ -104,7 +134,7 @@ namespace Machine {
       val = val<<8|val>>8;
     } else {
       asm(
-        "rol.w #8, %0"
+        "rol.w #8, %0\n"
         : "=d"(val)
         : "0"(val)
         : "cc"
@@ -123,7 +153,7 @@ namespace Machine {
       asm(
         "rol.w #8, %0\n\t"
         "swap %0\n\t"
-        "rol.w #8, %0"
+        "rol.w #8, %0\n"
         : "=d"(val)
         : "0"(val)
         : "cc"
@@ -160,40 +190,14 @@ namespace Machine {
   inline uint32 rotLeft8_32(uint32 bits, uint32 val)  { return _rotLeft8<uint32>(bits, val); }
   inline uint16 rotLeft8_16(uint32 bits, uint16 val)  { return _rotLeft8<uint16>(bits, val); }
   inline uint8  rotLeft8(uint32 bits, uint8 val)      { return _rotLeft8<uint8>(bits, val); }
-//   {
-//     if (__builtin_constant_p(bits)) {
-//       if (bits&7) {
-//         asm("rol.b %1, %0" : "=d"(val) : "I"(bits&7), "0"(val) : "cc");
-//       }
-//     } else {
-//       asm("rol.b %1, %0" : "=d"(val) : "d"(bits), "0"(val) : "cc");
-//     }
-//     return val;
-//   }
+
 
 
   #define _EXNG2_MACHINE_HAS_ROL8
 
   inline uint32 rotLeft16_32(uint16 bits, uint32 val) { return _rotLeft16<uint32>(bits, val); }
   inline uint16 rotLeft16(uint32 bits, uint16 val)    { return _rotLeft16<uint16>(bits, val); }
-//   {
-//     if (__builtin_constant_p(bits)) {
-//       if (bits&15) {
-//         // only rotate when modulus 16 > 0
-//         if ((bits&15) < 9) {
-//           asm("rol.w %1, %0" : "=d"(val) : "I"(bits&15), "0"(val) : "cc");
-//         }
-//         else {
-//           // use opposite rotate for N > 8
-//           asm("ror.w %1, %0" : "=d"(val) : "I"(16-(bits&15)), "0"(val) : "cc");
-//         }
-//       }
-//     }
-//     else {
-//       asm("rol.w %1, %0" : "=d"(val) : "d"(bits), "0"(val) : "cc");
-//     }
-//     return val;
-//   }
+
 
   #define _EXNG2_MACHINE_HAS_ROL16
 
@@ -203,23 +207,38 @@ namespace Machine {
       if (bits&31) {
         // only rotate when modulus 32 > 0
         if ((bits&31) < 9) {
-          asm("rol.l %1, %0" : "=d"(val) : "I"(bits&31), "0"(val) : "cc");
+          asm(
+            "rol.l %1, %0\n"
+            : "=d"(val) : "I"(bits&31), "0"(val) : "cc"
+          );
         }
         else if ((bits&31)==16) {
-          asm("swap %0" : "=d"(val) : "0"(val) : "cc");
+          asm(
+            "swap %0\n"
+            : "=d"(val) : "0"(val) : "cc"
+          );
         }
         else if ((bits&31)>23) {
           // use opposite rotate for N > 23
-          asm("ror.l %1, %0" : "=d"(val) : "I"(32-(bits&31)), "0"(val) : "cc");
+          asm(
+            "ror.l %1, %0\n"
+            : "=d"(val) : "I"(32-(bits&31)), "0"(val) : "cc"
+          );
         }
         else {
           // use register rotate for all intermediate sizes
-          asm("rol.l %1, %0" : "=d"(val) : "d"(bits&31), "0"(val) : "cc");
+          asm(
+            "rol.l %1, %0\n"
+            : "=d"(val) : "d"(bits&31), "0"(val) : "cc"
+          );
         }
       }
     }
     else {
-      asm("rol.l %1, %0" : "=d"(val) : "d"(bits), "0"(val) : "cc");
+      asm(
+        "rol.l %1, %0\n"
+        : "=d"(val) : "d"(bits), "0"(val) : "cc"
+      );
     }
     return val;
   }
@@ -228,40 +247,12 @@ namespace Machine {
   inline uint32 rotRight8_32(uint32 bits, uint32 val) { return _rotRight8<uint32>(bits, val); }
   inline uint16 rotRight8_16(uint32 bits, uint16 val) { return _rotRight8<uint16>(bits, val); }
   inline uint8  rotRight8(uint32 bits, uint8 val)     { return _rotRight8<uint8>(bits, val);  }
-//   {
-//     if (__builtin_constant_p(bits)) {
-//       if (bits&7) {
-//         // only rotate when modulus 8 > 0
-//         asm("ror.b %1, %0" : "=d"(val) : "I"(bits&7), "0"(val) : "cc");
-//       }
-//     }
-//     else {
-//       asm("ror.b %1, %0" : "=d"(val) : "d"(bits), "0"(val) : "cc");
-//     }
-//     return val;
-//   }
+
   #define _EXNG2_MACHINE_HAS_ROR8
 
   inline uint32 rotRight16_32(uint32 bits, uint32 val)  { return _rotRight16<uint32>(bits, val); }
   inline uint16 rotRight16(uint32 bits, uint16 val)     { return _rotRight16<uint32>(bits, val); }
-//   {
-//     if (__builtin_constant_p(bits)) {
-//       if (bits&15) {
-//         // only rotate when modulus 16 > 0
-//         if ((bits&15) < 9) {
-//           asm("ror.w %1, %0" : "=d"(val) : "I"(bits&15), "0"(val) : "cc");
-//         }
-//         else {
-//           // use opposite rotate for N > 8
-//           asm("rol.w %1, %0" : "=d"(val) : "I"(16-(bits&15)), "0"(val) : "cc");
-//         }
-//       }
-//     }
-//     else {
-//       asm("ror.w %1, %0" : "=d"(val) : "d"(bits), "0"(val) : "cc");
-//     }
-//     return val;
-//   }
+
   #define _EXNG2_MACHINE_HAS_ROR16
 
   inline uint32 rotRight32(uint32 bits, uint32 val)
@@ -270,23 +261,38 @@ namespace Machine {
       if (bits&31) {
         // only rotate when modulus 32 > 0
         if ((bits&31) < 9) {
-          asm("ror.l %1, %0" : "=d"(val) : "I"(bits&31), "0"(val) : "cc");
+          asm(
+            "ror.l %1, %0\n"
+            : "=d"(val) : "I"(bits&31), "0"(val) : "cc"
+          );
         }
         else if ((bits&31)==16) {
-          asm("swap %0" : "=d"(val) : "0"(val) : "cc");
+          asm(
+            "swap %0\n"
+            : "=d"(val) : "0"(val) : "cc"
+          );
         }
         else if ((bits&31)>23) {
           // use opposite rotate for N > 23
-          asm("rol.l %1, %0" : "=d"(val) : "I"(32-(bits&31)), "0"(val) : "cc");
+          asm(
+            "rol.l %1, %0\n"
+            : "=d"(val) : "I"(32-(bits&31)), "0"(val) : "cc"
+          );
         }
         else {
           // use register rotate for all intermediate sizes
-          asm("ror.l %1, %0" : "=d"(val) : "d"(bits&31), "0"(val) : "cc");
+          asm(
+            "ror.l %1, %0\n"
+            : "=d"(val) : "d"(bits&31), "0"(val) : "cc"
+          );
         }
       }
     }
     else {
-      asm("ror.r %1, %0" : "=d"(val) : "d"(bits), "0"(val) : "cc");
+      asm(
+        "ror.l %1, %0\n"
+        : "=d"(val) : "d"(bits), "0"(val) : "cc"
+      );
     }
     return val;
   }
@@ -296,8 +302,9 @@ namespace Machine {
   {
     asm(
       "bfffo %0 {#0:#32}, %0" "\n\t"
-      "neg.w %0"              "\n\t"
-      "add.w #31,%0" : "=d"(val) : "0"(val) : "cc");
+      "eor.w #31,%0\n"
+      : "=d"(val) : "0"(val) : "cc"
+    );
     return val;
   }
   #define _EXNG2_MACHINE_HAS_BFFFO

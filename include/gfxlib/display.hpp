@@ -25,7 +25,7 @@
 # include <gfxlib/palette.hpp>
 # include <gfxlib/rects.hpp>
 
-# include <systemlib/reflist.hpp>
+# include <utilitylib/referencelist.hpp>
 # include <systemlib/thread.hpp>
 
 # include <gfxlib/display_hostui.hpp>

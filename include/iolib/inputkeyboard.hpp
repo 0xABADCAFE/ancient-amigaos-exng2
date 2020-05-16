@@ -16,7 +16,7 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#ifndef _EXNG2_IOLIB_INPUT_KEYNOARD_HPP_
+#ifndef _EXNG2_IOLIB_INPUT_KEYBOARD_HPP_
 # define _EXNG2_IOLIB_INPUT_KEYBOARD_HPP_
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,8 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class Key {
+
+class HID::Key {
   public:
     typedef enum {
       UNASSIGNABLE = 0,
@@ -74,7 +75,7 @@ class Key {
     class Dispatcher;
 };
 
-class Key::Filter : protected EventMask {
+class HID::Key::Filter : protected EventMask {
   DEFINE_MIN_RTTI
   public:
     uint32  enableKeyEvents(uint32 mask);
@@ -92,7 +93,7 @@ class Key::Filter : protected EventMask {
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class Key::Observer : public Key::Filter {
+class HID::Key::Observer : public Key::Filter {
   DEFINE_MIN_RTTI
   private:
     static uint32 nextId;
@@ -118,7 +119,7 @@ class Key::Observer : public Key::Filter {
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class Key::Dispatcher : public Key::Filter {
+class HID::Key::Dispatcher : public Key::Filter {
   DEFINE_MIN_RTTI
   private:
     static uint32 nextId;
