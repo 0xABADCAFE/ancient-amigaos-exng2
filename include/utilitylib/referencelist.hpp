@@ -1,15 +1,19 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  File:         systemlib/reflist.hpp
+//  File:         utilitylib/referencelist.hpp
 //  Tab Size:     2
 //  Max Line:     120
-//  Description:  Simple list
+//  Description:  Simple reference lists
 //  Comment(s):
 //  Library:      utility
 //  Created:      2007-04-07
 //  Updated:      2007-04-07
 //  Author(s):    Karl Churchill
-//  Note(s):
+//
+//  Note(s):      As this container type is used by the library internally for an nuumber of components, only the
+//                template interface is defined here. The private implementation is contained within systemlib which
+//                precludes having to link against utilitylib.
+//
 //  Copyright:    (C)2006+, eXtropia Studios
 //                Karl Churchill
 //                All Rights Reserved.
@@ -27,7 +31,8 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template<class T> class RefList : private EXNGPrivate::VoidList {
+template<typename T>
+class RefList : private EXNGPrivate::VoidList {
 
   friend class Iterator;
   friend class RevIterator;
@@ -132,7 +137,8 @@ template<class T> class RefList : private EXNGPrivate::VoidList {
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template<class T> class ConstRefList : private EXNGPrivate::VoidList {
+template<typename T>
+class ConstRefList : private EXNGPrivate::VoidList {
 
   friend class Iterator;
   friend class RevIterator;

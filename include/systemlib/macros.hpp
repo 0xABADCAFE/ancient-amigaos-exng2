@@ -74,7 +74,7 @@
 # else
 #   define DEFINE_MIN_RTTI
 #   define DECLARE_MIN_RTTI(name)
-#   define THROW_NSX(ns,ex) throw ns::ex
+#   define THROW_NSX(ns,ex) throw ::ns::ex
 # endif
 
 # if defined(__GNUC__) && (__GNUC__ < 3) && (__GNUC_MINOR__ <= 95)

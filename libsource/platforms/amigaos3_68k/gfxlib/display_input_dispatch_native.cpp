@@ -35,7 +35,7 @@ using namespace EXNGPrivate;
 using namespace OSNative;
 
 namespace {
-  // helper code for intuition -> Key::Dispatcher stuff
+  // helper code for intuition -> HID::Key::Dispatcher stuff
 /*
   0x00,  //   UNASSIGNABLE = 0,
   0x41,  //   BACKSP,
@@ -84,47 +84,47 @@ namespace {
   0x5E,  //   NP_PLUS,
 */
   uint8 nonPrinting[] = {
-    Key::NP_0,      0x0F,
-    Key::NP_1,      0x1D,
-    Key::NP_2,      0x1E,
-    Key::NP_3,      0x1F,
-    Key::NP_4,      0x2D,
-    Key::NP_5,      0x2E,
-    Key::NP_6,      0x2F,
-    Key::NP_PNT,    0x3C,
-    Key::NP_7,      0x3D,
-    Key::NP_8,      0x3E,
-    Key::NP_9,      0x3F,
-    Key::BACKSP,    0x41,
-    Key::TAB,       0x42,
-    Key::NP_ENT,    0x43,
-    Key::ENTER,     0x44,
-    Key::ESC,       0x45,
-    Key::DEL,       0x46,
-    Key::NP_MINUS,  0x4A,
-    Key::UP,        0x4C,
-    Key::DOWN,      0x4D,
-    Key::RIGHT,     0x4E,
-    Key::LEFT,      0x4F,
-    Key::F1,        0x50,
-    Key::F2,        0x51,
-    Key::F3,        0x52,
-    Key::F4,        0x53,
-    Key::F5,        0x54,
-    Key::F6,        0x55,
-    Key::F7,        0x56,
-    Key::F8,        0x57,
-    Key::F9,        0x58,
-    Key::F10,       0x59,
-    Key::NP_PLUS,   0x5E,
-    Key::SHIFTL,    0x60,
-    Key::SHIFTR,    0x61,
-    Key::CAPSL,     0x62,
-    Key::CTRL,      0x63,
-    Key::ALTL,      0x64,
-    Key::ALTR,      0x65,
-    Key::F11,       0x66,
-    Key::F12,       0x67
+    HID::Key::NP_0,      0x0F,
+    HID::Key::NP_1,      0x1D,
+    HID::Key::NP_2,      0x1E,
+    HID::Key::NP_3,      0x1F,
+    HID::Key::NP_4,      0x2D,
+    HID::Key::NP_5,      0x2E,
+    HID::Key::NP_6,      0x2F,
+    HID::Key::NP_PNT,    0x3C,
+    HID::Key::NP_7,      0x3D,
+    HID::Key::NP_8,      0x3E,
+    HID::Key::NP_9,      0x3F,
+    HID::Key::BACKSP,    0x41,
+    HID::Key::TAB,       0x42,
+    HID::Key::NP_ENT,    0x43,
+    HID::Key::ENTER,     0x44,
+    HID::Key::ESC,       0x45,
+    HID::Key::DEL,       0x46,
+    HID::Key::NP_MINUS,  0x4A,
+    HID::Key::UP,        0x4C,
+    HID::Key::DOWN,      0x4D,
+    HID::Key::RIGHT,     0x4E,
+    HID::Key::LEFT,      0x4F,
+    HID::Key::F1,        0x50,
+    HID::Key::F2,        0x51,
+    HID::Key::F3,        0x52,
+    HID::Key::F4,        0x53,
+    HID::Key::F5,        0x54,
+    HID::Key::F6,        0x55,
+    HID::Key::F7,        0x56,
+    HID::Key::F8,        0x57,
+    HID::Key::F9,        0x58,
+    HID::Key::F10,       0x59,
+    HID::Key::NP_PLUS,   0x5E,
+    HID::Key::SHIFTL,    0x60,
+    HID::Key::SHIFTR,    0x61,
+    HID::Key::CAPSL,     0x62,
+    HID::Key::CTRL,      0x63,
+    HID::Key::ALTL,      0x64,
+    HID::Key::ALTR,      0x65,
+    HID::Key::F11,       0x66,
+    HID::Key::F12,       0x67
   };
 
   int         openCount   = 0;
@@ -177,7 +177,7 @@ void OSDisplay::initDispatcher()
       THROW_NSX(Error, ResourceUnavailable(keyMapLib));
     }
     nonPrintMap = Mem::alloc<uint8>(128);
-    Mem::set(nonPrintMap, Key::UNASSIGNABLE, 128);
+    Mem::set(nonPrintMap, HID::Key::UNASSIGNABLE, 128);
     for (int i=0; i<sizeof(nonPrinting); i+=2) {
       nonPrintMap[nonPrinting[i+1]] = nonPrinting[i];
     }
@@ -267,7 +267,7 @@ void OSDisplay::dispatchQueuedInput(const GfxArea* area)
         }
         else {
           dispatchKeyNonPrintable(
-            (Key::CtrlKey) nonPrintMap[(iMsg->Code & 0x7FUL)],
+            (HID::Key::CtrlKey) nonPrintMap[(iMsg->Code & 0x7FUL)],
             ((iMsg->Code & 0x80UL)==0)
           );
         }
@@ -275,12 +275,12 @@ void OSDisplay::dispatchQueuedInput(const GfxArea* area)
 
       case IDCMP_MOUSEBUTTONS:
         switch(iMsg->Code) {
-          case SELECTDOWN:  dispatchMouseKey(Mouse::LEFT, true);    break;
-          case MIDDLEDOWN:  dispatchMouseKey(Mouse::CENTRE, true);  break;
-          case MENUDOWN:    dispatchMouseKey(Mouse::RIGHT, true);   break;
-          case SELECTUP:    dispatchMouseKey(Mouse::LEFT, false);   break;
-          case MIDDLEUP:    dispatchMouseKey(Mouse::CENTRE, false); break;
-          case MENUUP:      dispatchMouseKey(Mouse::RIGHT, false);  break;
+          case SELECTDOWN:  dispatchMouseKey(HID::Mouse::LEFT, true);    break;
+          case MIDDLEDOWN:  dispatchMouseKey(HID::Mouse::CENTRE, true);  break;
+          case MENUDOWN:    dispatchMouseKey(HID::Mouse::RIGHT, true);   break;
+          case SELECTUP:    dispatchMouseKey(HID::Mouse::LEFT, false);   break;
+          case MIDDLEUP:    dispatchMouseKey(HID::Mouse::CENTRE, false); break;
+          case MENUUP:      dispatchMouseKey(HID::Mouse::RIGHT, false);  break;
         }
         break;
 
@@ -328,12 +328,12 @@ void OSDisplay::applyEventFilters(uint32 disp, uint32 key, uint32 mouse)
     uint32 winIDCMPFlags  =   (disp & HostUI::HUI_CLOSE)  ? IDCMP_CLOSEWINDOW     : 0;
     winIDCMPFlags         |=  (disp & HostUI::HUI_FOCUS)  ? IDCMP_ACTIVEWINDOW    : 0;
     winIDCMPFlags         |=  (disp & HostUI::HUI_BLUR)   ? IDCMP_INACTIVEWINDOW  : 0;
-    winIDCMPFlags         |=  (mouse & Mouse::BUTTONS)    ? IDCMP_MOUSEBUTTONS    : 0;
-    winIDCMPFlags         |=  (mouse & Mouse::MOVEMENT)   ? IDCMP_MOUSEMOVE       : 0;
-    winIDCMPFlags         |=  (key & Key::ALL_EVENTS)     ? IDCMP_RAWKEY          : 0;
+    winIDCMPFlags         |=  (mouse & HID::Mouse::BUTTONS)    ? IDCMP_MOUSEBUTTONS    : 0;
+    winIDCMPFlags         |=  (mouse & HID::Mouse::MOVEMENT)   ? IDCMP_MOUSEMOVE       : 0;
+    winIDCMPFlags         |=  (key & HID::Key::ALL_EVENTS)     ? IDCMP_RAWKEY          : 0;
     SystemLog::write(
       SystemLog::INFO,
-      "HostUI::0x%08X, Key::0x%08X, Mouse::0x%08X -> IDCMP 0x%08X\n",
+      "HostUI::0x%08X, HID::Key::0x%08X, HID::Mouse::0x%08X -> IDCMP 0x%08X\n",
       (unsigned)disp,
       (unsigned)key,
       (unsigned)mouse,

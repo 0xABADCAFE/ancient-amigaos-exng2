@@ -43,7 +43,7 @@ namespace HostUI {
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class HostUI::Filter : protected EventMask {
+class HostUI::Filter : protected HID::EventMask {
   DEFINE_MIN_RTTI
   public:
     uint32  enableDisplayEvents(uint32 mask);
@@ -63,24 +63,24 @@ class HostUI::Filter : protected EventMask {
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class HostUI::Observer : public HostUI::Filter, public Key::Observer, public Mouse::Observer {
+class HostUI::Observer : public HostUI::Filter, public HID::Key::Observer, public HID::Mouse::Observer {
   DEFINE_MIN_RTTI
   private:
     static uint32 nextId;
     uint32 id;
   public:
-    // Key::Observer
-    void nonPrintablePressed(const Key::Dispatcher* d, Key::CtrlKey code);
-    void nonPrintableReleased(const Key::Dispatcher* d, Key::CtrlKey code);
-    void printablePressed(const Key::Dispatcher* d, sint32 ch);
-    void printableReleased(const Key::Dispatcher* d, sint32 ch);
+    // HID::Key::Observer
+    void nonPrintablePressed(const HID::Key::Dispatcher* d, HID::Key::CtrlKey code);
+    void nonPrintableReleased(const HID::Key::Dispatcher* d, HID::Key::CtrlKey code);
+    void printablePressed(const HID::Key::Dispatcher* d, sint32 ch);
+    void printableReleased(const HID::Key::Dispatcher* d, sint32 ch);
 
-    // Mouse::Observer
-    void buttonPressed(const Mouse::Dispatcher* d, Mouse::Button b);
-    void buttonReleased(const Mouse::Dispatcher* d, Mouse::Button b);
-    void scroll(const Mouse::Dispatcher* d, sint16 dx, sint16 dy);
-    void move(const Mouse::Dispatcher* d, sint16 x, sint16 y, sint16 dx, sint16 dy, uint32);
-    void drag(const Mouse::Dispatcher* d, sint16 x, sint16 y, sint16 dx, sint16 dy, uint32 keys);
+    // HID::Mouse::Observer
+    void buttonPressed(const HID::Mouse::Dispatcher* d, HID::Mouse::Button b);
+    void buttonReleased(const HID::Mouse::Dispatcher* d, HID::Mouse::Button b);
+    void scroll(const HID::Mouse::Dispatcher* d, sint16 dx, sint16 dy);
+    void move(const HID::Mouse::Dispatcher* d, sint16 x, sint16 y, sint16 dx, sint16 dy, uint32);
+    void drag(const HID::Mouse::Dispatcher* d, sint16 x, sint16 y, sint16 dx, sint16 dy, uint32 keys);
 
     virtual void displayClosed(const HostUI::Dispatcher* d);
     virtual void displayMoved(const HostUI::Dispatcher* d);
@@ -107,7 +107,7 @@ class HostUI::Observer : public HostUI::Filter, public Key::Observer, public Mou
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class HostUI::Dispatcher : public HostUI::Filter, public Key::Dispatcher, public Mouse::Dispatcher {
+class HostUI::Dispatcher : public HostUI::Filter, public HID::Key::Dispatcher, public HID::Mouse::Dispatcher {
   DEFINE_MIN_RTTI
   private:
     static uint32 nextId;
@@ -116,15 +116,15 @@ class HostUI::Dispatcher : public HostUI::Filter, public Key::Dispatcher, public
 
   public:
 
-//     Key::Dispatcher
-//     void    addKeyObserver(Key::Observer* o)
-//     bool    removeKeyObserver(Key::Observer* o)
-//     bool    hasKeyObserver(Key::Observer* o)
+//     HID::Key::Dispatcher
+//     void    addKeyObserver(HID::Key::Observer* o)
+//     bool    removeKeyObserver(HID::Key::Observer* o)
+//     bool    hasKeyObserver(HID::Key::Observer* o)
 //
-//     Mouse::Dispatcher
-//     void    addMouseObserver(Mouse::Observer* o)
-//     bool    removeMouseObserver(Mouse::Observer* o)
-//     bool    hasMouseObserver(Mouse::Observer* o)
+//     HID::Mouse::Dispatcher
+//     void    addMouseObserver(HID::Mouse::Observer* o)
+//     bool    removeMouseObserver(HID::Mouse::Observer* o)
+//     bool    hasMouseObserver(HID::Mouse::Observer* o)
 
     void    addHostUIObserver(HostUI::Observer* o);
     bool    removeHostUIObserver(HostUI::Observer* o);
@@ -132,13 +132,13 @@ class HostUI::Dispatcher : public HostUI::Filter, public Key::Dispatcher, public
 
   protected:
 
-//     Key::Dispatcher
-//     void    dispatchKeyNonPrintable(Key::CtrlKey code, bool state);
+//     HID::Key::Dispatcher
+//     void    dispatchKeyNonPrintable(HID::Key::CtrlKey code, bool state);
 //     void    dispatchKeyPrintable(sint32 ch, bool state);
 //
-//     Mouse::Dispatcher
+//     HID::Mouse::Dispatcher
 //     void    dispatchMouseMove(sint16 x, sint16 xMin, sint16 xMax, sint16 y, sint16 yMin, sint16 yMax);
-//     void    dispatchMouseKey(Mouse::Button button, bool state);
+//     void    dispatchMouseKey(HID::Mouse::Button button, bool state);
 //     void    dispatchMouseScroll(sint16 dx, sint16 dy);
 
     void    dispatchClosed();
@@ -148,7 +148,7 @@ class HostUI::Dispatcher : public HostUI::Filter, public Key::Dispatcher, public
     void    dispatchFocus();
     void    dispatchBlur();
 
-    Dispatcher(uint32 mask=HostUI::NO_EVENTS, uint32 keyMask=Key::ALL_EVENTS, uint32 mouseMask=Mouse::NO_EVENTS);
+    Dispatcher(uint32 mask=HostUI::NO_EVENTS, uint32 keyMask=HID::Key::ALL_EVENTS, uint32 mouseMask=HID::Mouse::NO_EVENTS);
 
   public:
     virtual ~Dispatcher();

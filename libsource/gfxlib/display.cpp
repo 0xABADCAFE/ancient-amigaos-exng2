@@ -282,8 +282,8 @@ uint32 HostUI::Filter::disableDisplayEvents(uint32 mask)
 
 HostUI::Observer::Observer(uint32 mask, uint32 keyMask, uint32 mouseMask) :
   HostUI::Filter(mask),
-  Key::Observer(keyMask),
-  Mouse::Observer(mouseMask)
+  HID::Key::Observer(keyMask),
+  HID::Mouse::Observer(mouseMask)
 {
 
 }
@@ -306,8 +306,8 @@ void HostUI::Observer::applyDisplayEventFilter(uint32)
 
 HostUI::Dispatcher::Dispatcher(uint32 mask, uint32 keyMask, uint32 mouseMask) :
   HostUI::Filter(mask),
-  Key::Dispatcher(keyMask),
-  Mouse::Dispatcher(mouseMask)
+  HID::Key::Dispatcher(keyMask),
+  HID::Mouse::Dispatcher(mouseMask)
 {
 
 }
@@ -430,49 +430,49 @@ void HostUI::Dispatcher::dispatchBlur()
   }
 }
 
-// Key::Observer
-void HostUI::Observer::nonPrintablePressed(const Key::Dispatcher* d, Key::CtrlKey code)
+// HID::Key::Observer
+void HostUI::Observer::nonPrintablePressed(const HID::Key::Dispatcher* d, HID::Key::CtrlKey code)
 {
 
 }
 
-void HostUI::Observer::nonPrintableReleased(const Key::Dispatcher* d, Key::CtrlKey code)
+void HostUI::Observer::nonPrintableReleased(const HID::Key::Dispatcher* d, HID::Key::CtrlKey code)
 {
 
 }
 
-void HostUI::Observer::printablePressed(const Key::Dispatcher* d, sint32 ch)
+void HostUI::Observer::printablePressed(const HID::Key::Dispatcher* d, sint32 ch)
 {
 
 }
 
-void HostUI::Observer::printableReleased(const Key::Dispatcher* d, sint32 ch)
+void HostUI::Observer::printableReleased(const HID::Key::Dispatcher* d, sint32 ch)
 {
 
 }
 
-// Mouse::Observer
-void HostUI::Observer::buttonPressed(const Mouse::Dispatcher* d, Mouse::Button b)
+// HID::Mouse::Observer
+void HostUI::Observer::buttonPressed(const HID::Mouse::Dispatcher* d, HID::Mouse::Button b)
 {
 
 }
 
-void HostUI::Observer::buttonReleased(const Mouse::Dispatcher* d, Mouse::Button b)
+void HostUI::Observer::buttonReleased(const HID::Mouse::Dispatcher* d, HID::Mouse::Button b)
 {
 
 }
 
-void HostUI::Observer::scroll(const Mouse::Dispatcher* d, sint16 dx, sint16 dy)
+void HostUI::Observer::scroll(const HID::Mouse::Dispatcher* d, sint16 dx, sint16 dy)
 {
 
 }
 
-void HostUI::Observer::move(const Mouse::Dispatcher* d, sint16 x, sint16 y, sint16 dx, sint16 dy, uint32)
+void HostUI::Observer::move(const HID::Mouse::Dispatcher* d, sint16 x, sint16 y, sint16 dx, sint16 dy, uint32)
 {
 
 }
 
-void HostUI::Observer::drag(const Mouse::Dispatcher* d, sint16 x, sint16 y, sint16 dx, sint16 dy, uint32 keys)
+void HostUI::Observer::drag(const HID::Mouse::Dispatcher* d, sint16 x, sint16 y, sint16 dx, sint16 dy, uint32 keys)
 {
 
 }

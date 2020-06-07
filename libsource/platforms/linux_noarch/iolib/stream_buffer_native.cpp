@@ -91,7 +91,7 @@ size_t  StreamBuffer::size()  const
   return len;
 }
 
-IO::SeekPos StreamBuffer::tell()
+IO::Stream::SeekPos StreamBuffer::tell()
 {
   if (!file) {
     THROW_NSX(IO, SeekError());
@@ -100,21 +100,21 @@ IO::SeekPos StreamBuffer::tell()
   if (res<0) {
     THROW_NSX(IO, SeekError());
   }
-  return (IO::SeekPos)res;
+  return (IO::Stream::SeekPos)res;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-IO::SeekPos StreamBuffer::seek(IO::SeekPos p, IO::SeekMode m)
+IO::Stream::SeekPos StreamBuffer::seek(IO::Stream::SeekPos p, IO::Stream::SeekMode m)
 {
   if (!file) {
     THROW_NSX(IO, SeekError());
   }
   int res = 0;
   switch (m) {
-    case IO::FROM_START:    res = std::fseek(file, p, SEEK_SET); break;
-    case IO::FROM_CURRENT:  res = std::fseek(file, p, SEEK_CUR); break;
-    case IO::FROM_END:      res = std::fseek(file, p, SEEK_END); break;
+    case IO::Stream::FROM_START:    res = std::fseek(file, p, SEEK_SET); break;
+    case IO::Stream::FROM_CURRENT:  res = std::fseek(file, p, SEEK_CUR); break;
+    case IO::Stream::FROM_END:      res = std::fseek(file, p, SEEK_END); break;
   }
   if (res<0) {
     THROW_NSX(IO, SeekError());

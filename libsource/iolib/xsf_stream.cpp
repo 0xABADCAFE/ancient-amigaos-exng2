@@ -1,11 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  File:         iolib/streamio_error.cpp
+//  File:         iolib/xsf_stream.cpp
 //  Tab Size:     2
 //  Max Line:     120
-//  Description:  Stream Error
+//  Description:  XSF Stream implementations
 //  Comment(s):
-//  Library:      System
+//  Library:      IO
 //  Created:      2007-01-12
 //  Updated:      2007-01-12
 //  Author(s):    Karl Churchill
@@ -27,45 +27,45 @@ using namespace EXNGPrivate;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  XSF::StreamIn
+//  XSF::Stream::In
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-XSF::StreamIn::StreamIn() : header(), streamFlags(0)
+XSF::Stream::In::In() : header(), streamFlags(0)
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-XSF::StreamIn::~StreamIn()
+XSF::Stream::In::~In()
 {
   close();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamIn::setSwappedIO()
+void XSF::Stream::In::setSwappedIO()
 {
-  ioRead16 = &IO::StreamIn::read16Swap;
-  ioRead32 = &IO::StreamIn::read32Swap;
-  ioRead64 = &IO::StreamIn::read64Swap;
+  ioRead16 = &IO::Stream::In::read16Swap;
+  ioRead32 = &IO::Stream::In::read32Swap;
+  ioRead64 = &IO::Stream::In::read64Swap;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamIn::setDirectIO()
+void XSF::Stream::In::setDirectIO()
 {
-  ioRead16 = &IO::StreamIn::read16;
-  ioRead32 = &IO::StreamIn::read32;
-  ioRead64 = &IO::StreamIn::read64;
+  ioRead16 = &IO::Stream::In::read16;
+  ioRead32 = &IO::Stream::In::read32;
+  ioRead64 = &IO::Stream::In::read64;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamIn::open(const char* name, size_t bufSize)
+void XSF::Stream::In::open(const char* name, size_t bufSize)
 {
-  IO::StreamIn::open(name, IO::MODE_READ, bufSize);
+  IO::Stream::In::open(name, IO::Stream::MODE_READ, bufSize);
 
   header.read(*this); // may throw, but is always non-destructive on failure
 
@@ -84,9 +84,9 @@ void XSF::StreamIn::open(const char* name, size_t bufSize)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamIn::open(const char* name, const char* id, uint16 minVer, uint16 minRev, size_t bufSize)
+void XSF::Stream::In::open(const char* name, const char* id, uint16 minVer, uint16 minRev, size_t bufSize)
 {
-  IO::StreamIn::open(name, IO::MODE_READ, bufSize);
+  IO::Stream::In::open(name, IO::Stream::MODE_READ, bufSize);
 
   header.read(*this);
 
@@ -109,25 +109,25 @@ void XSF::StreamIn::open(const char* name, const char* id, uint16 minVer, uint16
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamIn::close()
+void XSF::Stream::In::close()
 {
-  IO::StreamIn::close();
+  IO::Stream::In::close();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  XSF::StreamOut
+//  XSF::Stream::Out
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-XSF::StreamOut::StreamOut() : header(), streamFlags(0)
+XSF::Stream::Out::Out() : header(), streamFlags(0)
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-XSF::StreamOut::~StreamOut()
+XSF::Stream::Out::~Out()
 {
   close();
 }
@@ -135,27 +135,27 @@ XSF::StreamOut::~StreamOut()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-void XSF::StreamOut::setSwappedIO()
+void XSF::Stream::Out::setSwappedIO()
 {
-  ioWrite16 = &IO::StreamOut::write16Swap;
-  ioWrite32 = &IO::StreamOut::write32Swap;
-  ioWrite64 = &IO::StreamOut::write64Swap;
+  ioWrite16 = &IO::Stream::Out::write16Swap;
+  ioWrite32 = &IO::Stream::Out::write32Swap;
+  ioWrite64 = &IO::Stream::Out::write64Swap;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamOut::setDirectIO()
+void XSF::Stream::Out::setDirectIO()
 {
-  ioWrite16 = &IO::StreamOut::write16;
-  ioWrite32 = &IO::StreamOut::write32;
-  ioWrite64 = &IO::StreamOut::write64;
+  ioWrite16 = &IO::Stream::Out::write16;
+  ioWrite32 = &IO::Stream::Out::write32;
+  ioWrite64 = &IO::Stream::Out::write64;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamOut::open(const char* name, size_t bufSize)
+void XSF::Stream::Out::open(const char* name, size_t bufSize)
 {
-  IO::StreamOut::open(name, IO::MODE_APPEND, bufSize);
+  IO::Stream::Out::open(name, IO::Stream::MODE_APPEND, bufSize);
   header.read(*this);
   streamFlags = 0;
   if ((header.getMachineFlags() & Machine::ENDIANNESS) != (Machine::SIGNATURE & Machine::ENDIANNESS)) {
@@ -172,9 +172,9 @@ void XSF::StreamOut::open(const char* name, size_t bufSize)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamOut::open(const char* name, const char* id, uint16 minVer, uint16 minRev,  uint8 mf, size_t bufSize)
+void XSF::Stream::Out::open(const char* name, const char* id, uint16 minVer, uint16 minRev,  uint8 mf, size_t bufSize)
 {
-  IO::StreamOut::open(name, IO::MODE_WRITE, bufSize);
+  IO::Stream::Out::open(name, IO::Stream::MODE_WRITE, bufSize);
   header.setPayloadId(id);
   header.setPayloadVersion(minVer);
   header.setPayloadRevision(minRev);
@@ -197,9 +197,9 @@ void XSF::StreamOut::open(const char* name, const char* id, uint16 minVer, uint1
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamOut::close()
+void XSF::Stream::Out::close()
 {
-  IO::StreamOut::close();
+  IO::Stream::Out::close();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -234,13 +234,13 @@ XSF::Storable::~Storable()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-sint32 XSF::Storable::write(XSF::StreamOut* out)
+sint32 XSF::Storable::write(XSF::Stream::Out* out)
 {
 
   return 0;
 }
 
-sint32 XSF::Storable::read(XSF::StreamIn* in)
+sint32 XSF::Storable::read(XSF::Stream::In* in)
 {
 
   return 0;

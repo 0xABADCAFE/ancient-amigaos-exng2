@@ -9,11 +9,7 @@ OBJ      =	$(OBJDIR)db_abstract.o \
 
 
 $(LIB): $(OBJ) Makefile_dblib
-	$(CXX) -shared -Wl,-soname,$(LIB).$(VER) -o $(LIBDIR)$(LIB).$(VER).$(REV) $(OBJ); \
-	cd $(LIBDIR); \
-	$(LN) $(LIB).$(VER).$(REV) $(LIB); \
-	$(LN) $(LIB).$(VER).$(REV) $(LIB).$(VER); \
-	cd ../
+	$(CXX) -shared -Wl,-soname,$(LIB) -o $(LIBDIR)$(LIB) $(OBJ); \
 
 $(OBJDIR)db_abstract.o: $(SRCDIR)dblib/db_abstract.cpp
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ -c $<

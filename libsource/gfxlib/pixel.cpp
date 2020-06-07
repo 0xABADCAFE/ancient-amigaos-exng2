@@ -3,9 +3,9 @@
 //  File:         gfxlib/pixel.cpp
 //  Tab Size:     2
 //  Max Line:     120
-//  Description:  Range bound integer class
+//  Description:  Pixel definitions
 //  Comment(s):
-//  Library:      System
+//  Library:      Graphics
 //  Created:      2006-10-08
 //  Updated:      2006-10-08
 //  Author(s):    Karl Churchill
@@ -87,28 +87,28 @@ Pixel::FBType Pixel::getPrefferedFormat(uint32 d)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Pixel::Layout Pixel::fbTypeLayout[Pixel::CUSTOM_FB] = {
-  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::WT_BYTE, 1), Pixel::Layout::VALUE),       // LUT_8
-  Pixel::Layout(Pixel::Layout::packBP(WT_SB, Machine::WT_WORD16, 3), LO_RGB, BFW_15, BFP_15),   // RGB_555B
-  Pixel::Layout(Pixel::Layout::packBP(WT_SB, Machine::WT_WORD16, 3), LO_BGR, BFW_15, BFP_15),   // BGR_555B
-  Pixel::Layout(Pixel::Layout::packBP(WT_SL, Machine::WT_WORD16, 3), LO_RGB, BFW_15, BFP_15),   // RGB_555L
-  Pixel::Layout(Pixel::Layout::packBP(WT_SL, Machine::WT_WORD16, 3), LO_BGR, BFW_15, BFP_15),   // BGR_555L
-  Pixel::Layout(Pixel::Layout::packBP(WT_SB, Machine::WT_WORD16, 3), LO_RGB, BFW_16, BFP_16),   // RGB_565B
-  Pixel::Layout(Pixel::Layout::packBP(WT_SB, Machine::WT_WORD16, 3), LO_BGR, BFW_16, BFP_16),   // BGR_565B
-  Pixel::Layout(Pixel::Layout::packBP(WT_SL, Machine::WT_WORD16, 3), LO_RGB, BFW_16, BFP_16),   // RGB_565L
-  Pixel::Layout(Pixel::Layout::packBP(WT_SL, Machine::WT_WORD16, 3), LO_BGR, BFW_16, BFP_16),   // BGR_565L
-  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::WT_BYTE, 3), LO_RGB),                     // RGB_24
-  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::WT_BYTE, 3), LO_BGR),                     // BGR_24
+  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::ET_UINT8, 1), Pixel::Layout::VALUE),       // LUT_8
+  Pixel::Layout(Pixel::Layout::packBP(WT_SB, Machine::ET_UINT16, 3), LO_RGB, BFW_15, BFP_15),   // RGB_555B
+  Pixel::Layout(Pixel::Layout::packBP(WT_SB, Machine::ET_UINT16, 3), LO_BGR, BFW_15, BFP_15),   // BGR_555B
+  Pixel::Layout(Pixel::Layout::packBP(WT_SL, Machine::ET_UINT16, 3), LO_RGB, BFW_15, BFP_15),   // RGB_555L
+  Pixel::Layout(Pixel::Layout::packBP(WT_SL, Machine::ET_UINT16, 3), LO_BGR, BFW_15, BFP_15),   // BGR_555L
+  Pixel::Layout(Pixel::Layout::packBP(WT_SB, Machine::ET_UINT16, 3), LO_RGB, BFW_16, BFP_16),   // RGB_565B
+  Pixel::Layout(Pixel::Layout::packBP(WT_SB, Machine::ET_UINT16, 3), LO_BGR, BFW_16, BFP_16),   // BGR_565B
+  Pixel::Layout(Pixel::Layout::packBP(WT_SL, Machine::ET_UINT16, 3), LO_RGB, BFW_16, BFP_16),   // RGB_565L
+  Pixel::Layout(Pixel::Layout::packBP(WT_SL, Machine::ET_UINT16, 3), LO_BGR, BFW_16, BFP_16),   // BGR_565L
+  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::ET_UINT8, 3), LO_RGB),                     // RGB_24
+  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::ET_UINT8, 3), LO_BGR),                     // BGR_24
 
-  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::WT_WORD32, 4), LO_ARGB, BFW_32, BFP_32),  // ARGB_8888
-  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::WT_WORD32, 4), LO_ABGR, BFW_32, BFP_32),  // ABGR_8888
-  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::WT_WORD32, 4), LO_BGRA, BFW_32, BFP_32),  // BGRA_8888
-  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::WT_WORD32, 4), LO_RGBA, BFW_32, BFP_32)   // RGBA_8888
+  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::ET_UINT32, 4), LO_ARGB, BFW_32, BFP_32),  // ARGB_8888
+  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::ET_UINT32, 4), LO_ABGR, BFW_32, BFP_32),  // ABGR_8888
+  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::ET_UINT32, 4), LO_BGRA, BFW_32, BFP_32),  // BGRA_8888
+  Pixel::Layout(Pixel::Layout::packBP(WT_PB, Machine::ET_UINT32, 4), LO_RGBA, BFW_32, BFP_32)   // RGBA_8888
 
 /*
-  Pixel::Layout(Pixel::Layout::packBP(WT_SB, Machine::WT_WORD32, 4), LO_ARGB, BFW_32, BFP_32),  // ARGB_32B
-  Pixel::Layout(Pixel::Layout::packBP(WT_SB, Machine::WT_WORD32, 4), LO_ABGR, BFW_32, BFP_32),  // ABGR_32B
-  Pixel::Layout(Pixel::Layout::packBP(WT_SL, Machine::WT_WORD32, 4), LO_ARGB, BFW_32, BFP_32),  // ARGB_32B
-  Pixel::Layout(Pixel::Layout::packBP(WT_SL, Machine::WT_WORD32, 4), LO_ABGR, BFW_32, BFP_32)   // ABGR_32B
+  Pixel::Layout(Pixel::Layout::packBP(WT_SB, Machine::ET_UINT32, 4), LO_ARGB, BFW_32, BFP_32),  // ARGB_32B
+  Pixel::Layout(Pixel::Layout::packBP(WT_SB, Machine::ET_UINT32, 4), LO_ABGR, BFW_32, BFP_32),  // ABGR_32B
+  Pixel::Layout(Pixel::Layout::packBP(WT_SL, Machine::ET_UINT32, 4), LO_ARGB, BFW_32, BFP_32),  // ARGB_32B
+  Pixel::Layout(Pixel::Layout::packBP(WT_SL, Machine::ET_UINT32, 4), LO_ABGR, BFW_32, BFP_32)   // ABGR_32B
 */
 };
 
@@ -148,10 +148,10 @@ Pixel::Layout::Layout(
   initCompMap(n, cDef);
 
   switch (wType) {
-    case Machine::WT_BYTE:    flags &= ~IS_BYTESWAPPED;
+    case Machine::ET_UINT8:   flags &= ~IS_BYTESWAPPED;
                               initBitfield(fldW, fldP, wType, 1); break;
-    case Machine::WT_WORD16:  initBitfield(fldW, fldP, wType, 2); break;
-    case Machine::WT_WORD32:  initBitfield(fldW, fldP, wType, 4); break;
+    case Machine::ET_UINT16:  initBitfield(fldW, fldP, wType, 2); break;
+    case Machine::ET_UINT32:  initBitfield(fldW, fldP, wType, 4); break;
     default:
       THROW_NSX(Error, InvalidValue());
       break;
@@ -185,12 +185,13 @@ Pixel::Layout::Layout(
   initCompMap(n, cDef);
 
   switch (wType) {
-    case Machine::WT_BYTE:    flags &= ~IS_BYTESWAPPED;
+    case Machine::ET_UINT8:   flags &= ~IS_BYTESWAPPED;
                               initElemental(1);   break;
-    case Machine::WT_WORD16:  initElemental(2);   break;
-    case Machine::WT_WORD32:  initElemental(4);   break;
-    case Machine::WT_WORD64:  initElemental(8);   break;
-    case Machine::WT_WORD128: initElemental(16);  break;
+    case Machine::ET_UINT16:  initElemental(2);   break;
+    case Machine::ET_UINT32:  initElemental(4);   break;
+    case Machine::ET_UINT64:  initElemental(8);   break;
+    case Machine::ET_UINT128: initElemental(16);  break;
+
     default:
       THROW_NSX(Error, InvalidValue());
       break;

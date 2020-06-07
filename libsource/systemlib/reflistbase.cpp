@@ -9,7 +9,10 @@
 //  Created:      2006-10-08
 //  Updated:      2006-10-08
 //  Author(s):    Karl Churchill
-//  Note(s):
+//  Note(s):      Non-templated anonymous (void*) base implementation for utilitylib/referencelist.hpp
+//                Is here rather than in utilitylib since this container is required by other libraries and would
+//                therefore require linking against utilitylib as a dependency.
+//
 //  Copyright:    (C)2006+, eXtropia Studios
 //                Karl Churchill
 //                All Rights Reserved.
@@ -17,10 +20,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <xbase.hpp>
-#include <systemlib/reflist.hpp>
 #include <systemlib/memory.hpp>
 #include <systemlib/logger.hpp>
 #include <private/systemlib/error.hpp>
+#include <utilitylib/referencelist.hpp>
 
 using namespace EXNGPrivate;
 
@@ -172,7 +175,7 @@ VoidList::~VoidList()
 void VoidList::clear()
 {
   sint32 link = head;
-  while (link >= 0/*!= NULL_LINK*/) {
+  while (link >= 0 /* != NULL_LINK*/) {
     sint32 newLink = linkCache[link].next;
     destroyLink(link);
     link = newLink;

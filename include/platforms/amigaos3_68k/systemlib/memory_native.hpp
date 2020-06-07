@@ -87,12 +87,10 @@ inline size_t RawMemHandler::getRemainingFreeSize()
 inline void RawMemHandler::copy(void* dst, const void* src, size_t len)
 {
   asm(
-    "\n/*************************************/\n\n"
     "\tmove.l %0, a0\n"
     "\tmove.l %1, a1\n"
     "\tmove.l %2, d0\n"
     "\tjsr _Mem_copy\n"
-    "\n/*************************************/\n\n"
     :                               // no outputs
     : "g"(dst), "g"(src), "g"(len)  // inputs
     : "d0", "d1", "a0", "a1","cc"   // clobbers
@@ -104,12 +102,10 @@ inline void RawMemHandler::copy(void* dst, const void* src, size_t len)
 inline void RawMemHandler::swap16(void* dst, const void* src, size_t num)
 {
   asm(
-    "\n/*************************************/\n\n"
     "\tmove.l %0, a0\n"
     "\tmove.l %1, a1\n"
     "\tmove.l %2, d0\n"
     "\tjsr _Mem_swap16\n"
-    "\n/*************************************/\n\n"
     :                                 // no outputs
     : "g"(dst), "g"(src), "g"(num)    // inputs
     : "d0", "d1", "a0", "a1", "cc"    // clobbers
@@ -121,12 +117,10 @@ inline void RawMemHandler::swap16(void* dst, const void* src, size_t num)
 inline void RawMemHandler::swap32(void* dst, const void* src, size_t num)
 {
   asm(
-    "\n/*************************************/\n\n"
     "\tmove.l %0, a0\n"
     "\tmove.l %1, a1\n"
     "\tmove.l %2, d0\n"
     "\tjsr _Mem_swap32\n"
-    "\n/*************************************/\n\n"
     :                                 // no outputs
     : "g"(dst), "g"(src), "g"(num)    // inputs
     : "d0", "d1", "a0", "a1","cc"     // clobbers
@@ -138,12 +132,10 @@ inline void RawMemHandler::swap32(void* dst, const void* src, size_t num)
 inline void RawMemHandler::swap64(void* dst, const void* src, size_t num)
 {
   asm(
-    "\n/*************************************/\n\n"
     "\tmove.l %0, a0\n"
     "\tmove.l %1, a1\n"
     "\tmove.l %2, d0\n"
     "\tjsr _Mem_swap64\n"
-    "\n/*************************************/\n\n"
     :                                 // no outputs
     : "g"(dst), "g"(src), "g"(num)    // inputs
     : "d0", "d1", "a0", "a1","cc"     // clobbers
@@ -155,11 +147,9 @@ inline void RawMemHandler::swap64(void* dst, const void* src, size_t num)
 inline void RawMemHandler::zero(void* dst, size_t len)
 {
   asm(
-    "\n/*************************************/\n\n"
     "\tmove.l %0, a0\n"
     "\tmove.l %1, d0\n"
     "\tjsr _Mem_zero\n"
-    "\n/*************************************/\n\n"
     :                                 // no outputs
     : "g"(dst), "g"(len)              // inputs
     : "d0", "d1", "a0", "a1","cc"     // clobbers
@@ -171,12 +161,10 @@ inline void RawMemHandler::zero(void* dst, size_t len)
 inline void RawMemHandler::set(void* dst, int val, size_t len)
 {
   asm(
-    "\n/*************************************/\n\n"
     "\tmove.l %0, a0\n"
     "\tmove.l %1, d0\n"
     "\tmove.l %2, d1\n"
     "\tjsr _Mem_set\n"
-    "\n/*************************************/\n\n"
     :                                 // no outputs
     : "g"(dst), "g"(val), "g"(len)    // inputs
     : "d0", "d1", "a0", "a1","cc"     // clobbers
@@ -188,12 +176,10 @@ inline void RawMemHandler::set(void* dst, int val, size_t len)
 inline void RawMemHandler::set16(void* dst, uint16 val, size_t num)
 {
   asm(
-    "\n/*************************************/\n\n"
     "\tmove.l %0, a0\n"
     "\tmove.l %1, d0\n"
     "\tmove.l %2, d1\n"
     "\tjsr _Mem_set16\n"
-    "\n/*************************************/\n\n"
     :                                 // no outputs
     : "g"(dst), "g"(val), "g"(num)    // inputs
     : "d0", "d1", "a0", "a1","cc"     // clobbers
@@ -205,12 +191,10 @@ inline void RawMemHandler::set16(void* dst, uint16 val, size_t num)
 inline void RawMemHandler::set32(void* dst, uint32 val, size_t num)
 {
   asm(
-    "\n/*************************************/\n\n"
     "\tmove.l %0, a0\n"
     "\tmove.l %1, d0\n"
     "\tmove.l %2, d1\n"
     "\tjsr _Mem_set32\n"
-    "\n/*************************************/\n\n"
     :                                 // no outputs
     : "g"(dst), "g"(val), "g"(num)    // inputs
     : "d0", "d1", "a0", "a1","cc"     // clobbers
@@ -222,12 +206,10 @@ inline void RawMemHandler::set32(void* dst, uint32 val, size_t num)
 inline void RawMemHandler::set64(void* dst, const uint64& val, size_t num)
 {
   asm(
-    "\n/*************************************/\n\n"
     "\tmove.l %0, a0\n"
     "\tmove.l %1, a1\n"
     "\tmove.l %2, d0\n"
     "\tjsr _Mem_set64\n"
-    "\n/*************************************/\n\n"
     :                                 // no outputs
     : "g"(dst), "g"(&val), "g"(num)   // inputs
     : "d0", "d1", "a0", "a1","cc"     // clobbers

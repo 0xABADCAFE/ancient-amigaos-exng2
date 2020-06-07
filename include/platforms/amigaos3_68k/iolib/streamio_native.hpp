@@ -23,63 +23,66 @@ namespace OSNative {
   extern "C" {
     #include <proto/dos.h>
   }
+  //#include <library_inlines/dos.hpp>
 };
 
-
-class AsyncStreamBuffer {
-  protected:
-    size_t  bufferSize;
-    size_t  fileSize;
-    size_t  blockSize;
-    uint32  flags;
-    uint32  currentBuf;
-    uint32  seekOffset;
-    sint32  bytesLeft;
-    void*   buffers[2];
-    void*   offset;
-
-    OSNative::BPTR            file;
-    OSNative::MsgPort*        handler;
-    OSNative::StandardPacket  packet;
-    OSNative::MsgPort         packetPort;
-
-
-    sint32  waitPacket();
-    void    sendPacket(void* p);
-    void    requeuePacket();
-    void    recordSyncFailure();
-
-    enum {
-      WAIT_PACKET = 0x00000001,
-      FILE_ATEND  = 0x00000002,
-      FILE_START  = 0x00000004,
-      FILE_GOOD   = 0x00000008,
-      FILE_READ   = 0x00000010,
-      FILE_WRITE  = 0x00000020,
-      FILE_APPEND = 0x00000040,
-      FILE_TEXT   = 0x00000080,
-      FILE_ACCESS = 0x000000F0,
-      BUFF_ERROR  = 0x00010000
-    };
-
-    static  bool exists(const char* f);
-    bool    create(size_t s);
-    void    destroy();
-
-    bool    valid() const { return flags & FILE_GOOD; }
-    bool    end()   const { return flags & FILE_ATEND; }
-    bool    start() const { return flags & FILE_START; }
-    size_t  size()  const { if (!(flags & FILE_ACCESS)) THROW_NSX(IO, Error()); return fileSize; }
-
-    AsyncStreamBuffer() : file(0), flags(0) { buffers[0] = 0; }
-    ~AsyncStreamBuffer()  { destroy(); }
-
-  private:
-    LOGGING_DEFINE_CLASSNAME
-};
 
 namespace EXNGPrivate {
+
+  class AsyncStreamBuffer {
+    protected:
+      size_t  bufferSize;
+      size_t  fileSize;
+      size_t  blockSize;
+      uint32  flags;
+      uint32  currentBuf;
+      uint32  seekOffset;
+      sint32  bytesLeft;
+      void*   buffers[2];
+      void*   offset;
+
+      OSNative::BPTR            file;
+      OSNative::MsgPort*        handler;
+      OSNative::StandardPacket  packet;
+      OSNative::MsgPort         packetPort;
+
+
+      sint32  waitPacket();
+      void    sendPacket(void* p);
+      void    requeuePacket();
+      void    recordSyncFailure();
+
+      enum {
+        WAIT_PACKET = 0x00000001,
+        FILE_ATEND  = 0x00000002,
+        FILE_START  = 0x00000004,
+        FILE_GOOD   = 0x00000008,
+        FILE_READ   = 0x00000010,
+        FILE_WRITE  = 0x00000020,
+        FILE_APPEND = 0x00000040,
+        FILE_TEXT   = 0x00000080,
+        FILE_ACCESS = 0x000000F0,
+        BUFF_ERROR  = 0x00010000
+      };
+
+      static  bool exists(const char* f);
+      bool    create(size_t s);
+      void    destroy();
+
+      bool    valid() const { return flags & FILE_GOOD; }
+      bool    end()   const { return flags & FILE_ATEND; }
+      bool    start() const { return flags & FILE_START; }
+      size_t  size()  const { if (!(flags & FILE_ACCESS)) THROW_NSX(IO, Error()); return fileSize; }
+
+      AsyncStreamBuffer() : file(0), flags(0) { buffers[0] = 0; }
+      ~AsyncStreamBuffer()  { destroy(); }
+
+    private:
+      LOGGING_DEFINE_CLASSNAME
+  };
+
   class StreamUser;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -88,26 +91,26 @@ namespace EXNGPrivate {
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-class IO::StreamIn : private AsyncStreamBuffer {
+class IO::Stream::In : private EXNGPrivate::AsyncStreamBuffer {
   friend class EXNGPrivate::StreamUser;
 
   private:
     sint32  getNextCharIO();
 
   protected:
-    size_t  rawWriteBytes(const void* buffer, size_t n, sint32 filePos);
+    size_t  rawWriteBytes(const void* buffer, size_t n, SeekPos filePos);
 
   public:
-    void        open(const char* f, IO::ReadMode m=IO::MODE_READ, size_t s=IO::DEFAULT_BUFFSIZE);
-    void        close();
-    void        flush();
-    IO::SeekPos tell();
-    IO::SeekPos seek(IO::SeekPos p, IO::SeekMode m=IO::FROM_START);
-    bool        valid()     const { return AsyncStreamBuffer::valid(); }
-    bool        end()       const { return AsyncStreamBuffer::end(); }
-    bool        start()     const { return AsyncStreamBuffer::start(); }
-    size_t      size()      const { return AsyncStreamBuffer::size(); }
-    sint32      getChar()
+    void    open(const char* f, ReadMode m=MODE_READ, size_t s=DEFAULT_BUFFSIZE);
+    void    close();
+    void    flush();
+    SeekPos tell();
+    SeekPos seek(SeekPos p, SeekMode m=IO::Stream::FROM_START);
+    bool    valid()     const { return AsyncStreamBuffer::valid(); }
+    bool    end()       const { return AsyncStreamBuffer::end(); }
+    bool    start()     const { return AsyncStreamBuffer::start(); }
+    size_t  size()      const { return AsyncStreamBuffer::size(); }
+    sint32  getChar()
     {
       if (bytesLeft==0) {
         return getNextCharIO();
@@ -129,12 +132,12 @@ class IO::StreamIn : private AsyncStreamBuffer {
     size_t  readText(char*buf, sint32 max, char mark=0, sint32 num=-1);
 
   public:
-    StreamIn() : AsyncStreamBuffer() {}
-    ~StreamIn();
+    In() : AsyncStreamBuffer() {}
+    ~In();
 
   private:
-    StreamIn(const StreamIn& ) : AsyncStreamBuffer() {}
-    StreamIn& operator=(const StreamIn&) { return *this; }
+    In(const In&) : AsyncStreamBuffer() {}
+    In& operator=(const In&) { return *this; }
 
     LOGGING_DEFINE_CLASSNAME
 };
@@ -147,26 +150,26 @@ class IO::StreamIn : private AsyncStreamBuffer {
 
 #define STREAMOUT_TEXTBUFFSIZE 2048
 
-class IO::StreamOut : private AsyncStreamBuffer {
+class IO::Stream::Out : private EXNGPrivate::AsyncStreamBuffer {
   friend class EXNGPrivate::StreamUser;
 
   private:
     char*   textBuffer;
 
   protected:
-    size_t  rawReadBytes(void* buffer, size_t n, sint32 filePos);
+    size_t  rawReadBytes(void* buffer, size_t n, SeekPos filePos);
 
   public:
-    void        open(const char* f, IO::WriteMode m, size_t s=IO::DEFAULT_BUFFSIZE);
-    void        close();
-    void        flush();
-    IO::SeekPos tell();
-    IO::SeekPos seek(sint32 position, IO::SeekMode m=IO::FROM_START);
-    bool        valid()     const { return AsyncStreamBuffer::valid(); }
-    bool        end()       const { return AsyncStreamBuffer::end(); }
-    bool        start()     const { return AsyncStreamBuffer::start(); }
-    size_t      size()      const { return AsyncStreamBuffer::size(); }
-    sint32      putChar(char ch)
+    void    open(const char* f, WriteMode m, size_t s=DEFAULT_BUFFSIZE);
+    void    close();
+    void    flush();
+    SeekPos tell();
+    SeekPos seek(SeekPos p, SeekMode m=FROM_START);
+    bool    valid()     const { return AsyncStreamBuffer::valid(); }
+    bool    end()       const { return AsyncStreamBuffer::end(); }
+    bool    start()     const { return AsyncStreamBuffer::start(); }
+    size_t  size()      const { return AsyncStreamBuffer::size(); }
+    sint32  putChar(char ch)
     {
       if (bytesLeft==0) {
         if (waitPacket() < 0) {
@@ -194,12 +197,12 @@ class IO::StreamOut : private AsyncStreamBuffer {
     size_t  writeText(const char* format,...);
 
   public:
-    StreamOut() : AsyncStreamBuffer(), textBuffer(0) {}
-    ~StreamOut();
+    Out() : AsyncStreamBuffer(), textBuffer(0) {}
+    ~Out();
 
   private:
-    StreamOut(const StreamOut& ) : AsyncStreamBuffer() {}
-    StreamOut& operator=(const StreamOut&) { return *this; }
+    Out(const Out& ) : AsyncStreamBuffer() {}
+    Out& operator=(const Out&) { return *this; }
 
     LOGGING_DEFINE_CLASSNAME
 };
@@ -219,12 +222,12 @@ namespace EXNGPrivate {
     ALIGN_INHERITED
 
     protected:
-      static size_t rawReadBytes(IO::StreamOut& out, void* buffer, size_t n, sint32 filePos)
+      static size_t rawReadBytes(IO::Stream::Out& out, void* buffer, size_t n, IO::Stream::SeekPos filePos)
       {
         return out.rawReadBytes(buffer, n, filePos);
       }
 
-      static size_t rawWriteBytes(IO::StreamIn& in, void* buffer, size_t n, sint32 filePos)
+      static size_t rawWriteBytes(IO::Stream::In& in, void* buffer, size_t n, IO::Stream::SeekPos filePos)
       {
         return in.rawWriteBytes(buffer, n, filePos);
       }

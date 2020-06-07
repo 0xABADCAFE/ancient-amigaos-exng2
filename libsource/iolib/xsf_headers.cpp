@@ -36,11 +36,11 @@ using namespace EXNGPrivate;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-//  XSF::StreamHeader
+//  XSF::Stream::Header
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-XSF::StreamHeader::StreamHeader()
+XSF::Stream::Header::Header()
 : block32(false), block16()
 {
   *((uint32*)block8.fileSignature) = *((uint32*)XSF::signature);
@@ -49,7 +49,7 @@ XSF::StreamHeader::StreamHeader()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-XSF::StreamHeader::StreamHeader(IO::StreamIn& in)
+XSF::Stream::Header::Header(IO::Stream::In& in)
 : block16(), block32(false)
 {
   // Private constructor, used by read method
@@ -63,7 +63,7 @@ XSF::StreamHeader::StreamHeader(IO::StreamIn& in)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-XSF::StreamHeader::StreamHeader(IO::StreamOut& out)
+XSF::Stream::Header::Header(IO::Stream::Out& out)
 : block16(), block32(false)
 {
   // Private constructor, used by read method
@@ -77,16 +77,16 @@ XSF::StreamHeader::StreamHeader(IO::StreamOut& out)
 
 #include <systemlib/logger.hpp>
 
-void XSF::StreamHeader::validate()
+void XSF::Stream::Header::validate()
 {
 //   SystemLog::write(
 //     SystemLog::INFO,
 //     "StreamHeaderInfo\n"
-//     "sizeof(XSF::StreamHeader)          = %d @ 0x%08X\n"
-//     "sizeof(XSF::StreamHeader::Block8)  = %d @ 0x%08X\n"
-//     "sizeof(XSF::StreamHeader::Block16) = %d @ Ox%08X\n"
-//     "sizeof(XSF::StreamHeader::Block32) = %d @ Ox%08X\n",
-//     (int)sizeof(StreamHeader),
+//     "sizeof(XSF::Stream::Header)          = %d @ 0x%08X\n"
+//     "sizeof(XSF::Stream::Header::Block8)  = %d @ 0x%08X\n"
+//     "sizeof(XSF::Stream::Header::Block16) = %d @ Ox%08X\n"
+//     "sizeof(XSF::Stream::Header::Block32) = %d @ Ox%08X\n",
+//     (int)sizeof(Stream::Header),
 //     (unsigned)(this),
 //     (int)sizeof(Block8),
 //     (unsigned)(&block8),
@@ -110,7 +110,7 @@ void XSF::StreamHeader::validate()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-XSF::StreamHeader::StreamHeader(const char* id, uint16 v, uint16 r, uint8 mf)
+XSF::Stream::Header::Header(const char* id, uint16 v, uint16 r, uint8 mf)
 : block16(v, r), block32(true)
 {
   *((uint32*)block8.fileSignature) = *((uint32*)XSF::signature);
@@ -120,7 +120,7 @@ XSF::StreamHeader::StreamHeader(const char* id, uint16 v, uint16 r, uint8 mf)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamHeader::setPayloadId(const char* id)
+void XSF::Stream::Header::setPayloadId(const char* id)
 {
   if (id) {
     Mem::zero(block8.payloadSignature, sizeof(block8.payloadSignature));
@@ -132,34 +132,34 @@ void XSF::StreamHeader::setPayloadId(const char* id)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool XSF::StreamHeader::matches(const char* id) const
+bool XSF::Stream::Header::matches(const char* id) const
 {
   return (std::strncmp(id, block8.payloadSignature, sizeof(block8.payloadSignature))==0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamHeader::read(IO::StreamIn& in)
+void XSF::Stream::Header::read(IO::Stream::In& in)
 {
   // this ensures that the current instance is never trashed by failing to read, since instansiation always throws
   // on invalid data
-  StreamHeader temp(in);
+  Header temp(in);
   *this = temp;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamHeader::read(IO::StreamOut& out)
+void XSF::Stream::Header::read(IO::Stream::Out& out)
 {
   // this ensures that the current instance is never trashed by failing to read, since instansiation always throws
   // on invalid data
-  StreamHeader temp(out);
+  Header temp(out);
   *this = temp;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void XSF::StreamHeader::write(IO::StreamOut& out)
+void XSF::Stream::Header::write(IO::Stream::Out& out)
 {
   if ((getMachineFlags() & Machine::ENDIANNESS) == (Machine::SIGNATURE & Machine::ENDIANNESS)) {
     if (

@@ -28,6 +28,8 @@ namespace OSNative {
   }
 };
 
+//#include <cstdio>
+
 using namespace OSNative;
 using namespace Time;
 
@@ -61,8 +63,16 @@ uint32 MilliClock::elapsed() const
 
 float64 MilliClock::elapsedFrac() const
 {
-  EClockVal current;
+  EClockVal current = { 0, 0 };
   ReadEClock(&current);
+
+//   std::printf(
+//     "current = { %" XPF_U32 ", %" XPF_U32 " }\n"
+//     "mark    = { %" XPF_U32 ", %" XPF_U32 " } @ %" XPF_U32 "Hz\n",
+//     current.ev_hi, current.ev_lo,
+//     mark.ev_hi, mark.ev_lo, clockFreq
+//   );
+
   float64 ticks;
   static float64 cF = 1000.0/(float64)clockFreq;
   if (current.ev_hi == mark.ev_hi) {

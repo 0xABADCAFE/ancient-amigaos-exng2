@@ -19,13 +19,13 @@
 #include <xbase.hpp>
 #include <iolib/inputdevices.hpp>
 
-DECLARE_MIN_RTTI(EventMask)
-DECLARE_MIN_RTTI(Mouse::Filter)
-DECLARE_MIN_RTTI(Mouse::Dispatcher)
-DECLARE_MIN_RTTI(Mouse::Observer)
-DECLARE_MIN_RTTI(Key::Filter)
-DECLARE_MIN_RTTI(Key::Dispatcher)
-DECLARE_MIN_RTTI(Key::Observer)
+DECLARE_MIN_RTTI(HID::EventMask)
+DECLARE_MIN_RTTI(HID::Mouse::Filter)
+DECLARE_MIN_RTTI(HID::Mouse::Dispatcher)
+DECLARE_MIN_RTTI(HID::Mouse::Observer)
+DECLARE_MIN_RTTI(HID::Key::Filter)
+DECLARE_MIN_RTTI(HID::Key::Dispatcher)
+DECLARE_MIN_RTTI(HID::Key::Observer)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -33,7 +33,7 @@ DECLARE_MIN_RTTI(Key::Observer)
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint32 EventMask::setMaskBits(uint32 f)
+uint32 HID::EventMask::setMaskBits(uint32 f)
 {
   uint32 oldMask = mask;
   mask = f;
@@ -42,7 +42,7 @@ uint32 EventMask::setMaskBits(uint32 f)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint32 EventMask::toggleMaskBits(uint32 f)
+uint32 HID::EventMask::toggleMaskBits(uint32 f)
 {
   uint32 oldMask = mask;
   mask ^= f;
@@ -51,7 +51,7 @@ uint32 EventMask::toggleMaskBits(uint32 f)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint32 EventMask::enableMaskBits(uint32 f)
+uint32 HID::EventMask::enableMaskBits(uint32 f)
 {
   uint32 oldMask = mask;
   mask |= f;
@@ -60,7 +60,7 @@ uint32 EventMask::enableMaskBits(uint32 f)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint32 EventMask::disableMaskBits(uint32 f)
+uint32 HID::EventMask::disableMaskBits(uint32 f)
 {
   uint32 oldMask = mask;
   mask &= (~f);
@@ -73,7 +73,7 @@ uint32 EventMask::disableMaskBits(uint32 f)
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint32 Mouse::Filter::enableMouseEvents(uint32 mask)
+uint32 HID::Mouse::Filter::enableMouseEvents(uint32 mask)
 {
   if (enableMaskBits(mask)) {
     applyMouseEventFilter(getMaskBits());
@@ -83,7 +83,7 @@ uint32 Mouse::Filter::enableMouseEvents(uint32 mask)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint32 Mouse::Filter::disableMouseEvents(uint32 mask)
+uint32 HID::Mouse::Filter::disableMouseEvents(uint32 mask)
 {
   if (disableMaskBits(mask)) {
     applyMouseEventFilter(getMaskBits());
@@ -97,7 +97,7 @@ uint32 Mouse::Filter::disableMouseEvents(uint32 mask)
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint32 Key::Filter::enableKeyEvents(uint32 mask)
+uint32 HID::Key::Filter::enableKeyEvents(uint32 mask)
 {
   if (enableMaskBits(mask)) {
     applyKeyEventFilter(getMaskBits());
@@ -107,7 +107,7 @@ uint32 Key::Filter::enableKeyEvents(uint32 mask)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint32 Key::Filter::disableKeyEvents(uint32 mask)
+uint32 HID::Key::Filter::disableKeyEvents(uint32 mask)
 {
   if (disableMaskBits(mask)) {
     applyKeyEventFilter(getMaskBits());
@@ -122,25 +122,25 @@ uint32 Key::Filter::disableKeyEvents(uint32 mask)
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint32 Mouse::Observer::nextId = 0;
+uint32 HID::Mouse::Observer::nextId = 0;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Mouse::Observer::Observer(uint32 mask) : Mouse::Filter((mask & Mouse::ALL_EVENTS))
+HID::Mouse::Observer::Observer(uint32 mask) : Mouse::Filter((mask & Mouse::ALL_EVENTS))
 {
   id = nextId++;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Mouse::Observer::~Observer()
+HID::Mouse::Observer::~Observer()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Mouse::Observer::applyMouseEventFilter(uint32 mask)
+void HID::Mouse::Observer::applyMouseEventFilter(uint32 mask)
 {
 
 }
@@ -151,25 +151,25 @@ void Mouse::Observer::applyMouseEventFilter(uint32 mask)
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint32 Key::Observer::nextId = 0;
+uint32 HID::Key::Observer::nextId = 0;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Key::Observer::Observer(uint32 mask) : Key::Filter((mask & Key::ALL_EVENTS))
+HID::Key::Observer::Observer(uint32 mask) : HID::Key::Filter((mask & Key::ALL_EVENTS))
 {
   id = nextId++;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Key::Observer::~Observer()
+HID::Key::Observer::~Observer()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Key::Observer::applyKeyEventFilter(uint32 m)
+void HID::Key::Observer::applyKeyEventFilter(uint32 m)
 {
 
 }
@@ -181,18 +181,18 @@ void Key::Observer::applyKeyEventFilter(uint32 m)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace {
-  typedef void (Mouse::Observer::* ButOp)(const Mouse::Dispatcher* d, Mouse::Button b);
-  typedef void (Mouse::Observer::* MovOp)(const Mouse::Dispatcher* d, sint16 x, sint16 y, sint16 dx, sint16 dy, uint32 keys);
+  typedef void (HID::Mouse::Observer::* ButOp)(const HID::Mouse::Dispatcher* d, HID::Mouse::Button b);
+  typedef void (HID::Mouse::Observer::* MovOp)(const HID::Mouse::Dispatcher* d, sint16 x, sint16 y, sint16 dx, sint16 dy, uint32 keys);
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint32 Mouse::Dispatcher::nextId = 0;
+uint32 HID::Mouse::Dispatcher::nextId = 0;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Mouse::Dispatcher::Dispatcher(uint32 mask) :
-Mouse::Filter((mask & Mouse::ALL_EVENTS)), observers(),
+HID::Mouse::Dispatcher::Dispatcher(uint32 mask) :
+HID::Mouse::Filter((mask & HID::Mouse::ALL_EVENTS)), observers(),
 buttons(0), lastX(0), lastY(0), lastSX(0), lastSY(0)
 {
   id = nextId++;
@@ -200,30 +200,30 @@ buttons(0), lastX(0), lastY(0), lastSX(0), lastSY(0)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Mouse::Dispatcher::~Dispatcher()
+HID::Mouse::Dispatcher::~Dispatcher()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Mouse::Dispatcher::dispatchMouseKey(Mouse::Button button, bool state)
+void HID::Mouse::Dispatcher::dispatchMouseKey(HID::Mouse::Button button, bool state)
 {
   ButOp   butOp;
   uint32  event;
   if (state) {
     buttons |= button;
     event    = button;
-    butOp    = &Mouse::Observer::buttonPressed;
+    butOp    = &HID::Mouse::Observer::buttonPressed;
   } else {
     buttons &= ~button;
     event    = button<<5;
-    butOp    = &Mouse::Observer::buttonReleased;
+    butOp    = &HID::Mouse::Observer::buttonReleased;
   }
 
   if (checkEnabledMouseEvents(event)) {
-    RefList<Mouse::Observer>::Iterator itor(observers);
-    for (Mouse::Observer* p = itor.first(); p; p = itor.next()) {
+    RefList<HID::Mouse::Observer>::Iterator itor(observers);
+    for (HID::Mouse::Observer* p = itor.first(); p; p = itor.next()) {
       if (p->checkEnabledMouseEvents(button)) {
         (p->*butOp)(this, button);
       }
@@ -233,7 +233,7 @@ void Mouse::Dispatcher::dispatchMouseKey(Mouse::Button button, bool state)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Mouse::Dispatcher::dispatchMouseMove(sint16 x, sint16 xMin, sint16 xMax, sint16 y, sint16 yMin, sint16 yMax)
+void HID::Mouse::Dispatcher::dispatchMouseMove(sint16 x, sint16 xMin, sint16 xMax, sint16 y, sint16 yMin, sint16 yMax)
 {
   // update the internal cursor states regardless of filtering
   sint16 dx = x-lastX;
@@ -261,14 +261,14 @@ void Mouse::Dispatcher::dispatchMouseMove(sint16 x, sint16 xMin, sint16 xMax, si
   if (checkEnabledMouseEvents(MOVE_LIMIT_BOTTOM) && (y>yMax)) {
     y = yMax;
   }
-  uint32 mode = buttons ? Mouse::DRAG :
-                          Mouse::MOVE;
+  uint32 mode = buttons ? HID::Mouse::DRAG :
+                          HID::Mouse::MOVE;
 
-  MovOp movOp = buttons ? &Mouse::Observer::drag :
-                          &Mouse::Observer::move;
+  MovOp movOp = buttons ? &HID::Mouse::Observer::drag :
+                          &HID::Mouse::Observer::move;
 
-  RefList<Mouse::Observer>::Iterator itor(observers);
-  for (Mouse::Observer* p = itor.first(); p; p = itor.next()) {
+  RefList<HID::Mouse::Observer>::Iterator itor(observers);
+  for (HID::Mouse::Observer* p = itor.first(); p; p = itor.next()) {
     if (p->checkEnabledMouseEvents(mode)) {
       (p->*movOp)(this, x, y, dx, dy, buttons);
     }
@@ -277,12 +277,12 @@ void Mouse::Dispatcher::dispatchMouseMove(sint16 x, sint16 xMin, sint16 xMax, si
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Mouse::Dispatcher::dispatchMouseScroll(sint16 dx, sint16 dy)
+void HID::Mouse::Dispatcher::dispatchMouseScroll(sint16 dx, sint16 dy)
 {
-  if (checkEnabledMouseEvents(Mouse::SCROLL)) {
-    RefList<Mouse::Observer>::Iterator itor(observers);
-    for (Mouse::Observer* p = itor.first(); p; p = itor.next()) {
-      if (p->checkEnabledMouseEvents(Mouse::SCROLL)) {
+  if (checkEnabledMouseEvents(HID::Mouse::SCROLL)) {
+    RefList<HID::Mouse::Observer>::Iterator itor(observers);
+    for (HID::Mouse::Observer* p = itor.first(); p; p = itor.next()) {
+      if (p->checkEnabledMouseEvents(HID::Mouse::SCROLL)) {
         p->scroll(this, dx, dy);
       }
     }
@@ -296,37 +296,37 @@ void Mouse::Dispatcher::dispatchMouseScroll(sint16 dx, sint16 dy)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace {
-  typedef void (Key::Observer::* NPKOp)(const Key::Dispatcher* d, Key::CtrlKey key);
-  typedef void (Key::Observer::* PKOp)(const Key::Dispatcher* d, sint32 ch);
+  typedef void (HID::Key::Observer::* NPKOp)(const HID::Key::Dispatcher* d, HID::Key::CtrlKey key);
+  typedef void (HID::Key::Observer::* PKOp)(const HID::Key::Dispatcher* d, sint32 ch);
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Key::Dispatcher::Dispatcher(uint32 mask) : Key::Filter((mask & Key::ALL_EVENTS)), observers()
+HID::Key::Dispatcher::Dispatcher(uint32 mask) : HID::Key::Filter((mask & HID::Key::ALL_EVENTS)), observers()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Key::Dispatcher::~Dispatcher()
+HID::Key::Dispatcher::~Dispatcher()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Key::Dispatcher::dispatchKeyNonPrintable(Key::CtrlKey key, bool state)
+void HID::Key::Dispatcher::dispatchKeyNonPrintable(HID::Key::CtrlKey key, bool state)
 {
-  uint32 mode = state ? Key::NON_PRINTABLE_PRESS :
-                        Key::NON_PRINTABLE_RELEASE;
+  uint32 mode = state ? HID::Key::NON_PRINTABLE_PRESS :
+                        HID::Key::NON_PRINTABLE_RELEASE;
 
-  NPKOp keyOp = state ? &Key::Observer::nonPrintablePressed :
-                        &Key::Observer::nonPrintableReleased;
+  NPKOp keyOp = state ? &HID::Key::Observer::nonPrintablePressed :
+                        &HID::Key::Observer::nonPrintableReleased;
 
   if (checkEnabledKeyEvents(mode)) {
-    RefList<Key::Observer>::Iterator itor(observers);
-    for (Key::Observer* p = itor.first(); p; p = itor.next()) {
+    RefList<HID::Key::Observer>::Iterator itor(observers);
+    for (HID::Key::Observer* p = itor.first(); p; p = itor.next()) {
       if (p->checkEnabledKeyEvents(mode)) {
         (p->*keyOp)(this, key);
       }
@@ -336,17 +336,17 @@ void Key::Dispatcher::dispatchKeyNonPrintable(Key::CtrlKey key, bool state)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Key::Dispatcher::dispatchKeyPrintable(sint32 ch, bool state)
+void HID::Key::Dispatcher::dispatchKeyPrintable(sint32 ch, bool state)
 {
-  uint32 mode = state ? Key::NON_PRINTABLE_PRESS :
-                        Key::NON_PRINTABLE_RELEASE;
+  uint32 mode = state ? HID::Key::NON_PRINTABLE_PRESS :
+                        HID::Key::NON_PRINTABLE_RELEASE;
 
-  PKOp keyOp  = state ? &Key::Observer::printablePressed :
-                        &Key::Observer::printableReleased;
+  PKOp keyOp  = state ? &HID::Key::Observer::printablePressed :
+                        &HID::Key::Observer::printableReleased;
 
   if (checkEnabledKeyEvents(mode)) {
-    RefList<Key::Observer>::Iterator itor(observers);
-    for (Key::Observer* p = itor.first(); p; p = itor.next()) {
+    RefList<HID::Key::Observer>::Iterator itor(observers);
+    for (HID::Key::Observer* p = itor.first(); p; p = itor.next()) {
       if (p->checkEnabledKeyEvents(mode)) {
         (p->*keyOp)(this, ch);
       }

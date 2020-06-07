@@ -21,9 +21,9 @@
 
 namespace EXNGPrivate {
 
-  class PixelFormat {
-
-  };
+//   class PixelFormat {
+//
+//   };
 
 };
 #endif

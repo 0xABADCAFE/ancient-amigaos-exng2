@@ -75,6 +75,28 @@ namespace Machine {
     WT_WORD128   = 7
   } WordType;
 
+  // interpretation of machine words
+  typedef enum {
+    ET_OTHER      = 0,
+    ET_BIT        = 1,
+    ET_UBITFIELD  = 2,
+    ET_SBITFIELD  = 3,
+    ET_UINT8      = 4,
+    ET_SINT8      = 5,
+    ET_UINT16     = 6,
+    ET_SINT16     = 7,
+    ET_FLOAT16    = 8,
+    ET_UINT32     = 9,
+    ET_SINT32     = 10,
+    ET_FLOAT32    = 11,
+    ET_UINT64     = 12,
+    ET_SINT64     = 13,
+    ET_FLOAT64    = 14,
+    ET_UINT128    = 15,
+    ET_SINT128    = 16,
+    ET_FLOAT128   = 17
+  } ElemType;
+
 };
 
 #endif

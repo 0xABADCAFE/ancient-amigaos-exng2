@@ -19,6 +19,8 @@
 #include <gfxlib/gfx.hpp>
 #include <gfxlib/palette.hpp>
 
+using namespace EXNGPrivate;
+
 void Graphics::init()
 {
   GfxResource::init();

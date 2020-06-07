@@ -32,11 +32,11 @@ using namespace EXNGPrivate;
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-LOGGING_DECLARE_CLASSNAME(IO::StreamOut)
+LOGGING_DECLARE_CLASSNAME(IO::Stream::Out)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-IO::StreamOut::~StreamOut()
+IO::Stream::Out::~Out()
 {
   close();
   if (textBuffer) {
@@ -46,7 +46,7 @@ IO::StreamOut::~StreamOut()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void IO::StreamOut::open(const char* fileName, IO::WriteMode m, size_t reqSize)
+void IO::Stream::Out::open(const char* fileName, IO::Stream::WriteMode m, size_t reqSize)
 {
   LOGGING_DECLARE_FUNCNAME(open)
 
@@ -57,7 +57,7 @@ void IO::StreamOut::open(const char* fileName, IO::WriteMode m, size_t reqSize)
     close();
   }
 
-  if ((m==IO::MODE_APPEND || m==IO::MODE_APPENDTEXT) && (file = Open(fileName, MODE_READWRITE)) ) {
+  if ((m==IO::Stream::MODE_APPEND || m==IO::Stream::MODE_APPENDTEXT) && (file = Open(fileName, MODE_READWRITE)) ) {
     flags |= FILE_APPEND;
     if (Seek(file, 0, OFFSET_END)>=0) {
       fileSize = Seek(file, 0, OFFSET_CURRENT);
@@ -110,7 +110,7 @@ void IO::StreamOut::open(const char* fileName, IO::WriteMode m, size_t reqSize)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void IO::StreamOut::close()
+void IO::Stream::Out::close()
 {
   flush();
   if (file) {
@@ -123,7 +123,7 @@ void IO::StreamOut::close()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void IO::StreamOut::flush()
+void IO::Stream::Out::flush()
 {
   if (file) {
     sint32 result = waitPacket();
@@ -137,14 +137,14 @@ void IO::StreamOut::flush()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-IO::SeekPos IO::StreamOut::tell()
+IO::Stream::SeekPos IO::Stream::Out::tell()
 {
   return seek(0, FROM_CURRENT);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-IO::SeekPos IO::StreamOut::seek(IO::SeekPos position, IO::SeekMode mode)
+IO::Stream::SeekPos IO::Stream::Out::seek(IO::Stream::SeekPos position, IO::Stream::SeekMode mode)
 {
   if (!file) {
     THROW_NSX(IO, SeekError());
@@ -161,9 +161,9 @@ IO::SeekPos IO::StreamOut::seek(IO::SeekPos position, IO::SeekMode mode)
   }
   sint32 natMode;
   switch (mode) {
-    case IO::FROM_START:    natMode = OFFSET_BEGINNING; break;
-    case IO::FROM_CURRENT:  natMode = OFFSET_CURRENT; break;
-    case IO::FROM_END:      natMode = OFFSET_END; break;
+    case IO::Stream::FROM_START:    natMode = OFFSET_BEGINNING; break;
+    case IO::Stream::FROM_CURRENT:  natMode = OFFSET_CURRENT; break;
+    case IO::Stream::FROM_END:      natMode = OFFSET_END; break;
   }
   sint32 current = Seek(file, position, natMode);
   if (current < 0) {
@@ -173,12 +173,12 @@ IO::SeekPos IO::StreamOut::seek(IO::SeekPos position, IO::SeekMode mode)
   bytesLeft  = bufferSize;
   currentBuf = 0;
   offset     = buffers[0];
-  return (IO::SeekPos) current;
+  return (IO::Stream::SeekPos) current;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t IO::StreamOut::writeBytes(const void* buffer, size_t n)
+size_t IO::Stream::Out::writeBytes(const void* buffer, size_t n)
 {
   if (!file) {
     THROW_NSX(IO, WriteError());
@@ -217,7 +217,7 @@ size_t IO::StreamOut::writeBytes(const void* buffer, size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t IO::StreamOut::write16Swap(const void* buffer,size_t n)
+size_t IO::Stream::Out::write16Swap(const void* buffer,size_t n)
 {
   if (!file) {
     THROW_NSX(IO, WriteError());
@@ -260,7 +260,7 @@ size_t IO::StreamOut::write16Swap(const void* buffer,size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t IO::StreamOut::write32Swap(const void* buffer,size_t n)
+size_t IO::Stream::Out::write32Swap(const void* buffer,size_t n)
 {
   if (!file) {
     THROW_NSX(IO, WriteError());
@@ -302,7 +302,7 @@ size_t IO::StreamOut::write32Swap(const void* buffer,size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t IO::StreamOut::write64Swap(const void* buffer,size_t n)
+size_t IO::Stream::Out::write64Swap(const void* buffer,size_t n)
 {
   if (!file) {
     THROW_NSX(IO, WriteError());
@@ -344,7 +344,7 @@ size_t IO::StreamOut::write64Swap(const void* buffer,size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t IO::StreamOut::writeText(const char* format,...)
+size_t IO::Stream::Out::writeText(const char* format,...)
 {
   if (!file) {
     THROW_NSX(IO, WriteError());
@@ -363,7 +363,7 @@ size_t IO::StreamOut::writeText(const char* format,...)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t IO::StreamOut::rawReadBytes(void* buffer, size_t n, sint32 filePos)
+size_t IO::Stream::Out::rawReadBytes(void* buffer, size_t n, IO::Stream::SeekPos filePos)
 {
   // Note the existing file position, move to the requested absolute position,
   // read and then reset the original position.

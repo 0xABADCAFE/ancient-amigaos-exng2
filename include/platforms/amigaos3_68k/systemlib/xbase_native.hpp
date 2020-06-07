@@ -38,12 +38,11 @@
 # endif
 
 
-
 namespace OSNative {
   extern "C" {
-    #include <proto/exec.h>           // OS realtime kernel
-    //#include <proto/intuition.h>      // OS windowing environment
+    #include <proto/exec.h>           // OS kernel
   }
+  #include <library_inlines/exec.hpp>
 };
 
 ////////////////////////////////////////////////////////////////////////////////

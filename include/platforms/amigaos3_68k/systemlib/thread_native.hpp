@@ -21,8 +21,8 @@
 
 namespace OSNative {
   extern "C" {
-    #include <proto/dos.h>        // OS realtime kernel
-    #include <dos/dostags.h>      // OS windowing environment
+    #include <proto/dos.h>
+    #include <dos/dostags.h>
     #include <exec/execbase.h>
   }
 };

@@ -27,9 +27,9 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class XSF::StreamHeader : private EXNGPrivate::StreamUser {
-  friend class XSF::StreamIn;
-  friend class XSF::StreamOut;
+class XSF::Stream::Header : private EXNGPrivate::StreamUser {
+  friend class XSF::Stream::In;
+  friend class XSF::Stream::Out;
 
   private:
     struct Block8 {
@@ -61,9 +61,9 @@ class XSF::StreamHeader : private EXNGPrivate::StreamUser {
     } block32;
 
     void    init();
-    void    read(IO::StreamIn& in);
-    void    read(IO::StreamOut& out);
-    void    write(IO::StreamOut& out);
+    void    read(IO::Stream::In& in);
+    void    read(IO::Stream::Out& out);
+    void    write(IO::Stream::Out& out);
 
   public:
     const   Time::Datestamp& getDateCreated() const { return block32.created; }
@@ -86,14 +86,14 @@ class XSF::StreamHeader : private EXNGPrivate::StreamUser {
     void    setUpdated()                 { block32.modified.now(); }
     void    initDate()                   { block32.created.now(); block32.modified = block32.created; }
 
-    StreamHeader();
-    StreamHeader(const char* id, uint16 v, uint16 r, uint8 df);
+    Header();
+    Header(const char* id, uint16 v, uint16 r, uint8 df);
 
   private:
     void validate();
 
-    StreamHeader(IO::StreamIn& in);
-    StreamHeader(IO::StreamOut& out);
+    Header(IO::Stream::In& in);
+    Header(IO::Stream::Out& out);
 
 };
 
@@ -151,8 +151,8 @@ class XSF::ItemHeader {
     void    setClassId(uint32 id)             { block32.classId         = id; }
     void    setSubClassId(uint32 id)          { block32.subClassId      = id; }
 
-    size_t  write(XSF::StreamOut* f); // returns total bytes written
-    size_t  read(XSF::StreamIn* f);   // returns total bytes read
+    size_t  write(XSF::Stream::Out* f); // returns total bytes written
+    size_t  read(XSF::Stream::In* f);   // returns total bytes read
 
   public:
     ItemHeader();

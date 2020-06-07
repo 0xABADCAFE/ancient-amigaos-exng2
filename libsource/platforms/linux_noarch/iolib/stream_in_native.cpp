@@ -33,15 +33,14 @@ using namespace EXNGPrivate;
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-size_t      IO::StreamIn::rawWriteBytes(const void* buffer, size_t n, sint32 filePos)
+size_t IO::Stream::In::rawWriteBytes(const void* buffer, size_t n, IO::Stream::SeekPos filePos)
 {
   return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void        IO::StreamIn::open(const char* fileName, IO::ReadMode m, size_t s)
+void IO::Stream::In::open(const char* fileName, IO::Stream::ReadMode m, size_t s)
 {
   //LOGGING_DECLARE_FUNCNAME(open)
   if (!fileName) {
@@ -61,7 +60,7 @@ void        IO::StreamIn::open(const char* fileName, IO::ReadMode m, size_t s)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void        IO::StreamIn::close()
+void IO::Stream::In::close()
 {
   if (file) {
     std::fclose(file);
@@ -72,7 +71,7 @@ void        IO::StreamIn::close()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void        IO::StreamIn::flush()
+void IO::Stream::In::flush()
 {
 
 }
@@ -81,7 +80,7 @@ void        IO::StreamIn::flush()
 
 //#include <cstdio>
 
-size_t      IO::StreamIn::readBytes(void* buffer, size_t n)
+size_t IO::Stream::In::readBytes(void* buffer, size_t n)
 {
   assertReadable();
   assertPointer(buffer);
@@ -95,7 +94,7 @@ size_t      IO::StreamIn::readBytes(void* buffer, size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t      IO::StreamIn::read16Swap(void* buffer, size_t n)
+size_t IO::Stream::In::read16Swap(void* buffer, size_t n)
 {
   assertReadable();
   assertPointer(buffer);
@@ -116,7 +115,7 @@ size_t      IO::StreamIn::read16Swap(void* buffer, size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t      IO::StreamIn::read32Swap(void* buffer, size_t n)
+size_t IO::Stream::In::read32Swap(void* buffer, size_t n)
 {
   assertReadable();
   assertPointer(buffer);
@@ -137,7 +136,7 @@ size_t      IO::StreamIn::read32Swap(void* buffer, size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t      IO::StreamIn::read64Swap(void* buffer, size_t n)
+size_t IO::Stream::In::read64Swap(void* buffer, size_t n)
 {
   assertReadable();
   assertPointer(buffer);
@@ -160,7 +159,7 @@ size_t      IO::StreamIn::read64Swap(void* buffer, size_t n)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-size_t      IO::StreamIn::readText(char* buffer, sint32 max, char mark, sint32 num)
+size_t IO::Stream::In::readText(char* buffer, sint32 max, char mark, sint32 num)
 {
   assertReadable();
   assertPointer(buffer);

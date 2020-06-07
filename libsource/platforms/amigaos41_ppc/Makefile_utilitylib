@@ -8,11 +8,7 @@ OBJ      =	$(OBJDIR)hashkeys.o \
 						$(OBJDIR)poll.o
 
 $(LIB): $(OBJ) Makefile_utilitylib
-	$(CXX) -shared -Wl,-soname,$(LIB).$(VER) -o $(LIBDIR)$(LIB).$(VER).$(REV) $(OBJ); \
-	cd $(LIBDIR); \
-  $(LN) $(LIB).$(VER).$(REV) $(LIB); \
-  $(LN) $(LIB).$(VER).$(REV) $(LIB).$(VER); \
-	cd ../
+	$(CXX) -shared -Wl,-soname,$(LIB) -o $(LIBDIR)$(LIB) $(OBJ); \
 
 $(OBJDIR)hashkeys.o: $(SRCDIR)utilitylib/hashkeys.cpp
 	$(CXX) $(CXXFLAGS) -o $@ -c $<

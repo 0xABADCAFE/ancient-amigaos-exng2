@@ -44,9 +44,9 @@ class AbstractPixelMap : public GfxArea {
     virtual Pixel::FBType         getFormat()     const = 0;
 
     // modifiers
-    virtual void* lockData()                                = 0;
-    virtual void  unlockData()                              = 0;
-    virtual void  clear(Colour32 c)                         = 0;
+    virtual void* lockData()                            = 0;
+    virtual void  unlockData()                          = 0;
+    virtual void  clear(Colour32 c)                     = 0;
 
     ~AbstractPixelMap() {};
 };
@@ -62,28 +62,28 @@ class AbstractPixelMap : public GfxArea {
 
 class ImageBuffer : public AbstractPixelMap {
   DEFINE_MIN_RTTI
+
   public:
     enum {
       IB_CLONE_PALETTE    = 0x00000001,
-      IB_CLONE_DESCRIPTOR = 0x00000002
+      IB_CLONE_DESCRIPTOR = 0x00000002,
+      IB_CREATE_PALETTE   = 0x00000004
     };
 
     // inspectors
     const Pixel::Layout*  getDescriptor() const;
     Pixel::FBType         getFormat()     const;
-    Palette*              getPalette()    const;
 
 
     // modifiers
-    void* lockData();
-    void  unlockData();
-    void  clear(Colour32 c);
-
-    void  setPalette(Palette* p, uint32 options);
-
-    void  create(sint16 w, sint16 h, const Pixel::Layout* d, Palette* p=0, uint32 options=0);
-    void  create(sint16 w, sint16 h, Pixel::FBType f, Palette* p=0, uint32 options=0);
-    void  destroy();
+    void*     lockData();
+    void      unlockData();
+    void      clear(Colour32 c);
+    Palette*  getPalette(); // returned palette is mutable
+    void      setPalette(Palette* p, uint32 options);
+    void      create(sint16 w, sint16 h, const Pixel::Layout* d, Palette* p=0, uint32 options=0);
+    void      create(sint16 w, sint16 h, Pixel::FBType f, Palette* p=0, uint32 options=0);
+    void      destroy();
 
 
     ImageBuffer();
@@ -109,6 +109,17 @@ class ImageBuffer : public AbstractPixelMap {
     const Pixel::Layout*  descriptor;
     Pixel::FBType         format;
     uint32                flags;
+
+    LOGGING_DEFINE_CLASSNAME
+
+};
+
+class ImageLoader {
+  public:
+    static ImageBuffer* loadImage(const char* name, bool aligned=true);
+
+  private:
+    LOGGING_DEFINE_CLASSNAME
 };
 
 #endif

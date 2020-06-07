@@ -21,7 +21,7 @@
 
 # include <xbase.hpp>
 # include <systemlib/error.hpp>
-# include <systemlib/reflist.hpp>
+# include <utilitylib/referencelist.hpp>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -34,23 +34,28 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+namespace HID {
 
-class EventMask {
-  DEFINE_MIN_RTTI
-  private:
-    uint32 mask;
+  class EventMask {
+    DEFINE_MIN_RTTI
+    private:
+      uint32 mask;
 
-  protected:
-    uint32 getMaskBits()            const { return mask; }
-    uint32 checkMaskBits(uint32 f)  const { return mask & f; }
-    uint32 setMaskBits(uint32 f);
-    uint32 toggleMaskBits(uint32 f);
-    uint32 enableMaskBits(uint32 f);
-    uint32 disableMaskBits(uint32 f);
+    protected:
+      uint32 getMaskBits()            const { return mask; }
+      uint32 checkMaskBits(uint32 f)  const { return mask & f; }
+      uint32 setMaskBits(uint32 f);
+      uint32 toggleMaskBits(uint32 f);
+      uint32 enableMaskBits(uint32 f);
+      uint32 disableMaskBits(uint32 f);
 
-  protected:
-    EventMask(uint32 m) : mask(m) { }
-};
+    protected:
+      EventMask(uint32 m) : mask(m) { }
+  };
+
+  class Key;
+  class Mouse;
+}
 
 #include <iolib/inputmouse.hpp>
 #include <iolib/inputkeyboard.hpp>

@@ -3,9 +3,9 @@
 //  File:         gfxlib/pixel.hpp
 //  Tab Size:     2
 //  Max Line:     120
-//  Description:  Range bound integer class
+//  Description:  Pixel definitions
 //  Comment(s):
-//  Library:      System
+//  Library:      Graphics
 //  Created:      2006-10-08
 //  Updated:      2006-10-08
 //  Author(s):    Karl Churchill
@@ -132,15 +132,15 @@ class Pixel {
           return d<<24|c<<16|b<<8|a;
         }
 
-        static uint32 packBP(uint32 flags, Machine::WordType w, uint8 n)
+        static uint32 packBP(uint32 flags, Machine::ElemType e, uint8 n)
         {
-          return (flags&MASK_USER_SET)|w<<8|n;
+          return (flags&MASK_USER_SET)|e<<8|n;
         }
 
         uint32            getNumComponents()              const { return props[2]; }
         size_t            getAccessSize()                 const { return props[3]; }
-        Machine::WordType getAccessType()                 const { return (Machine::WordType)props[1]; }
-        Machine::WordType getComponentAccessType()        const { return (Machine::WordType)props[0]; }
+        Machine::ElemType getAccessType()                 const { return (Machine::ElemType)props[1]; }
+        Machine::ElemType getComponentAccessType()        const { return (Machine::ElemType)props[0]; }
 
         uint32            getWidth(Component c)           const { return width[getIdxComp(c)]; }
         uint32            getPosition(Component c)        const { return pos[getIdxComp(c)]; }
@@ -231,15 +231,15 @@ class Pixel {
     }
 
   private:
-    #define PIXCONV_ARGS void* dst, const void* src, int w, int h, int dstSpan, int srcSpan
-    typedef void (*Convert)(PIXCONV_ARGS);
+    // although values are specified as 32-bit unsigned, system specific limits apply
+    #define PIXCONV_ARGS  void* dst, const void* src, uint32 w, uint32 h, uint32 dstMod, uint32 srcMod
+    #define PIXCONV_ARGS2 void* dst, const void* src, const uint32* sPal, uint32 w, uint32 h, uint32 dstMod, uint32 srcMod
 
-    Convert conversion[CUSTOM_FB][CUSTOM_FB];
+    typedef void (*ConvertRGB)(PIXCONV_ARGS);
+    typedef void (*ConvertIdx)(PIXCONV_ARGS2);
 
-    #include <private/gfxlib/pixel_15bit.hpp>
-    #include <private/gfxlib/pixel_16bit.hpp>
-    #include <private/gfxlib/pixel_24bit.hpp>
-    #include <private/gfxlib/pixel_32bit.hpp>
+    static ConvertRGB convertRGB[CUSTOM_FB-1][CUSTOM_FB-1];
+    static ConvertIdx convertIdx2RGB[CUSTOM_FB-1];
 
     static uint8    fbPrefFormats [6]; // preferred formats for depth
     static Layout   fbTypeLayout  [Pixel::CUSTOM_FB];
