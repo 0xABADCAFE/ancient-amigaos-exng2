@@ -1,0 +1,1394 @@
+#NO_APP
+.stabs "Developer:Extropia/exng2/projects/test/newlist/",100,0,0,Ltext0
+.stabs "application.cpp",100,0,0,Ltext0
+.text
+Ltext0:
+.stabs "int:t1=r1;0020000000000;0017777777777;",128,0,0,0
+.stabs "char:t2=r2;0;255;",128,0,0,0
+.stabs "long int:t3=r1;0020000000000;0017777777777;",128,0,0,0
+.stabs "unsigned int:t4=r1;0000000000000;0037777777777;",128,0,0,0
+.stabs "long unsigned int:t5=r1;0000000000000;0037777777777;",128,0,0,0
+.stabs "long long int:t6=r1;01000000000000000000000;0777777777777777777777;",128,0,0,0
+.stabs "long long unsigned int:t7=r1;0000000000000;01777777777777777777777;",128,0,0,0
+.stabs "short int:t8=r8;-32768;32767;",128,0,0,0
+.stabs "short unsigned int:t9=r9;0;65535;",128,0,0,0
+.stabs "signed char:t10=r10;-128;127;",128,0,0,0
+.stabs "unsigned char:t11=r11;0;255;",128,0,0,0
+.stabs "float:t12=r1;4;0;",128,0,0,0
+.stabs "double:t13=r1;8;0;",128,0,0,0
+.stabs "long double:t14=r1;8;0;",128,0,0,0
+.stabs "complex int:t15=s8real:1,0,32;imag:1,32,32;;",128,0,0,0
+.stabs "complex float:t16=r16;4;0;",128,0,0,0
+.stabs "complex double:t17=r17;8;0;",128,0,0,0
+.stabs "complex long double:t18=r18;8;0;",128,0,0,0
+.stabs "bool:t19=@s8;-16;",128,0,0,0
+.stabs "void:t20=20",128,0,0,0
+.stabs "__wchar_t:t21=r1;0000000000000;0037777777777;",128,0,0,0
+.stabs "__vtbl_ptr_type:t22=*23=f1",128,0,0,0
+.stabs "_physadr:T24=s2r:25=ar1;0;0;8,0,16;__as::26=##27=&24;:RC8_physadr;2A.;\\",128,0,0,0
+.stabs "_physadr::28=##29=*24;:RC8_physadr;2A.30=##29;:;2A.;;",128,0,0,0
+.stabs "_physadr:Tt24",128,0,45,0
+.stabs "physadr:t31=29",128,0,45,0
+.stabs "label_t:Tt32=s60val:33=ar1;0;14;1,0,480;__as::34=##35=&32;:RC7label_t;2A.;\\",128,0,0,0
+.stabs "label_t::36=##37=*32;:RC7label_t;2A.38=##37;:;2A.;;",128,0,49,0
+.stabs "vm_offset_t:t39=5",128,0,52,0
+.stabs "vm_size_t:t40=5",128,0,53,0
+.stabs "int8_t:t41=10",128,0,63,0
+.stabs "u_int8_t:t42=11",128,0,64,0
+.stabs "int16_t:t43=8",128,0,65,0
+.stabs "u_int16_t:t44=9",128,0,66,0
+.stabs "int32_t:t45=1",128,0,67,0
+.stabs "u_int32_t:t46=4",128,0,68,0
+.stabs "int64_t:t47=6",128,0,69,0
+.stabs "u_int64_t:t48=7",128,0,70,0
+.stabs "register_t:t49=45",128,0,73,0
+.stabs "u_char:t50=11",128,0,53,0
+.stabs "u_short:t51=9",128,0,54,0
+.stabs "u_int:t52=4",128,0,55,0
+.stabs "u_long:t53=5",128,0,56,0
+.stabs "ushort:t54=9",128,0,57,0
+.stabs "uint:t55=4",128,0,58,0
+.stabs "u_quad_t:t56=48",128,0,61,0
+.stabs "quad_t:t57=47",128,0,62,0
+.stabs "qaddr_t:t58=59=*57",128,0,63,0
+.stabs "caddr_t:t60=61=*2",128,0,65,0
+.stabs "daddr_t:t62=45",128,0,66,0
+.stabs "dev_t:t63=43",128,0,67,0
+.stabs "fixpt_t:t64=46",128,0,68,0
+.stabs "gid_t:t65=44",128,0,69,0
+.stabs "ino_t:t66=46",128,0,70,0
+.stabs "key_t:t67=3",128,0,71,0
+.stabs "mode_t:t68=44",128,0,72,0
+.stabs "nlink_t:t69=44",128,0,73,0
+.stabs "off_t:t70=45",128,0,74,0
+.stabs "pid_t:t71=45",128,0,75,0
+.stabs "rlim_t:t72=45",128,0,76,0
+.stabs "segsz_t:t73=45",128,0,77,0
+.stabs "swblk_t:t74=45",128,0,78,0
+.stabs "uid_t:t75=44",128,0,79,0
+.stabs "clock_t:t76=5",128,0,105,0
+.stabs "size_t:t77=5",128,0,110,0
+.stabs "ssize_t:t78=1",128,0,115,0
+.stabs "time_t:t79=3",128,0,120,0
+.stabs "fd_mask:t80=45",128,0,137,0
+.stabs "fd_set:Tt81=s32fds_bits:82=ar1;0;7;1,0,256;__as::83=##84=&81;:RC6fd_set;2A.;\\",128,0,0,0
+.stabs "fd_set::85=##86=*81;:RC6fd_set;2A.87=##86;:;2A.;;",128,0,146,0
+.stabs "ptrdiff_t:t88=1",128,0,20,0
+.stabs "wchar_t:t21",128,0,0,0
+.stabs "WordType:t89=eWT_OTHER:0,WT_BIT:1,WT_BITFIELD:2,\\",128,0,0,0
+.stabs "WT_BYTE:3,WT_WORD16:4,WT_WORD32:5,\\",128,0,0,0
+.stabs "WT_WORD64:6,WT_WORD128:7,;",128,0,76,0
+.stabs "RuntimeError:Tt90=s4$vf90:91=*22,0;__as::92=##93=&90;:RC12RuntimeError;2A.;\\",128,0,0,0
+.stabs "RuntimeError::94=##95=*90;:RC12RuntimeError;2A.96=##95;:;2A.;_dfRTTI::97=##20;:;0A*2;90;;\\",128,0,0,0
+.stabs "getClass::98=##99=*2;:;2B*3;90;;log::100=##20;:;2B*4;90;;;~%90;",128,0,34,0
+.stabs "InvalidValue:Tt101=s4!1,020,90;__as::102=##103=&101;:RC12InvalidValue;2A.;\\",128,0,0,0
+.stabs "InvalidValue::104=##105=*101;:RC12InvalidValue;2A.106=##105;:;2A.;_dfRTTI::107=##20;:;0A*2;90;;;~%90;",128,0,42,0
+.stabs "NullPointer:Tt108=s4!1,020,90;__as::109=##110=&108;:RC11NullPointer;2A.;\\",128,0,0,0
+.stabs "NullPointer::111=##112=*108;:RC11NullPointer;2A.113=##112;:;2A.;_dfRTTI::114=##20;:;0A*2;90;;;~%90;",128,0,43,0
+.stabs "ZeroDivide:Tt115=s4!1,020,90;__as::116=##117=&115;:RC10ZeroDivide;2A.;\\",128,0,0,0
+.stabs "ZeroDivide::118=##119=*115;:RC10ZeroDivide;2A.120=##119;:;2A.;_dfRTTI::121=##20;:;0A*2;90;;;~%90;",128,0,44,0
+.stabs "IllegalAddress:Tt122=s4!1,020,90;__as::123=##124=&122;:RC14IllegalAddress;2A.;\\",128,0,0,0
+.stabs "IllegalAddress::125=##126=*122;:RC14IllegalAddress;2A.127=##126;:;2A.;_dfRTTI::128=##20;:;0A*2;90;;;~%90;",128,0,45,0
+.stabs "BadAlignment:Tt129=s4!1,020,90;__as::130=##131=&129;:RC12BadAlignment;2A.;\\",128,0,0,0
+.stabs "BadAlignment::132=##133=*129;:RC12BadAlignment;2A.134=##133;:;2A.;_dfRTTI::135=##20;:;0A*2;90;;;~%90;",128,0,46,0
+.stabs "RangeError:Tt136=s4!1,020,90;__as::137=##138=&136;:RC10RangeError;2A.;\\",128,0,0,0
+.stabs "RangeError::139=##140=*136;:RC10RangeError;2A.141=##140;:;2A.;_dfRTTI::142=##20;:;0A*2;90;;;~%90;",128,0,47,0
+.stabs "ObjectModified:Tt143=s4!1,020,90;__as::144=##145=&143;:RC14ObjectModified;2A.;\\",128,0,0,0
+.stabs "ObjectModified::146=##147=*143;:RC14ObjectModified;2A.148=##147;:;2A.;_dfRTTI::149=##20;:;0A*2;90;;;~%90;",128,0,48,0
+.stabs "ObjectDestroyed:Tt150=s4!1,020,90;__as::151=##152=&150;:RC15ObjectDestroyed;2A.;\\",128,0,0,0
+.stabs "ObjectDestroyed::153=##154=*150;:RC15ObjectDestroyed;2A.155=##154;:;2A.;_dfRTTI::156=##20;:;0A*2;90;;;~%90;",128,0,49,0
+.stabs "ObjectStateViolation:Tt157=s4!1,020,90;__as::158=##159=&157;:RC20ObjectStateViolation;2A.;\\",128,0,0,0
+.stabs "ObjectStateViolation::160=##161=*157;:RC20ObjectStateViolation;2A.162=##161;:;2A.;\\",128,0,0,0
+.stabs "_dfRTTI::163=##20;:;0A*2;90;;;~%90;",128,0,50,0
+.stabs "ResourceError:Tt164=s8!1,020,90;resName:/099,32,32;\\",128,0,0,0
+.stabs "__as::165=##166=&164;:RC13ResourceError;2A.;ResourceError::167=##168=*164;:RC13ResourceError;2A.;\\",128,0,0,0
+.stabs "_dfRTTI::169=##20;:;0A*2;90;;getName::170=##99;:;2B.;log::171=##20;:;2B*4;90;;\\",128,0,0,0
+.stabs "ResourceError::172=##168;:PCc;2A.;;~%90;",128,0,70,0
+.stabs "ResourceInvalid:Tt173=s8!1,020,164;__as::174=##175=&173;:RC15ResourceInvalid;2A.;\\",128,0,0,0
+.stabs "ResourceInvalid::176=##177=*173;:RC15ResourceInvalid;2A.;_dfRTTI::178=##20;:;0A*2;90;;\\",128,0,0,0
+.stabs "ResourceInvalid::179=##177;:PCc;2A.;;~%90;",128,0,84,0
+.stabs "ResourceExhausted:Tt180=s8!1,020,164;__as::181=##182=&180;:RC17ResourceExhausted;2A.;\\",128,0,0,0
+.stabs "ResourceExhausted::183=##184=*180;:RC17ResourceExhausted;2A.;_dfRTTI::185=##20;:;0A*2;90;;\\",128,0,0,0
+.stabs "ResourceExhausted::186=##184;:PCc;2A.;;~%90;",128,0,91,0
+.stabs "ResourceUnavailable:Tt187=s8!1,020,164;__as::188=##189=&187;:RC19ResourceUnavailable;2A.;\\",128,0,0,0
+.stabs "ResourceUnavailable::190=##191=*187;:RC19ResourceUnavailable;2A.;_dfRTTI::192=##20;:;0A*2;90;;\\",128,0,0,0
+.stabs "ResourceUnavailable::193=##191;:PCc;2A.;;~%90;",128,0,98,0
+.stabs "ResourceLocked:Tt194=s8!1,020,164;__as::195=##196=&194;:RC14ResourceLocked;2A.;\\",128,0,0,0
+.stabs "ResourceLocked::197=##198=*194;:RC14ResourceLocked;2A.;_dfRTTI::199=##20;:;0A*2;90;;\\",128,0,0,0
+.stabs "ResourceLocked::200=##198;:PCc;2A.;;~%90;",128,0,105,0
+.stabs "ResourceVersion:Tt201=s8!1,020,164;__as::202=##203=&201;:RC15ResourceVersion;2A.;\\",128,0,0,0
+.stabs "ResourceVersion::204=##205=*201;:RC15ResourceVersion;2A.;_dfRTTI::206=##20;:;0A*2;90;;\\",128,0,0,0
+.stabs "ResourceVersion::207=##205;:PCc;2A.;;~%90;",128,0,112,0
+.stabs "APTR:t208=209=*20",128,0,40,0
+.stabs "LONG:t210=3",128,0,42,0
+.stabs "ULONG:t211=5",128,0,43,0
+.stabs "LONGBITS:t212=5",128,0,44,0
+.stabs "WORD:t213=8",128,0,45,0
+.stabs "UWORD:t214=9",128,0,46,0
+.stabs "WORDBITS:t215=9",128,0,47,0
+.stabs "BYTE:t216=10",128,0,49,0
+.stabs "UBYTE:t217=11",128,0,53,0
+.stabs "BYTEBITS:t218=11",128,0,54,0
+.stabs "RPTR:t219=9",128,0,55,0
+.stabs "STRPTR:t220=61",128,0,58,0
+.stabs "CONST_STRPTR:t221=99",128,0,59,0
+.stabs "SHORT:t222=8",128,0,67,0
+.stabs "USHORT:t223=9",128,0,68,0
+.stabs "COUNT:t224=8",128,0,69,0
+.stabs "UCOUNT:t225=9",128,0,70,0
+.stabs "CPTR:t226=211",128,0,71,0
+.stabs "FLOAT:t227=12",128,0,75,0
+.stabs "DOUBLE:t228=13",128,0,76,0
+.stabs "BOOL:t229=8",128,0,77,0
+.stabs "TEXT:t230=11",128,0,78,0
+.stabs "Node:Tt231=s14ln_Succ:232=*231,0,32;ln_Pred:232,32,32;\\",128,0,0,0
+.stabs "ln_Type:217,64,8;ln_Pri:216,72,8;ln_Name:61,80,32;\\",128,0,0,0
+.stabs "__as::233=##234=&231;:Q28OSNative4NodeRCQ28OSNative4Node;2A.;Node::235=##232;:__Q28OSNative4NodeRCQ28OSNative4Node;2A.\\",128,0,0,0
+.stabs "236=##232;:__Q28OSNative4Node;2A.;;",128,0,28,0
+.stabs "MinNode:Tt237=s8mln_Succ:238=*237,0,32;mln_Pred:238,32,32;\\",128,0,0,0
+.stabs "__as::239=##240=&237;:Q28OSNative7MinNodeRCQ28OSNative7MinNode;2A.;MinNode::241=##238;:__Q28OSNative7MinNodeRCQ28OSNative7MinNode;2A.\\",128,0,0,0
+.stabs "242=##238;:__Q28OSNative7MinNode;2A.;;",128,0,34,0
+.stabs "List:Tt243=s14lh_Head:232,0,32;lh_Tail:232,32,32;\\",128,0,0,0
+.stabs "lh_TailPred:232,64,32;lh_Type:217,96,8;l_pad:217,104,8;\\",128,0,0,0
+.stabs "__as::244=##245=&243;:Q28OSNative4ListRCQ28OSNative4List;2A.;List::246=##247=*243;:__Q28OSNative4ListRCQ28OSNative4List;2A.\\",128,0,0,0
+.stabs "248=##247;:__Q28OSNative4List;2A.;;",128,0,26,0
+.stabs "MinList:Tt249=s12mlh_Head:238,0,32;mlh_Tail:238,32,32;\\",128,0,0,0
+.stabs "mlh_TailPred:238,64,32;__as::250=##251=&249;:Q28OSNative7MinListRCQ28OSNative7MinList;2A.;\\",128,0,0,0
+.stabs "MinList::252=##253=*249;:__Q28OSNative7MinListRCQ28OSNative7MinList;2A.254=##253;:__Q28OSNative7MinList;2A.;;",128,0,35,0
+.stabs "Task:Tt255=s92tc_Node:231,0,112;tc_Flags:217,112,8;\\",128,0,0,0
+.stabs "tc_State:217,120,8;tc_IDNestCnt:216,128,8;tc_TDNestCnt:216,136,8;\\",128,0,0,0
+.stabs "tc_SigAlloc:211,144,32;tc_SigWait:211,176,32;tc_SigRecvd:211,208,32;\\",128,0,0,0
+.stabs "tc_SigExcept:211,240,32;tc_TrapAlloc:214,272,16;tc_TrapAble:214,288,16;\\",128,0,0,0
+.stabs "tc_ExceptData:208,304,32;tc_ExceptCode:208,336,32;\\",128,0,0,0
+.stabs "tc_TrapData:208,368,32;tc_TrapCode:208,400,32;tc_SPReg:208,432,32;\\",128,0,0,0
+.stabs "tc_SPLower:208,464,32;tc_SPUpper:208,496,32;tc_Switch:256=*257=f20,528,32;\\",128,0,0,0
+.stabs "tc_Launch:256,560,32;tc_MemEntry:243,592,112;tc_UserData:208,704,32;\\",128,0,0,0
+.stabs "__as::258=##259=&255;:Q28OSNative4TaskRCQ28OSNative4Task;2A.;Task::260=##261=*255;:__Q28OSNative4TaskRCQ28OSNative4Task;2A.\\",128,0,0,0
+.stabs "262=##261;:__Q28OSNative4Task;2A.;;",128,0,47,0
+.stabs "StackSwapStruct:Tt263=s12stk_Lower:208,0,32;stk_Upper:211,32,32;\\",128,0,0,0
+.stabs "stk_Pointer:208,64,32;__as::264=##265=&263;:Q28OSNative15StackSwapStructRCQ28OSNative15StackSwapStruct;2A.;\\",128,0,0,0
+.stabs "StackSwapStruct::266=##267=*263;:__Q28OSNative15StackSwapStructRCQ28OSNative15StackSwapStruct;2A.\\",128,0,0,0
+.stabs "268=##267;:__Q28OSNative15StackSwapStruct;2A.;;",128,0,56,0
+.stabs "MemChunk:Tt269=s8mc_Next:270=*269,0,32;mc_Bytes:211,32,32;\\",128,0,0,0
+.stabs "__as::271=##272=&269;:Q28OSNative8MemChunkRCQ28OSNative8MemChunk;2A.;MemChunk::273=##270;:__Q28OSNative8MemChunkRCQ28OSNative8MemChunk;2A.\\",128,0,0,0
+.stabs "274=##270;:__Q28OSNative8MemChunk;2A.;;",128,0,23,0
+.stabs "MemHeader:Tt275=s32mh_Node:231,0,112;mh_Attributes:214,112,16;\\",128,0,0,0
+.stabs "mh_First:270,128,32;mh_Lower:208,160,32;mh_Upper:208,192,32;\\",128,0,0,0
+.stabs "mh_Free:211,224,32;__as::276=##277=&275;:Q28OSNative9MemHeaderRCQ28OSNative9MemHeader;2A.;\\",128,0,0,0
+.stabs "MemHeader::278=##279=*275;:__Q28OSNative9MemHeaderRCQ28OSNative9MemHeader;2A.280=##279;:__Q28OSNative9MemHeader;2A.;;",128,0,35,0
+.stabs "MemEntry:Tt281=s8me_Un:282=u4meu_Reqs:211,0,32;\\",128,0,0,0
+.stabs "meu_Addr:208,0,32;__as::283=#282,284=&282,285=*282,286=&282,20;:__as__Q38OSNative8MemEntry3$_2RCQ38OSNative8MemEntry3$_2;2A.;\\",128,0,0,0
+.stabs "$_2::287=#282,285,285,286,20;:__Q38OSNative8MemEntry3$_2RCQ38OSNative8MemEntry3$_2;2A.\\",128,0,0,0
+.stabs "288=#282,285,285,20;:__Q38OSNative8MemEntry3$_2;2A.;;,0,32;me_Length:211,32,32;\\",128,0,0,0
+.stabs "__as::289=##290=&281;:Q28OSNative8MemEntryRCQ28OSNative8MemEntry;2A.;MemEntry::291=##292=*281;:__Q28OSNative8MemEntryRCQ28OSNative8MemEntry;2A.\\",128,0,0,0
+.stabs "293=##292;:__Q28OSNative8MemEntry;2A.;;",128,0,46,0
+.stabs "MemList:Tt294=s24ml_Node:231,0,112;ml_NumEntries:214,112,16;\\",128,0,0,0
+.stabs "ml_ME:295=ar1;0;0;281,128,64;__as::296=##297=&294;:Q28OSNative7MemListRCQ28OSNative7MemList;2A.;\\",128,0,0,0
+.stabs "MemList::298=##299=*294;:__Q28OSNative7MemListRCQ28OSNative7MemList;2A.300=##299;:__Q28OSNative7MemList;2A.;;",128,0,60,0
+.stabs "MemHandlerData:Tt301=s12memh_RequestSize:211,0,32;memh_RequestFlags:211,32,32;\\",128,0,0,0
+.stabs "memh_Flags:211,64,32;__as::302=##303=&301;:Q28OSNative14MemHandlerDataRCQ28OSNative14MemHandlerData;2A.;\\",128,0,0,0
+.stabs "MemHandlerData::304=##305=*301;:__Q28OSNative14MemHandlerDataRCQ28OSNative14MemHandlerData;2A.\\",128,0,0,0
+.stabs "306=##305;:__Q28OSNative14MemHandlerData;2A.;;",128,0,95,0
+.stabs "MsgPort:Tt307=s34mp_Node:231,0,112;mp_Flags:217,112,8;\\",128,0,0,0
+.stabs "mp_SigBit:217,120,8;mp_SigTask:209,128,32;mp_MsgList:243,160,112;\\",128,0,0,0
+.stabs "__as::308=##309=&307;:Q28OSNative7MsgPortRCQ28OSNative7MsgPort;2A.;MsgPort::310=##311=*307;:__Q28OSNative7MsgPortRCQ28OSNative7MsgPort;2A.\\",128,0,0,0
+.stabs "312=##311;:__Q28OSNative7MsgPort;2A.;;",128,0,34,0
+.stabs "Message:Tt313=s20mn_Node:231,0,112;mn_ReplyPort:311,112,32;\\",128,0,0,0
+.stabs "mn_Length:214,144,16;__as::314=##315=&313;:Q28OSNative7MessageRCQ28OSNative7Message;2A.;\\",128,0,0,0
+.stabs "Message::316=##317=*313;:__Q28OSNative7MessageRCQ28OSNative7Message;2A.318=##317;:__Q28OSNative7Message;2A.;;",128,0,53,0
+.stabs "Library:Tt319=s34lib_Node:231,0,112;lib_Flags:217,112,8;\\",128,0,0,0
+.stabs "lib_pad:217,120,8;lib_NegSize:214,128,16;lib_PosSize:214,144,16;\\",128,0,0,0
+.stabs "lib_Version:214,160,16;lib_Revision:214,176,16;lib_IdString:208,192,32;\\",128,0,0,0
+.stabs "lib_Sum:211,224,32;lib_OpenCnt:214,256,16;__as::320=##321=&319;:Q28OSNative7LibraryRCQ28OSNative7Library;2A.;\\",128,0,0,0
+.stabs "Library::322=##323=*319;:__Q28OSNative7LibraryRCQ28OSNative7Library;2A.324=##323;:__Q28OSNative7Library;2A.;;",128,0,53,0
+.stabs "Device:Tt325=s34dd_Library:319,0,272;__as::326=##327=&325;:Q28OSNative6DeviceRCQ28OSNative6Device;2A.;\\",128,0,0,0
+.stabs "Device::328=##329=*325;:__Q28OSNative6DeviceRCQ28OSNative6Device;2A.330=##329;:__Q28OSNative6Device;2A.;;",128,0,26,0
+.stabs "Unit:Tt331=s38unit_MsgPort:307,0,272;unit_flags:217,272,8;\\",128,0,0,0
+.stabs "unit_pad:217,280,8;unit_OpenCnt:214,288,16;__as::332=##333=&331;:Q28OSNative4UnitRCQ28OSNative4Unit;2A.;\\",128,0,0,0
+.stabs "Unit::334=##335=*331;:__Q28OSNative4UnitRCQ28OSNative4Unit;2A.336=##335;:__Q28OSNative4Unit;2A.;;",128,0,37,0
+.stabs "IORequest:Tt337=s32io_Message:313,0,160;io_Device:329,160,32;\\",128,0,0,0
+.stabs "io_Unit:335,192,32;io_Command:214,224,16;io_Flags:217,240,8;\\",128,0,0,0
+.stabs "io_Error:216,248,8;__as::338=##339=&337;:Q28OSNative9IORequestRCQ28OSNative9IORequest;2A.;\\",128,0,0,0
+.stabs "IORequest::340=##341=*337;:__Q28OSNative9IORequestRCQ28OSNative9IORequest;2A.342=##341;:__Q28OSNative9IORequest;2A.;;",128,0,25,0
+.stabs "IOStdReq:Tt343=s48io_Message:313,0,160;io_Device:329,160,32;\\",128,0,0,0
+.stabs "io_Unit:335,192,32;io_Command:214,224,16;io_Flags:217,240,8;\\",128,0,0,0
+.stabs "io_Error:216,248,8;io_Actual:211,256,32;io_Length:211,288,32;\\",128,0,0,0
+.stabs "io_Data:208,320,32;io_Offset:211,352,32;__as::344=##345=&343;:Q28OSNative8IOStdReqRCQ28OSNative8IOStdReq;2A.;\\",128,0,0,0
+.stabs "IOStdReq::346=##347=*343;:__Q28OSNative8IOStdReqRCQ28OSNative8IOStdReq;2A.348=##347;:__Q28OSNative8IOStdReq;2A.;;",128,0,38,0
+.stabs "SemaphoreRequest:Tt349=s12sr_Link:237,0,64;sr_Waiter:261,64,32;\\",128,0,0,0
+.stabs "__as::350=##351=&349;:Q28OSNative16SemaphoreRequestRCQ28OSNative16SemaphoreRequest;2A.;\\",128,0,0,0
+.stabs "SemaphoreRequest::352=##353=*349;:__Q28OSNative16SemaphoreRequestRCQ28OSNative16SemaphoreRequest;2A.\\",128,0,0,0
+.stabs "354=##353;:__Q28OSNative16SemaphoreRequest;2A.;;",128,0,37,0
+.stabs "SignalSemaphore:Tt355=s46ss_Link:231,0,112;ss_NestCount:213,112,16;\\",128,0,0,0
+.stabs "ss_WaitQueue:249,128,96;ss_MultipleLink:349,224,96;\\",128,0,0,0
+.stabs "ss_Owner:261,320,32;ss_QueueCount:213,352,16;__as::356=##357=&355;:Q28OSNative15SignalSemaphoreRCQ28OSNative15SignalSemaphore;2A.;\\",128,0,0,0
+.stabs "SignalSemaphore::358=##359=*355;:__Q28OSNative15SignalSemaphoreRCQ28OSNative15SignalSemaphore;2A.\\",128,0,0,0
+.stabs "360=##359;:__Q28OSNative15SignalSemaphore;2A.;;",128,0,48,0
+.stabs "SemaphoreMessage:Tt361=s24ssm_Message:313,0,160;ssm_Semaphore:359,160,32;\\",128,0,0,0
+.stabs "__as::362=##363=&361;:Q28OSNative16SemaphoreMessageRCQ28OSNative16SemaphoreMessage;2A.;\\",128,0,0,0
+.stabs "SemaphoreMessage::364=##365=*361;:__Q28OSNative16SemaphoreMessageRCQ28OSNative16SemaphoreMessage;2A.\\",128,0,0,0
+.stabs "366=##365;:__Q28OSNative16SemaphoreMessage;2A.;;",128,0,55,0
+.stabs "Semaphore:Tt367=s36sm_MsgPort:307,0,272;sm_Bids:213,272,16;\\",128,0,0,0
+.stabs "__as::368=##369=&367;:Q28OSNative9SemaphoreRCQ28OSNative9Semaphore;2A.;Semaphore::370=##371=*367;:__Q28OSNative9SemaphoreRCQ28OSNative9Semaphore;2A.\\",128,0,0,0
+.stabs "372=##371;:__Q28OSNative9Semaphore;2A.;;",128,0,66,0
+.stabs "Rectangle:Tt373=s8MinX:213,0,16;MinY:213,16,16;\\",128,0,0,0
+.stabs "MaxX:213,32,16;MaxY:213,48,16;__as::374=##375=&373;:Q28OSNative9RectangleRCQ28OSNative9Rectangle;2A.;\\",128,0,0,0
+.stabs "Rectangle::376=##377=*373;:__Q28OSNative9RectangleRCQ28OSNative9Rectangle;2A.378=##377;:__Q28OSNative9Rectangle;2A.;;",128,0,31,0
+.stabs "Rect32:Tt379=s16MinX:210,0,32;MinY:210,32,32;\\",128,0,0,0
+.stabs "MaxX:210,64,32;MaxY:210,96,32;__as::380=##381=&379;:Q28OSNative6Rect32RCQ28OSNative6Rect32;2A.;\\",128,0,0,0
+.stabs "Rect32::382=##383=*379;:__Q28OSNative6Rect32RCQ28OSNative6Rect32;2A.384=##383;:__Q28OSNative6Rect32;2A.;;",128,0,37,0
+.stabs "tPoint:Tt385=s4x:213,0,16;y:213,16,16;\\",128,0,0,0
+.stabs "__as::386=##387=&385;:Q28OSNative6tPointRCQ28OSNative6tPoint;2A.;tPoint::388=##389=*385;:__Q28OSNative6tPointRCQ28OSNative6tPoint;2A.\\",128,0,0,0
+.stabs "390=##389;:__Q28OSNative6tPoint;2A.;;",128,0,42,0
+.stabs "Point:t391=385",128,0,42,0
+.stabs "PLANEPTR:t392=393=*217",128,0,44,0
+.stabs "BitMap:Tt394=s40BytesPerRow:214,0,16;Rows:214,16,16;\\",128,0,0,0
+.stabs "Flags:217,32,8;Depth:217,40,8;pad:214,48,16;\\",128,0,0,0
+.stabs "Planes:395=ar1;0;7;393,64,256;__as::396=##397=&394;:Q28OSNative6BitMapRCQ28OSNative6BitMap;2A.;\\",128,0,0,0
+.stabs "BitMap::398=##399=*394;:__Q28OSNative6BitMapRCQ28OSNative6BitMap;2A.400=##399;:__Q28OSNative6BitMap;2A.;;",128,0,54,0
+.stabs "Hook:Tt401=s20h_MinNode:237,0,64;h_Entry:402=*403=f211,64,32;\\",128,0,0,0
+.stabs "h_SubEntry:402,96,32;h_Data:208,128,32;__as::404=##405=&401;:Q28OSNative4HookRCQ28OSNative4Hook;2A.;\\",128,0,0,0
+.stabs "Hook::406=##407=*401;:__Q28OSNative4HookRCQ28OSNative4Hook;2A.408=##407;:__Q28OSNative4Hook;2A.;;",128,0,34,0
+.stabs "HOOKFUNC:t409=410=*411=f5",128,0,39,0
+.stabs "Layer:Tt412=s160front:413=*412,0,32;back:413,32,32;\\",128,0,0,0
+.stabs "ClipRect:414=*415=xsClipRect:,64,32;rp:416=*417=xsRastPort:,96,32;\\",128,0,0,0
+.stabs "bounds:373,128,64;reserved:418=ar1;0;3;11,192,32;\\",128,0,0,0
+.stabs "priority:214,224,16;Flags:214,240,16;SuperBitMap:399,256,32;\\",128,0,0,0
+.stabs "SuperClipRect:414,288,32;Window:208,320,32;Scroll_X:213,352,16;\\",128,0,0,0
+.stabs "Scroll_Y:213,368,16;cr:414,384,32;cr2:414,416,32;\\",128,0,0,0
+.stabs "crnew:414,448,32;SuperSaveClipRects:414,480,32;_cliprects:414,512,32;\\",128,0,0,0
+.stabs "LayerInfo:419=*420=xsLayer_Info:,544,32;Lock:355,576,368;\\",128,0,0,0
+.stabs "BackFill:407,944,32;reserved1:211,976,32;ClipRegion:421=*422=xsRegion:,1008,32;\\",128,0,0,0
+.stabs "saveClipRects:421,1040,32;Width:213,1072,16;Height:213,1088,16;\\",128,0,0,0
+.stabs "reserved2:423=ar1;0;17;11,1104,144;DamageList:421,1248,32;\\",128,0,0,0
+.stabs "__as::424=##425=&412;:Q28OSNative5LayerRCQ28OSNative5Layer;2A.;Layer::426=##413;:__Q28OSNative5LayerRCQ28OSNative5Layer;2A.\\",128,0,0,0
+.stabs "427=##413;:__Q28OSNative5Layer;2A.;;",128,0,55,0
+.stabs "ClipRect:Tt415=s36Next:414,0,32;prev:414,32,32;\\",128,0,0,0
+.stabs "lobs:413,64,32;BitMap:399,96,32;bounds:373,128,64;\\",128,0,0,0
+.stabs "_p1:209,192,32;_p2:209,224,32;reserved:210,256,32;\\",128,0,0,0
+.stabs "__as::428=##429=&415;:Q28OSNative8ClipRectRCQ28OSNative8ClipRect;2A.;ClipRect::430=##414;:__Q28OSNative8ClipRectRCQ28OSNative8ClipRect;2A.\\",128,0,0,0
+.stabs "431=##414;:__Q28OSNative8ClipRect;2A.;;",128,0,71,0
+.stabs "CopIns:Tt432=s6OpCode:213,0,16;u3:433=u4nxtlist:434=*435=xsCopList:,0,32;\\",128,0,0,0
+.stabs "u4:436=s4u1:437=u2VWaitPos:213,0,16;DestAddr:213,0,16;\\",128,0,0,0
+.stabs "__as::438=#437,439=&437,440=*437,441=&437,20;:__as__Q58OSNative6CopIns3$_33$_43$_5RCQ58OSNative6CopIns3$_33$_43$_5;2A.;\\",128,0,0,0
+.stabs "$_5::442=#437,440,440,441,20;:__Q58OSNative6CopIns3$_33$_43$_5RCQ58OSNative6CopIns3$_33$_43$_5;2A.\\",128,0,0,0
+.stabs "443=#437,440,440,20;:__Q58OSNative6CopIns3$_33$_43$_5;2A.;;,0,16;\\",128,0,0,0
+.stabs "u2:444=u2HWaitPos:213,0,16;DestData:213,0,16;\\",128,0,0,0
+.stabs "__as::445=#444,446=&444,447=*444,448=&444,20;:__as__Q58OSNative6CopIns3$_33$_43$_6RCQ58OSNative6CopIns3$_33$_43$_6;2A.;\\",128,0,0,0
+.stabs "$_6::449=#444,447,447,448,20;:__Q58OSNative6CopIns3$_33$_43$_6RCQ58OSNative6CopIns3$_33$_43$_6;2A.\\",128,0,0,0
+.stabs "450=#444,447,447,20;:__Q58OSNative6CopIns3$_33$_43$_6;2A.;;,16,16;\\",128,0,0,0
+.stabs "__as::451=#436,452=&436,453=*436,454=&436,20;:__as__Q48OSNative6CopIns3$_33$_4RCQ48OSNative6CopIns3$_33$_4;2A.;\\",128,0,0,0
+.stabs "$_4::455=#436,453,453,454,20;:__Q48OSNative6CopIns3$_33$_4RCQ48OSNative6CopIns3$_33$_4;2A.\\",128,0,0,0
+.stabs "456=#436,453,453,20;:__Q48OSNative6CopIns3$_33$_4;2A.;;,0,32;__as::457=#433,458=&433,459=*433,460=&433,20;:__as__Q38OSNative6CopIns3$_3RCQ38OSNative6CopIns3$_3;2A.;\\",128,0,0,0
+.stabs "$_3::461=#433,459,459,460,20;:__Q38OSNative6CopIns3$_3RCQ38OSNative6CopIns3$_3;2A.\\",128,0,0,0
+.stabs "462=#433,459,459,20;:__Q38OSNative6CopIns3$_3;2A.;;,16,32;__as::463=##464=&432;:Q28OSNative6CopInsRCQ28OSNative6CopIns;2A.;\\",128,0,0,0
+.stabs "CopIns::465=##466=*432;:__Q28OSNative6CopInsRCQ28OSNative6CopIns;2A.467=##466;:__Q28OSNative6CopIns;2A.;;",128,0,44,0
+.stabs "cprlist:Tt468=s10Next:469=*468,0,32;start:470=*214,32,32;\\",128,0,0,0
+.stabs "MaxCount:213,64,16;__as::471=##472=&468;:Q28OSNative7cprlistRCQ28OSNative7cprlist;2A.;\\",128,0,0,0
+.stabs "cprlist::473=##469;:__Q28OSNative7cprlistRCQ28OSNative7cprlist;2A.474=##469;:__Q28OSNative7cprlist;2A.;;",128,0,60,0
+.stabs "CopList:Tt435=s38Next:434,0,32;_CopList:434,32,32;\\",128,0,0,0
+.stabs "_ViewPort:475=*476=xsViewPort:,64,32;CopIns:466,96,32;\\",128,0,0,0
+.stabs "CopPtr:466,128,32;CopLStart:470,160,32;CopSStart:470,192,32;\\",128,0,0,0
+.stabs "Count:213,224,16;MaxCount:213,240,16;DyOffset:213,256,16;\\",128,0,0,0
+.stabs "SLRepeat:214,272,16;Flags:214,288,16;__as::477=##478=&435;:Q28OSNative7CopListRCQ28OSNative7CopList;2A.;\\",128,0,0,0
+.stabs "CopList::479=##434;:__Q28OSNative7CopListRCQ28OSNative7CopList;2A.480=##434;:__Q28OSNative7CopList;2A.;;",128,0,82,0
+.stabs "UCopList:Tt481=s12Next:482=*481,0,32;FirstCopList:434,32,32;\\",128,0,0,0
+.stabs "CopList:434,64,32;__as::483=##484=&481;:Q28OSNative8UCopListRCQ28OSNative8UCopList;2A.;\\",128,0,0,0
+.stabs "UCopList::485=##482;:__Q28OSNative8UCopListRCQ28OSNative8UCopList;2A.486=##482;:__Q28OSNative8UCopList;2A.;;",128,0,94,0
+.stabs "copinit:Tt487=s192vsync_hblank:488=ar1;0;1;9,0,32;\\",128,0,0,0
+.stabs "diagstrt:489=ar1;0;11;9,32,192;fm0:488,224,32;\\",128,0,0,0
+.stabs "diwstart:490=ar1;0;9;9,256,160;bplcon2:488,416,32;\\",128,0,0,0
+.stabs "sprfix:491=ar1;0;15;9,448,256;sprstrtup:492=ar1;0;31;9,704,512;\\",128,0,0,0
+.stabs "wait14:488,1216,32;norm_hblank:488,1248,32;jump:488,1280,32;\\",128,0,0,0
+.stabs "wait_forever:493=ar1;0;5;9,1312,96;sprstop:494=ar1;0;7;9,1408,128;\\",128,0,0,0
+.stabs "__as::495=##496=&487;:Q28OSNative7copinitRCQ28OSNative7copinit;2A.;copinit::497=##498=*487;:__Q28OSNative7copinitRCQ28OSNative7copinit;2A.\\",128,0,0,0
+.stabs "499=##498;:__Q28OSNative7copinit;2A.;;",128,0,114,0
+.stabs "ExtendedNode:Tt500=s24xln_Succ:232,0,32;xln_Pred:232,32,32;\\",128,0,0,0
+.stabs "xln_Type:217,64,8;xln_Pri:216,72,8;xln_Name:61,80,32;\\",128,0,0,0
+.stabs "xln_Subsystem:217,112,8;xln_Subtype:217,120,8;xln_Library:210,128,32;\\",128,0,0,0
+.stabs "xln_Init:501=*502=f210,160,32;__as::503=##504=&500;:Q28OSNative12ExtendedNodeRCQ28OSNative12ExtendedNode;2A.;\\",128,0,0,0
+.stabs "ExtendedNode::505=##506=*500;:__Q28OSNative12ExtendedNodeRCQ28OSNative12ExtendedNode;2A.\\",128,0,0,0
+.stabs "507=##506;:__Q28OSNative12ExtendedNode;2A.;;",128,0,27,0
+.stabs "MonitorSpec:Tt508=s160ms_Node:500,0,192;ms_Flags:214,192,16;\\",128,0,0,0
+.stabs "ratioh:210,208,32;ratiov:210,240,32;total_rows:214,272,16;\\",128,0,0,0
+.stabs "total_colorclocks:214,288,16;DeniseMaxDisplayColumn:214,304,16;\\",128,0,0,0
+.stabs "BeamCon0:214,320,16;min_row:214,336,16;ms_Special:509=*510=xsSpecialMonitor:,352,32;\\",128,0,0,0
+.stabs "ms_OpenCount:214,384,16;ms_transform:501,400,32;ms_translate:501,432,32;\\",128,0,0,0
+.stabs "ms_scale:501,464,32;ms_xoffset:214,496,16;ms_yoffset:214,512,16;\\",128,0,0,0
+.stabs "ms_LegalView:373,528,64;ms_maxoscan:501,592,32;ms_videoscan:501,624,32;\\",128,0,0,0
+.stabs "DeniseMinDisplayColumn:214,656,16;DisplayCompatible:211,672,32;\\",128,0,0,0
+.stabs "DisplayInfoDataBase:243,704,112;DisplayInfoDataBaseSemaphore:355,816,368;\\",128,0,0,0
+.stabs "ms_MrgCop:501,1184,32;ms_LoadView:501,1216,32;ms_KillView:501,1248,32;\\",128,0,0,0
+.stabs "__as::511=##512=&508;:Q28OSNative11MonitorSpecRCQ28OSNative11MonitorSpec;2A.;MonitorSpec::513=##514=*508;:__Q28OSNative11MonitorSpecRCQ28OSNative11MonitorSpec;2A.\\",128,0,0,0
+.stabs "515=##514;:__Q28OSNative11MonitorSpec;2A.;;",128,0,53,0
+.stabs "AnalogSignalInterval:Tt516=s4asi_Start:214,0,16;asi_Stop:214,16,16;\\",128,0,0,0
+.stabs "__as::517=##518=&516;:Q28OSNative20AnalogSignalIntervalRCQ28OSNative20AnalogSignalInterval;2A.;\\",128,0,0,0
+.stabs "AnalogSignalInterval::519=##520=*516;:__Q28OSNative20AnalogSignalIntervalRCQ28OSNative20AnalogSignalInterval;2A.\\",128,0,0,0
+.stabs "521=##520;:__Q28OSNative20AnalogSignalInterval;2A.;;",128,0,156,0
+.stabs "SpecialMonitor:Tt510=s58spm_Node:500,0,192;spm_Flags:214,192,16;\\",128,0,0,0
+.stabs "do_monitor:501,208,32;reserved1:501,240,32;reserved2:501,272,32;\\",128,0,0,0
+.stabs "reserved3:501,304,32;hblank:516,336,32;vblank:516,368,32;\\",128,0,0,0
+.stabs "hsync:516,400,32;vsync:516,432,32;__as::522=##523=&510;:Q28OSNative14SpecialMonitorRCQ28OSNative14SpecialMonitor;2A.;\\",128,0,0,0
+.stabs "SpecialMonitor::524=##509;:__Q28OSNative14SpecialMonitorRCQ28OSNative14SpecialMonitor;2A.\\",128,0,0,0
+.stabs "525=##509;:__Q28OSNative14SpecialMonitor;2A.;;",128,0,170,0
+.stabs "Tag:t526=211",128,0,30,0
+.stabs "TagItem:Tt527=s8ti_Tag:526,0,32;ti_Data:211,32,32;\\",128,0,0,0
+.stabs "__as::528=##529=&527;:Q28OSNative7TagItemRCQ28OSNative7TagItem;2A.;TagItem::530=##531=*527;:__Q28OSNative7TagItemRCQ28OSNative7TagItem;2A.\\",128,0,0,0
+.stabs "532=##531;:__Q28OSNative7TagItem;2A.;;",128,0,36,0
+.stabs "DisplayInfoHandle:t533=208",128,0,35,0
+.stabs "QueryHeader:Tt534=s16StructID:211,0,32;DisplayID:211,32,32;\\",128,0,0,0
+.stabs "SkipID:211,64,32;Length:211,96,32;__as::535=##536=&534;:Q28OSNative11QueryHeaderRCQ28OSNative11QueryHeader;2A.;\\",128,0,0,0
+.stabs "QueryHeader::537=##538=*534;:__Q28OSNative11QueryHeaderRCQ28OSNative11QueryHeader;2A.\\",128,0,0,0
+.stabs "539=##538;:__Q28OSNative11QueryHeader;2A.;;",128,0,51,0
+.stabs "DisplayInfo:Tt540=s56Header:534,0,128;NotAvailable:214,128,16;\\",128,0,0,0
+.stabs "PropertyFlags:211,144,32;Resolution:391,176,32;PixelSpeed:214,208,16;\\",128,0,0,0
+.stabs "NumStdSprites:214,224,16;PaletteRange:214,240,16;\\",128,0,0,0
+.stabs "SpriteResolution:391,256,32;pad:418,288,32;RedBits:217,320,8;\\",128,0,0,0
+.stabs "GreenBits:217,328,8;BlueBits:217,336,8;pad2:541=ar1;0;4;11,344,40;\\",128,0,0,0
+.stabs "reserved:542=ar1;0;1;5,384,64;__as::543=##544=&540;:Q28OSNative11DisplayInfoRCQ28OSNative11DisplayInfo;2A.;\\",128,0,0,0
+.stabs "DisplayInfo::545=##546=*540;:__Q28OSNative11DisplayInfoRCQ28OSNative11DisplayInfo;2A.\\",128,0,0,0
+.stabs "547=##546;:__Q28OSNative11DisplayInfo;2A.;;",128,0,69,0
+.stabs "DimensionInfo:Tt548=s88Header:534,0,128;MaxDepth:214,128,16;\\",128,0,0,0
+.stabs "MinRasterWidth:214,144,16;MinRasterHeight:214,160,16;\\",128,0,0,0
+.stabs "MaxRasterWidth:214,176,16;MaxRasterHeight:214,192,16;\\",128,0,0,0
+.stabs "Nominal:373,208,64;MaxOScan:373,272,64;VideoOScan:373,336,64;\\",128,0,0,0
+.stabs "TxtOScan:373,400,64;StdOScan:373,464,64;pad:549=ar1;0;13;11,528,112;\\",128,0,0,0
+.stabs "reserved:542,640,64;__as::550=##551=&548;:Q28OSNative13DimensionInfoRCQ28OSNative13DimensionInfo;2A.;\\",128,0,0,0
+.stabs "DimensionInfo::552=##553=*548;:__Q28OSNative13DimensionInfoRCQ28OSNative13DimensionInfo;2A.\\",128,0,0,0
+.stabs "554=##553;:__Q28OSNative13DimensionInfo;2A.;;",128,0,136,0
+.stabs "MonitorInfo:Tt555=s96Header:534,0,128;Mspc:514,128,32;\\",128,0,0,0
+.stabs "ViewPosition:391,160,32;ViewResolution:391,192,32;\\",128,0,0,0
+.stabs "ViewPositionRange:373,224,64;TotalRows:214,288,16;\\",128,0,0,0
+.stabs "TotalColorClocks:214,304,16;MinRow:214,320,16;Compatibility:213,336,16;\\",128,0,0,0
+.stabs "pad:556=ar1;0;31;11,352,256;MouseTicks:391,608,32;\\",128,0,0,0
+.stabs "DefaultViewPosition:391,640,32;PreferredModeID:211,672,32;\\",128,0,0,0
+.stabs "reserved:542,704,64;__as::557=##558=&555;:Q28OSNative11MonitorInfoRCQ28OSNative11MonitorInfo;2A.;\\",128,0,0,0
+.stabs "MonitorInfo::559=##560=*555;:__Q28OSNative11MonitorInfoRCQ28OSNative11MonitorInfo;2A.\\",128,0,0,0
+.stabs "561=##560;:__Q28OSNative11MonitorInfo;2A.;;",128,0,154,0
+.stabs "NameInfo:Tt562=s56Header:534,0,128;Name:556,128,256;\\",128,0,0,0
+.stabs "reserved:542,384,64;__as::563=##564=&562;:Q28OSNative8NameInfoRCQ28OSNative8NameInfo;2A.;\\",128,0,0,0
+.stabs "NameInfo::565=##566=*562;:__Q28OSNative8NameInfoRCQ28OSNative8NameInfo;2A.567=##566;:__Q28OSNative8NameInfo;2A.;;",128,0,169,0
+.stabs "VecInfo:Tt568=s40Header:534,0,128;Vec:208,128,32;\\",128,0,0,0
+.stabs "Data:208,160,32;Type:214,192,16;pad:569=ar1;0;2;9,208,48;\\",128,0,0,0
+.stabs "reserved:542,256,64;__as::570=##571=&568;:Q28OSNative7VecInfoRCQ28OSNative7VecInfo;2A.;\\",128,0,0,0
+.stabs "VecInfo::572=##573=*568;:__Q28OSNative7VecInfoRCQ28OSNative7VecInfo;2A.574=##573;:__Q28OSNative7VecInfo;2A.;;",128,0,185,0
+.stabs "AudChannel:Tt575=s16ac_ptr:470,0,32;ac_len:214,32,16;\\",128,0,0,0
+.stabs "ac_per:214,48,16;ac_vol:214,64,16;ac_dat:214,80,16;\\",128,0,0,0
+.stabs "ac_pad:488,96,32;__as::576=##577=&575;:Q38OSNative6Custom10AudChannelRCQ38OSNative6Custom10AudChannel;2A.;\\",128,0,0,0
+.stabs "AudChannel::578=##579=*575;:__Q38OSNative6Custom10AudChannelRCQ38OSNative6Custom10AudChannel;2A.\\",128,0,0,0
+.stabs "580=##579;:__Q38OSNative6Custom10AudChannel;2A.;;",128,0,102,0
+.stabs "SpriteDef:Tt581=s8pos:214,0,16;ctl:214,16,16;\\",128,0,0,0
+.stabs "dataa:214,32,16;datab:214,48,16;__as::582=##583=&581;:Q38OSNative6Custom9SpriteDefRCQ38OSNative6Custom9SpriteDef;2A.;\\",128,0,0,0
+.stabs "SpriteDef::584=##585=*581;:__Q38OSNative6Custom9SpriteDefRCQ38OSNative6Custom9SpriteDef;2A.\\",128,0,0,0
+.stabs "586=##585;:__Q38OSNative6Custom9SpriteDef;2A.;;",128,0,119,0
+.stabs "Custom:Tt587=s510bltddat:214,0,16;dmaconr:214,16,16;\\",128,0,0,0
+.stabs "vposr:214,32,16;vhposr:214,48,16;dskdatr:214,64,16;\\",128,0,0,0
+.stabs "joy0dat:214,80,16;joy1dat:214,96,16;clxdat:214,112,16;\\",128,0,0,0
+.stabs "adkconr:214,128,16;pot0dat:214,144,16;pot1dat:214,160,16;\\",128,0,0,0
+.stabs "potinp:214,176,16;serdatr:214,192,16;dskbytr:214,208,16;\\",128,0,0,0
+.stabs "intenar:214,224,16;intreqr:214,240,16;dskpt:208,256,32;\\",128,0,0,0
+.stabs "dsklen:214,288,16;dskdat:214,304,16;refptr:214,320,16;\\",128,0,0,0
+.stabs "vposw:214,336,16;vhposw:214,352,16;copcon:214,368,16;\\",128,0,0,0
+.stabs "serdat:214,384,16;serper:214,400,16;potgo:214,416,16;\\",128,0,0,0
+.stabs "joytest:214,432,16;strequ:214,448,16;strvbl:214,464,16;\\",128,0,0,0
+.stabs "strhor:214,480,16;strlong:214,496,16;bltcon0:214,512,16;\\",128,0,0,0
+.stabs "bltcon1:214,528,16;bltafwm:214,544,16;bltalwm:214,560,16;\\",128,0,0,0
+.stabs "bltcpt:208,576,32;bltbpt:208,608,32;bltapt:208,640,32;\\",128,0,0,0
+.stabs "bltdpt:208,672,32;bltsize:214,704,16;pad2d:217,720,8;\\",128,0,0,0
+.stabs "bltcon0l:217,728,8;bltsizv:214,736,16;bltsizh:214,752,16;\\",128,0,0,0
+.stabs "bltcmod:214,768,16;bltbmod:214,784,16;bltamod:214,800,16;\\",128,0,0,0
+.stabs "bltdmod:214,816,16;pad34:588=ar1;0;3;9,832,64;\\",128,0,0,0
+.stabs "bltcdat:214,896,16;bltbdat:214,912,16;bltadat:214,928,16;\\",128,0,0,0
+.stabs "pad3b:569,944,48;deniseid:214,992,16;dsksync:214,1008,16;\\",128,0,0,0
+.stabs "cop1lc:211,1024,32;cop2lc:211,1056,32;copjmp1:214,1088,16;\\",128,0,0,0
+.stabs "copjmp2:214,1104,16;copins:214,1120,16;diwstrt:214,1136,16;\\",128,0,0,0
+.stabs "diwstop:214,1152,16;ddfstrt:214,1168,16;ddfstop:214,1184,16;\\",128,0,0,0
+.stabs "dmacon:214,1200,16;clxcon:214,1216,16;intena:214,1232,16;\\",128,0,0,0
+.stabs "intreq:214,1248,16;adkcon:214,1264,16;aud:589=ar1;0;3;575,1280,512;\\",128,0,0,0
+.stabs "bplpt:590=ar1;0;7;209,1792,256;bplcon0:214,2048,16;\\",128,0,0,0
+.stabs "bplcon1:214,2064,16;bplcon2:214,2080,16;bplcon3:214,2096,16;\\",128,0,0,0
+.stabs "bpl1mod:214,2112,16;bpl2mod:214,2128,16;bplcon4:214,2144,16;\\",128,0,0,0
+.stabs "clxcon2:214,2160,16;bpldat:494,2176,128;sprpt:590,2304,256;\\",128,0,0,0
+.stabs "spr:591=ar1;0;7;581,2560,512;color:492,3072,512;\\",128,0,0,0
+.stabs "htotal:214,3584,16;hsstop:214,3600,16;hbstrt:214,3616,16;\\",128,0,0,0
+.stabs "hbstop:214,3632,16;vtotal:214,3648,16;vsstop:214,3664,16;\\",128,0,0,0
+.stabs "vbstrt:214,3680,16;vbstop:214,3696,16;sprhstrt:214,3712,16;\\",128,0,0,0
+.stabs "sprhstop:214,3728,16;bplhstrt:214,3744,16;bplhstop:214,3760,16;\\",128,0,0,0
+.stabs "hhposw:214,3776,16;hhposr:214,3792,16;beamcon0:214,3808,16;\\",128,0,0,0
+.stabs "hsstrt:214,3824,16;vsstrt:214,3840,16;hcenter:214,3856,16;\\",128,0,0,0
+.stabs "diwhigh:214,3872,16;padf3:592=ar1;0;10;9,3888,176;\\",128,0,0,0
+.stabs "fmode:214,4064,16;__as::593=##594=&587;:Q28OSNative6CustomRCQ28OSNative6Custom;2A.;\\",128,0,0,0
+.stabs "Custom::595=##596=*587;:__Q28OSNative6CustomRCQ28OSNative6Custom;2A.597=##596;:__Q28OSNative6Custom;2A.;;",128,0,142,0
+.stabs "ViewPort:Tt476=s40Next:475,0,32;ColorMap:598=*599=xsColorMap:,32,32;\\",128,0,0,0
+.stabs "DspIns:434,64,32;SprIns:434,96,32;ClrIns:434,128,32;\\",128,0,0,0
+.stabs "UCopIns:482,160,32;DWidth:213,192,16;DHeight:213,208,16;\\",128,0,0,0
+.stabs "DxOffset:213,224,16;DyOffset:213,240,16;Modes:214,256,16;\\",128,0,0,0
+.stabs "SpritePriorities:217,272,8;ExtendedModes:217,280,8;\\",128,0,0,0
+.stabs "RasInfo:600=*601=xsRasInfo:,288,32;__as::602=##603=&476;:Q28OSNative8ViewPortRCQ28OSNative8ViewPort;2A.;\\",128,0,0,0
+.stabs "ViewPort::604=##475;:__Q28OSNative8ViewPortRCQ28OSNative8ViewPort;2A.605=##475;:__Q28OSNative8ViewPort;2A.;;",128,0,62,0
+.stabs "View:Tt606=s18ViewPort:475,0,32;LOFCprList:469,32,32;\\",128,0,0,0
+.stabs "SHFCprList:469,64,32;DyOffset:213,96,16;DxOffset:213,112,16;\\",128,0,0,0
+.stabs "Modes:214,128,16;__as::607=##608=&606;:Q28OSNative4ViewRCQ28OSNative4View;2A.;\\",128,0,0,0
+.stabs "View::609=##610=*606;:__Q28OSNative4ViewRCQ28OSNative4View;2A.611=##610;:__Q28OSNative4View;2A.;;",128,0,72,0
+.stabs "ViewExtra:Tt612=s34n:500,0,192;View:610,192,32;\\",128,0,0,0
+.stabs "Monitor:514,224,32;TopLine:214,256,16;__as::613=##614=&612;:Q28OSNative9ViewExtraRCQ28OSNative9ViewExtra;2A.;\\",128,0,0,0
+.stabs "ViewExtra::615=##616=*612;:__Q28OSNative9ViewExtraRCQ28OSNative9ViewExtra;2A.617=##616;:__Q28OSNative9ViewExtra;2A.;;",128,0,82,0
+.stabs "ViewPortExtra:Tt618=s66n:500,0,192;ViewPort:475,192,32;\\",128,0,0,0
+.stabs "DisplayClip:373,224,64;VecTable:208,288,32;DriverData:619=ar1;0;1;209,320,64;\\",128,0,0,0
+.stabs "Flags:214,384,16;Origin:620=ar1;0;1;385,400,64;\\",128,0,0,0
+.stabs "cop1ptr:211,464,32;cop2ptr:211,496,32;__as::621=##622=&618;:Q28OSNative13ViewPortExtraRCQ28OSNative13ViewPortExtra;2A.;\\",128,0,0,0
+.stabs "ViewPortExtra::623=##624=*618;:__Q28OSNative13ViewPortExtraRCQ28OSNative13ViewPortExtra;2A.\\",128,0,0,0
+.stabs "625=##624;:__Q28OSNative13ViewPortExtra;2A.;;",128,0,100,0
+.stabs "RasInfo:Tt601=s12Next:600,0,32;BitMap:399,32,32;\\",128,0,0,0
+.stabs "RxOffset:213,64,16;RyOffset:213,80,16;__as::626=##627=&601;:Q28OSNative7RasInfoRCQ28OSNative7RasInfo;2A.;\\",128,0,0,0
+.stabs "RasInfo::628=##600;:__Q28OSNative7RasInfoRCQ28OSNative7RasInfo;2A.629=##600;:__Q28OSNative7RasInfo;2A.;;",128,0,141,0
+.stabs "ColorMap:Tt599=s52Flags:217,0,8;Type:217,8,8;\\",128,0,0,0
+.stabs "Count:214,16,16;ColorTable:208,32,32;cm_vpe:624,64,32;\\",128,0,0,0
+.stabs "LowColorBits:208,96,32;TransparencyPlane:217,128,8;\\",128,0,0,0
+.stabs "SpriteResolution:217,136,8;SpriteResDefault:217,144,8;\\",128,0,0,0
+.stabs "AuxFlags:217,152,8;cm_vp:475,160,32;NormalDisplayInfo:208,192,32;\\",128,0,0,0
+.stabs "CoerceDisplayInfo:208,224,32;cm_batch_items:531,256,32;\\",128,0,0,0
+.stabs "VPModeID:211,288,32;PalExtra:630=*631=xsPaletteExtra:,320,32;\\",128,0,0,0
+.stabs "SpriteBase_Even:214,352,16;SpriteBase_Odd:214,368,16;\\",128,0,0,0
+.stabs "Bp_0_base:214,384,16;Bp_1_base:214,400,16;__as::632=##633=&599;:Q28OSNative8ColorMapRCQ28OSNative8ColorMap;2A.;\\",128,0,0,0
+.stabs "ColorMap::634=##598;:__Q28OSNative8ColorMapRCQ28OSNative8ColorMap;2A.635=##598;:__Q28OSNative8ColorMap;2A.;;",128,0,166,0
+.stabs "PaletteExtra:Tt631=s68pe_Semaphore:355,0,368;pe_FirstFree:214,368,16;\\",128,0,0,0
+.stabs "pe_NFree:214,384,16;pe_FirstShared:214,400,16;pe_NShared:214,416,16;\\",128,0,0,0
+.stabs "pe_RefCnt:393,432,32;pe_AllocList:393,464,32;pe_ViewPort:475,496,32;\\",128,0,0,0
+.stabs "pe_SharableColors:214,528,16;__as::636=##637=&631;:Q28OSNative12PaletteExtraRCQ28OSNative12PaletteExtra;2A.;\\",128,0,0,0
+.stabs "PaletteExtra::638=##630;:__Q28OSNative12PaletteExtraRCQ28OSNative12PaletteExtra;2A.\\",128,0,0,0
+.stabs "639=##630;:__Q28OSNative12PaletteExtra;2A.;;",128,0,221,0
+.stabs "DBufInfo:Tt640=s84dbi_Link1:208,0,32;dbi_Count1:211,32,32;\\",128,0,0,0
+.stabs "dbi_SafeMessage:313,64,160;dbi_UserData1:208,224,32;\\",128,0,0,0
+.stabs "dbi_Link2:208,256,32;dbi_Count2:211,288,32;dbi_DispMessage:313,320,160;\\",128,0,0,0
+.stabs "dbi_UserData2:208,480,32;dbi_MatchLong:211,512,32;\\",128,0,0,0
+.stabs "dbi_CopPtr1:208,544,32;dbi_CopPtr2:208,576,32;dbi_CopPtr3:208,608,32;\\",128,0,0,0
+.stabs "dbi_BeamPos1:214,640,16;dbi_BeamPos2:214,656,16;__as::641=##642=&640;:Q28OSNative8DBufInfoRCQ28OSNative8DBufInfo;2A.;\\",128,0,0,0
+.stabs "DBufInfo::643=##644=*640;:__Q28OSNative8DBufInfoRCQ28OSNative8DBufInfo;2A.645=##644;:__Q28OSNative8DBufInfo;2A.;;",128,0,296,0
+.stabs "AreaInfo:Tt646=s24VctrTbl:647=*213,0,32;VctrPtr:647,32,32;\\",128,0,0,0
+.stabs "FlagTbl:648=*216,64,32;FlagPtr:648,96,32;Count:213,128,16;\\",128,0,0,0
+.stabs "MaxCount:213,144,16;FirstX:213,160,16;FirstY:213,176,16;\\",128,0,0,0
+.stabs "__as::649=##650=&646;:Q28OSNative8AreaInfoRCQ28OSNative8AreaInfo;2A.;AreaInfo::651=##652=*646;:__Q28OSNative8AreaInfoRCQ28OSNative8AreaInfo;2A.\\",128,0,0,0
+.stabs "653=##652;:__Q28OSNative8AreaInfo;2A.;;",128,0,30,0
+.stabs "TmpRas:Tt654=s8RasPtr:648,0,32;Size:210,32,32;\\",128,0,0,0
+.stabs "__as::655=##656=&654;:Q28OSNative6TmpRasRCQ28OSNative6TmpRas;2A.;TmpRas::657=##658=*654;:__Q28OSNative6TmpRasRCQ28OSNative6TmpRas;2A.\\",128,0,0,0
+.stabs "659=##658;:__Q28OSNative6TmpRas;2A.;;",128,0,36,0
+.stabs "GelsInfo:Tt660=s38sprRsrvd:216,0,8;Flags:217,8,8;\\",128,0,0,0
+.stabs "gelHead:661=*662=xsVSprite:,16,32;gelTail:661,48,32;\\",128,0,0,0
+.stabs "nextLine:647,80,32;lastColor:663=*647,112,32;collHandler:664=*665=xscollTable:,144,32;\\",128,0,0,0
+.stabs "leftmost:213,176,16;rightmost:213,192,16;topmost:213,208,16;\\",128,0,0,0
+.stabs "bottommost:213,224,16;firstBlissObj:208,240,32;lastBlissObj:208,272,32;\\",128,0,0,0
+.stabs "__as::666=##667=&660;:Q28OSNative8GelsInfoRCQ28OSNative8GelsInfo;2A.;GelsInfo::668=##669=*660;:__Q28OSNative8GelsInfoRCQ28OSNative8GelsInfo;2A.\\",128,0,0,0
+.stabs "670=##669;:__Q28OSNative8GelsInfo;2A.;;",128,0,52,0
+.stabs "RastPort:Tt417=s100Layer:413,0,32;BitMap:399,32,32;\\",128,0,0,0
+.stabs "AreaPtrn:470,64,32;TmpRas:658,96,32;AreaInfo:652,128,32;\\",128,0,0,0
+.stabs "GelsInfo:669,160,32;Mask:217,192,8;FgPen:216,200,8;\\",128,0,0,0
+.stabs "BgPen:216,208,8;AOlPen:216,216,8;DrawMode:216,224,8;\\",128,0,0,0
+.stabs "AreaPtSz:216,232,8;linpatcnt:216,240,8;dummy:216,248,8;\\",128,0,0,0
+.stabs "Flags:214,256,16;LinePtrn:214,272,16;cp_x:213,288,16;\\",128,0,0,0
+.stabs "cp_y:213,304,16;minterms:671=ar1;0;7;11,320,64;\\",128,0,0,0
+.stabs "PenWidth:213,384,16;PenHeight:213,400,16;Font:672=*673=xsTextFont:,416,32;\\",128,0,0,0
+.stabs "AlgoStyle:217,448,8;TxFlags:217,456,8;TxHeight:214,464,16;\\",128,0,0,0
+.stabs "TxWidth:214,480,16;TxBaseline:214,496,16;TxSpacing:213,512,16;\\",128,0,0,0
+.stabs "RP_User:674=*208,528,32;longreserved:542,560,64;wordreserved:675=ar1;0;6;9,624,112;\\",128,0,0,0
+.stabs "reserved:671,736,64;__as::676=##677=&417;:Q28OSNative8RastPortRCQ28OSNative8RastPort;2A.;\\",128,0,0,0
+.stabs "RastPort::678=##416;:__Q28OSNative8RastPortRCQ28OSNative8RastPort;2A.679=##416;:__Q28OSNative8RastPort;2A.;;",128,0,89,0
+.stabs "Layer_Info:Tt420=s102top_layer:413,0,32;check_lp:413,32,32;\\",128,0,0,0
+.stabs "obs:414,64,32;FreeClipRects:414,96,32;PrivateReserve1:210,128,32;\\",128,0,0,0
+.stabs "PrivateReserve2:210,160,32;Lock:355,192,368;gs_Head:249,560,96;\\",128,0,0,0
+.stabs "PrivateReserve3:213,656,16;PrivateReserve4:209,672,32;\\",128,0,0,0
+.stabs "Flags:214,704,16;fatten_count:216,720,8;LockLayersCount:216,728,8;\\",128,0,0,0
+.stabs "PrivateReserve5:213,736,16;BlankHook:209,752,32;LayerInfo_extra:209,784,32;\\",128,0,0,0
+.stabs "__as::680=##681=&420;:Q28OSNative10Layer_InfoRCQ28OSNative10Layer_Info;2A.;Layer_Info::682=##419;:__Q28OSNative10Layer_InfoRCQ28OSNative10Layer_Info;2A.\\",128,0,0,0
+.stabs "683=##419;:__Q28OSNative10Layer_Info;2A.;;",128,0,49,0
+.stabs "TextAttr:Tt684=s8ta_Name:220,0,32;ta_YSize:214,32,16;\\",128,0,0,0
+.stabs "ta_Style:217,48,8;ta_Flags:217,56,8;__as::685=##686=&684;:Q28OSNative8TextAttrRCQ28OSNative8TextAttr;2A.;\\",128,0,0,0
+.stabs "TextAttr::687=##688=*684;:__Q28OSNative8TextAttrRCQ28OSNative8TextAttr;2A.689=##688;:__Q28OSNative8TextAttr;2A.;;",128,0,70,0
+.stabs "TTextAttr:Tt690=s12tta_Name:220,0,32;tta_YSize:214,32,16;\\",128,0,0,0
+.stabs "tta_Style:217,48,8;tta_Flags:217,56,8;tta_Tags:531,64,32;\\",128,0,0,0
+.stabs "__as::691=##692=&690;:Q28OSNative9TTextAttrRCQ28OSNative9TTextAttr;2A.;TTextAttr::693=##694=*690;:__Q28OSNative9TTextAttrRCQ28OSNative9TTextAttr;2A.\\",128,0,0,0
+.stabs "695=##694;:__Q28OSNative9TTextAttr;2A.;;",128,0,78,0
+.stabs "TextFont:Tt673=s52tf_Message:313,0,160;tf_YSize:214,160,16;\\",128,0,0,0
+.stabs "tf_Style:217,176,8;tf_Flags:217,184,8;tf_XSize:214,192,16;\\",128,0,0,0
+.stabs "tf_Baseline:214,208,16;tf_BoldSmear:214,224,16;tf_Accessors:214,240,16;\\",128,0,0,0
+.stabs "tf_LoChar:217,256,8;tf_HiChar:217,264,8;tf_CharData:208,272,32;\\",128,0,0,0
+.stabs "tf_Modulo:214,304,16;tf_CharLoc:208,320,32;tf_CharSpace:208,352,32;\\",128,0,0,0
+.stabs "tf_CharKern:208,384,32;__as::696=##697=&673;:Q28OSNative8TextFontRCQ28OSNative8TextFont;2A.;\\",128,0,0,0
+.stabs "TextFont::698=##672;:__Q28OSNative8TextFontRCQ28OSNative8TextFont;2A.699=##672;:__Q28OSNative8TextFont;2A.;;",128,0,110,0
+.stabs "TextFontExtension:Tt700=s24tfe_MatchWord:214,0,16;tfe_Flags0:217,16,8;\\",128,0,0,0
+.stabs "tfe_Flags1:217,24,8;tfe_BackPtr:672,32,32;tfe_OrigReplyPort:311,64,32;\\",128,0,0,0
+.stabs "tfe_Tags:531,96,32;tfe_OFontPatchS:470,128,32;tfe_OFontPatchK:470,160,32;\\",128,0,0,0
+.stabs "__as::701=##702=&700;:Q28OSNative17TextFontExtensionRCQ28OSNative17TextFontExtension;2A.;\\",128,0,0,0
+.stabs "TextFontExtension::703=##704=*700;:__Q28OSNative17TextFontExtensionRCQ28OSNative17TextFontExtension;2A.\\",128,0,0,0
+.stabs "705=##704;:__Q28OSNative17TextFontExtension;2A.;;",128,0,129,0
+.stabs "ColorFontColors:Tt706=s8cfc_Reserved:214,0,16;cfc_Count:214,16,16;\\",128,0,0,0
+.stabs "cfc_ColorTable:470,32,32;__as::707=##708=&706;:Q28OSNative15ColorFontColorsRCQ28OSNative15ColorFontColors;2A.;\\",128,0,0,0
+.stabs "ColorFontColors::709=##710=*706;:__Q28OSNative15ColorFontColorsRCQ28OSNative15ColorFontColors;2A.\\",128,0,0,0
+.stabs "711=##710;:__Q28OSNative15ColorFontColors;2A.;;",128,0,147,0
+.stabs "ColorTextFont:Tt712=s96ctf_TF:673,0,416;ctf_Flags:214,416,16;\\",128,0,0,0
+.stabs "ctf_Depth:217,432,8;ctf_FgColor:217,440,8;ctf_Low:217,448,8;\\",128,0,0,0
+.stabs "ctf_High:217,456,8;ctf_PlanePick:217,464,8;ctf_PlaneOnOff:217,472,8;\\",128,0,0,0
+.stabs "ctf_ColorFontColors:710,480,32;ctf_CharData:590,512,256;\\",128,0,0,0
+.stabs "__as::713=##714=&712;:Q28OSNative13ColorTextFontRCQ28OSNative13ColorTextFont;2A.;\\",128,0,0,0
+.stabs "ColorTextFont::715=##716=*712;:__Q28OSNative13ColorTextFontRCQ28OSNative13ColorTextFont;2A.\\",128,0,0,0
+.stabs "717=##716;:__Q28OSNative13ColorTextFont;2A.;;",128,0,161,0
+.stabs "TextExtent:Tt718=s12te_Width:214,0,16;te_Height:214,16,16;\\",128,0,0,0
+.stabs "te_Extent:373,32,64;__as::719=##720=&718;:Q28OSNative10TextExtentRCQ28OSNative10TextExtent;2A.;\\",128,0,0,0
+.stabs "TextExtent::721=##722=*718;:__Q28OSNative10TextExtentRCQ28OSNative10TextExtent;2A.\\",128,0,0,0
+.stabs "723=##722;:__Q28OSNative10TextExtent;2A.;;",128,0,168,0
+.stabs "timeval:Tt724=s8tv_secs:211,0,32;tv_micro:211,32,32;\\",128,0,0,0
+.stabs "__as::725=##726=&724;:Q28OSNative7timevalRCQ28OSNative7timeval;2A.;timeval::727=##728=*724;:__Q28OSNative7timevalRCQ28OSNative7timeval;2A.\\",128,0,0,0
+.stabs "729=##728;:__Q28OSNative7timeval;2A.;;",128,0,34,0
+.stabs "EClockVal:Tt730=s8ev_hi:211,0,32;ev_lo:211,32,32;\\",128,0,0,0
+.stabs "__as::731=##732=&730;:Q28OSNative9EClockValRCQ28OSNative9EClockVal;2A.;EClockVal::733=##734=*730;:__Q28OSNative9EClockValRCQ28OSNative9EClockVal;2A.\\",128,0,0,0
+.stabs "735=##734;:__Q28OSNative9EClockVal;2A.;;",128,0,43,0
+.stabs "timerequest:Tt736=s40tr_node:337,0,256;tr_time:724,256,64;\\",128,0,0,0
+.stabs "__as::737=##738=&736;:Q28OSNative11timerequestRCQ28OSNative11timerequest;2A.;timerequest::739=##740=*736;:__Q28OSNative11timerequestRCQ28OSNative11timerequest;2A.\\",128,0,0,0
+.stabs "741=##740;:__Q28OSNative11timerequest;2A.;;",128,0,48,0
+.stabs "IEPointerPixel:Tt742=s8iepp_Screen:743=*744=xsScreen:,0,32;\\",128,0,0,0
+.stabs "iepp_Position:745=s4X:213,0,16;Y:213,16,16;\\",128,0,0,0
+.stabs "__as::746=#745,747=&745,748=*745,749=&745,20;:__as__Q38OSNative14IEPointerPixel3$_7RCQ38OSNative14IEPointerPixel3$_7;2A.;\\",128,0,0,0
+.stabs "$_7::750=#745,748,748,749,20;:__Q38OSNative14IEPointerPixel3$_7RCQ38OSNative14IEPointerPixel3$_7;2A.\\",128,0,0,0
+.stabs "751=#745,748,748,20;:__Q38OSNative14IEPointerPixel3$_7;2A.;;,32,32;\\",128,0,0,0
+.stabs "__as::752=##753=&742;:Q28OSNative14IEPointerPixelRCQ28OSNative14IEPointerPixel;2A.;\\",128,0,0,0
+.stabs "IEPointerPixel::754=##755=*742;:__Q28OSNative14IEPointerPixelRCQ28OSNative14IEPointerPixel;2A.\\",128,0,0,0
+.stabs "756=##755;:__Q28OSNative14IEPointerPixel;2A.;;",128,0,103,0
+.stabs "IEPointerTablet:Tt757=s10iept_Range:758=s4X:214,0,16;\\",128,0,0,0
+.stabs "Y:214,16,16;__as::759=#758,760=&758,761=*758,762=&758,20;:__as__Q38OSNative15IEPointerTablet3$_8RCQ38OSNative15IEPointerTablet3$_8;2A.;\\",128,0,0,0
+.stabs "$_8::763=#758,761,761,762,20;:__Q38OSNative15IEPointerTablet3$_8RCQ38OSNative15IEPointerTablet3$_8;2A.\\",128,0,0,0
+.stabs "764=#758,761,761,20;:__Q38OSNative15IEPointerTablet3$_8;2A.;;,0,32;\\",128,0,0,0
+.stabs "iept_Value:765=s4X:214,0,16;Y:214,16,16;\\",128,0,0,0
+.stabs "__as::766=#765,767=&765,768=*765,769=&765,20;:__as__Q38OSNative15IEPointerTablet3$_9RCQ38OSNative15IEPointerTablet3$_9;2A.;\\",128,0,0,0
+.stabs "$_9::770=#765,768,768,769,20;:__Q38OSNative15IEPointerTablet3$_9RCQ38OSNative15IEPointerTablet3$_9;2A.\\",128,0,0,0
+.stabs "771=#765,768,768,20;:__Q38OSNative15IEPointerTablet3$_9;2A.;;,32,32;\\",128,0,0,0
+.stabs "iept_Pressure:213,64,16;__as::772=##773=&757;:Q28OSNative15IEPointerTabletRCQ28OSNative15IEPointerTablet;2A.;\\",128,0,0,0
+.stabs "IEPointerTablet::774=##775=*757;:__Q28OSNative15IEPointerTabletRCQ28OSNative15IEPointerTablet;2A.\\",128,0,0,0
+.stabs "776=##775;:__Q28OSNative15IEPointerTablet;2A.;;",128,0,128,0
+.stabs "IENewTablet:Tt777=s32ient_CallBack:407,0,32;ient_ScaledX:214,32,16;\\",128,0,0,0
+.stabs "ient_ScaledY:214,48,16;ient_ScaledXFraction:214,64,16;\\",128,0,0,0
+.stabs "ient_ScaledYFraction:214,80,16;ient_TabletX:211,96,32;\\",128,0,0,0
+.stabs "ient_TabletY:211,128,32;ient_RangeX:211,160,32;ient_RangeY:211,192,32;\\",128,0,0,0
+.stabs "ient_TagList:531,224,32;__as::778=##779=&777;:Q28OSNative11IENewTabletRCQ28OSNative11IENewTablet;2A.;\\",128,0,0,0
+.stabs "IENewTablet::780=##781=*777;:__Q28OSNative11IENewTabletRCQ28OSNative11IENewTablet;2A.\\",128,0,0,0
+.stabs "782=##781;:__Q28OSNative11IENewTablet;2A.;;",128,0,178,0
+.stabs "InputEvent:Tt783=s22ie_NextEvent:784=*783,0,32;ie_Class:217,32,8;\\",128,0,0,0
+.stabs "ie_SubClass:217,40,8;ie_Code:214,48,16;ie_Qualifier:214,64,16;\\",128,0,0,0
+.stabs "ie_position:785=u4ie_xy:786=s4ie_x:213,0,16;\\",128,0,0,0
+.stabs "ie_y:213,16,16;__as::787=#786,788=&786,789=*786,790=&786,20;:__as__Q48OSNative10InputEvent4$_104$_11RCQ48OSNative10InputEvent4$_104$_11;2A.;\\",128,0,0,0
+.stabs "$_11::791=#786,789,789,790,20;:__Q48OSNative10InputEvent4$_104$_11RCQ48OSNative10InputEvent4$_104$_11;2A.\\",128,0,0,0
+.stabs "792=#786,789,789,20;:__Q48OSNative10InputEvent4$_104$_11;2A.;;,0,32;\\",128,0,0,0
+.stabs "ie_addr:208,0,32;ie_dead:793=s4ie_prev1DownCode:217,0,8;\\",128,0,0,0
+.stabs "ie_prev1DownQual:217,8,8;ie_prev2DownCode:217,16,8;\\",128,0,0,0
+.stabs "ie_prev2DownQual:217,24,8;__as::794=#793,795=&793,796=*793,797=&793,20;:__as__Q48OSNative10InputEvent4$_104$_12RCQ48OSNative10InputEvent4$_104$_12;2A.;\\",128,0,0,0
+.stabs "$_12::798=#793,796,796,797,20;:__Q48OSNative10InputEvent4$_104$_12RCQ48OSNative10InputEvent4$_104$_12;2A.\\",128,0,0,0
+.stabs "799=#793,796,796,20;:__Q48OSNative10InputEvent4$_104$_12;2A.;;,0,32;\\",128,0,0,0
+.stabs "__as::800=#785,801=&785,802=*785,803=&785,20;:__as__Q38OSNative10InputEvent4$_10RCQ38OSNative10InputEvent4$_10;2A.;\\",128,0,0,0
+.stabs "$_10::804=#785,802,802,803,20;:__Q38OSNative10InputEvent4$_10RCQ38OSNative10InputEvent4$_10;2A.\\",128,0,0,0
+.stabs "805=#785,802,802,20;:__Q38OSNative10InputEvent4$_10;2A.;;,80,32;\\",128,0,0,0
+.stabs "ie_TimeStamp:724,112,64;__as::806=##807=&783;:Q28OSNative10InputEventRCQ28OSNative10InputEvent;2A.;\\",128,0,0,0
+.stabs "InputEvent::808=##784;:__Q28OSNative10InputEventRCQ28OSNative10InputEvent;2A.809=##784;:__Q28OSNative10InputEvent;2A.;;",128,0,277,0
+.stabs "Menu:Tt810=s30NextMenu:811=*810,0,32;LeftEdge:213,32,16;\\",128,0,0,0
+.stabs "TopEdge:213,48,16;Width:213,64,16;Height:213,80,16;\\",128,0,0,0
+.stabs "Flags:214,96,16;MenuName:648,112,32;FirstItem:812=*813=xsMenuItem:,144,32;\\",128,0,0,0
+.stabs "JazzX:213,176,16;JazzY:213,192,16;BeatX:213,208,16;\\",128,0,0,0
+.stabs "BeatY:213,224,16;__as::814=##815=&810;:Q28OSNative4MenuRCQ28OSNative4Menu;2A.;\\",128,0,0,0
+.stabs "Menu::816=##811;:__Q28OSNative4MenuRCQ28OSNative4Menu;2A.817=##811;:__Q28OSNative4Menu;2A.;;",128,0,71,0
+.stabs "MenuItem:Tt813=s34NextItem:812,0,32;LeftEdge:213,32,16;\\",128,0,0,0
+.stabs "TopEdge:213,48,16;Width:213,64,16;Height:213,80,16;\\",128,0,0,0
+.stabs "Flags:214,96,16;MutualExclude:210,112,32;ItemFill:208,144,32;\\",128,0,0,0
+.stabs "SelectFill:208,176,32;Command:216,208,8;SubItem:812,224,32;\\",128,0,0,0
+.stabs "NextSelect:214,256,16;__as::818=##819=&813;:Q28OSNative8MenuItemRCQ28OSNative8MenuItem;2A.;\\",128,0,0,0
+.stabs "MenuItem::820=##812;:__Q28OSNative8MenuItemRCQ28OSNative8MenuItem;2A.821=##812;:__Q28OSNative8MenuItem;2A.;;",128,0,112,0
+.stabs "Requester:Tt822=s112OlderRequest:823=*822,0,32;LeftEdge:213,32,16;\\",128,0,0,0
+.stabs "TopEdge:213,48,16;Width:213,64,16;Height:213,80,16;\\",128,0,0,0
+.stabs "RelLeft:213,96,16;RelTop:213,112,16;ReqGadget:824=*825=xsGadget:,128,32;\\",128,0,0,0
+.stabs "ReqBorder:826=*827=xsBorder:,160,32;ReqText:828=*829=xsIntuiText:,192,32;\\",128,0,0,0
+.stabs "Flags:214,224,16;BackFill:217,240,8;ReqLayer:413,256,32;\\",128,0,0,0
+.stabs "ReqPad1:556,288,256;ImageBMap:399,544,32;RWindow:830=*831=xsWindow:,576,32;\\",128,0,0,0
+.stabs "ReqImage:832=*833=xsImage:,608,32;ReqPad2:556,640,256;\\",128,0,0,0
+.stabs "__as::834=##835=&822;:Q28OSNative9RequesterRCQ28OSNative9Requester;2A.;Requester::836=##823;:__Q28OSNative9RequesterRCQ28OSNative9Requester;2A.\\",128,0,0,0
+.stabs "837=##823;:__Q28OSNative9Requester;2A.;;",128,0,175,0
+.stabs "Gadget:Tt825=s44NextGadget:824,0,32;LeftEdge:213,32,16;\\",128,0,0,0
+.stabs "TopEdge:213,48,16;Width:213,64,16;Height:213,80,16;\\",128,0,0,0
+.stabs "Flags:214,96,16;Activation:214,112,16;GadgetType:214,128,16;\\",128,0,0,0
+.stabs "GadgetRender:208,144,32;SelectRender:208,176,32;GadgetText:828,208,32;\\",128,0,0,0
+.stabs "MutualExclude:210,240,32;SpecialInfo:208,272,32;GadgetID:214,304,16;\\",128,0,0,0
+.stabs "UserData:208,320,32;__as::838=##839=&825;:Q28OSNative6GadgetRCQ28OSNative6Gadget;2A.;\\",128,0,0,0
+.stabs "Gadget::840=##824;:__Q28OSNative6GadgetRCQ28OSNative6Gadget;2A.841=##824;:__Q28OSNative6Gadget;2A.;;",128,0,260,0
+.stabs "ExtGadget:Tt842=s56NextGadget:843=*842,0,32;LeftEdge:213,32,16;\\",128,0,0,0
+.stabs "TopEdge:213,48,16;Width:213,64,16;Height:213,80,16;\\",128,0,0,0
+.stabs "Flags:214,96,16;Activation:214,112,16;GadgetType:214,128,16;\\",128,0,0,0
+.stabs "GadgetRender:208,144,32;SelectRender:208,176,32;GadgetText:828,208,32;\\",128,0,0,0
+.stabs "MutualExclude:210,240,32;SpecialInfo:208,272,32;GadgetID:214,304,16;\\",128,0,0,0
+.stabs "UserData:208,320,32;MoreFlags:211,352,32;BoundsLeftEdge:213,384,16;\\",128,0,0,0
+.stabs "BoundsTopEdge:213,400,16;BoundsWidth:213,416,16;BoundsHeight:213,432,16;\\",128,0,0,0
+.stabs "__as::844=##845=&842;:Q28OSNative9ExtGadgetRCQ28OSNative9ExtGadget;2A.;ExtGadget::846=##843;:__Q28OSNative9ExtGadgetRCQ28OSNative9ExtGadget;2A.\\",128,0,0,0
+.stabs "847=##843;:__Q28OSNative9ExtGadget;2A.;;",128,0,286,0
+.stabs "BoolInfo:Tt848=s10Flags:214,0,16;Mask:470,16,32;\\",128,0,0,0
+.stabs "Reserved:211,48,32;__as::849=##850=&848;:Q28OSNative8BoolInfoRCQ28OSNative8BoolInfo;2A.;\\",128,0,0,0
+.stabs "BoolInfo::851=##852=*848;:__Q28OSNative8BoolInfoRCQ28OSNative8BoolInfo;2A.853=##852;:__Q28OSNative8BoolInfo;2A.;;",128,0,524,0
+.stabs "PropInfo:Tt854=s22Flags:214,0,16;HorizPot:214,16,16;\\",128,0,0,0
+.stabs "VertPot:214,32,16;HorizBody:214,48,16;VertBody:214,64,16;\\",128,0,0,0
+.stabs "CWidth:214,80,16;CHeight:214,96,16;HPotRes:214,112,16;\\",128,0,0,0
+.stabs "VPotRes:214,128,16;LeftBorder:214,144,16;TopBorder:214,160,16;\\",128,0,0,0
+.stabs "__as::855=##856=&854;:Q28OSNative8PropInfoRCQ28OSNative8PropInfo;2A.;PropInfo::857=##858=*854;:__Q28OSNative8PropInfoRCQ28OSNative8PropInfo;2A.\\",128,0,0,0
+.stabs "859=##858;:__Q28OSNative8PropInfo;2A.;;",128,0,579,0
+.stabs "StringInfo:Tt860=s36Buffer:220,0,32;ndoBuffer:220,32,32;\\",128,0,0,0
+.stabs "BufferPos:213,64,16;MaxChars:213,80,16;DispPos:213,96,16;\\",128,0,0,0
+.stabs "UndoPos:213,112,16;NumChars:213,128,16;DispCount:213,144,16;\\",128,0,0,0
+.stabs "CLeft:213,160,16;CTop:213,176,16;Extension:861=*862=xsStringExtend:,192,32;\\",128,0,0,0
+.stabs "LongInt:210,224,32;AltKeyMap:863=*864=xsKeyMap:,256,32;\\",128,0,0,0
+.stabs "__as::865=##866=&860;:Q28OSNative10StringInfoRCQ28OSNative10StringInfo;2A.;StringInfo::867=##868=*860;:__Q28OSNative10StringInfoRCQ28OSNative10StringInfo;2A.\\",128,0,0,0
+.stabs "869=##868;:__Q28OSNative10StringInfo;2A.;;",128,0,647,0
+.stabs "IntuiText:Tt829=s20FrontPen:217,0,8;BackPen:217,8,8;\\",128,0,0,0
+.stabs "DrawMode:217,16,8;LeftEdge:213,32,16;TopEdge:213,48,16;\\",128,0,0,0
+.stabs "ITextFont:688,64,32;IText:220,96,32;NextText:828,128,32;\\",128,0,0,0
+.stabs "__as::870=##871=&829;:Q28OSNative9IntuiTextRCQ28OSNative9IntuiText;2A.;IntuiText::872=##828;:__Q28OSNative9IntuiTextRCQ28OSNative9IntuiText;2A.\\",128,0,0,0
+.stabs "873=##828;:__Q28OSNative9IntuiText;2A.;;",128,0,665,0
+.stabs "Border:Tt827=s16LeftEdge:213,0,16;TopEdge:213,16,16;\\",128,0,0,0
+.stabs "FrontPen:217,32,8;BackPen:217,40,8;DrawMode:217,48,8;\\",128,0,0,0
+.stabs "Count:216,56,8;XY:647,64,32;NextBorder:826,96,32;\\",128,0,0,0
+.stabs "__as::874=##875=&827;:Q28OSNative6BorderRCQ28OSNative6Border;2A.;Border::876=##826;:__Q28OSNative6BorderRCQ28OSNative6Border;2A.\\",128,0,0,0
+.stabs "877=##826;:__Q28OSNative6Border;2A.;;",128,0,692,0
+.stabs "Image:Tt833=s20LeftEdge:213,0,16;TopEdge:213,16,16;\\",128,0,0,0
+.stabs "Width:213,32,16;Height:213,48,16;Depth:213,64,16;\\",128,0,0,0
+.stabs "ImageData:470,80,32;PlanePick:217,112,8;PlaneOnOff:217,120,8;\\",128,0,0,0
+.stabs "NextImage:832,128,32;__as::878=##879=&833;:Q28OSNative5ImageRCQ28OSNative5Image;2A.;\\",128,0,0,0
+.stabs "Image::880=##832;:__Q28OSNative5ImageRCQ28OSNative5Image;2A.881=##832;:__Q28OSNative5Image;2A.;;",128,0,753,0
+.stabs "IntuiMessage:Tt882=s52ExecMessage:313,0,160;Class:211,160,32;\\",128,0,0,0
+.stabs "Code:214,192,16;Qualifier:214,208,16;IAddress:208,224,32;\\",128,0,0,0
+.stabs "MouseX:213,256,16;MouseY:213,272,16;Seconds:211,288,32;\\",128,0,0,0
+.stabs "Micros:211,320,32;IDCMPWindow:830,352,32;SpecialLink:883=*882,384,32;\\",128,0,0,0
+.stabs "__as::884=##885=&882;:Q28OSNative12IntuiMessageRCQ28OSNative12IntuiMessage;2A.;IntuiMessage::886=##883;:__Q28OSNative12IntuiMessageRCQ28OSNative12IntuiMessage;2A.\\",128,0,0,0
+.stabs "887=##883;:__Q28OSNative12IntuiMessage;2A.;;",128,0,803,0
+.stabs "ExtIntuiMessage:Tt888=s56eim_IntuiMessage:882,0,416;eim_TabletData:889=*890=xsTabletData:,416,32;\\",128,0,0,0
+.stabs "__as::891=##892=&888;:Q28OSNative15ExtIntuiMessageRCQ28OSNative15ExtIntuiMessage;2A.;\\",128,0,0,0
+.stabs "ExtIntuiMessage::893=##894=*888;:__Q28OSNative15ExtIntuiMessageRCQ28OSNative15ExtIntuiMessage;2A.\\",128,0,0,0
+.stabs "895=##894;:__Q28OSNative15ExtIntuiMessage;2A.;;",128,0,826,0
+.stabs "IBox:Tt896=s8Left:213,0,16;Top:213,16,16;\\",128,0,0,0
+.stabs "Width:213,32,16;Height:213,48,16;__as::897=##898=&896;:Q28OSNative4IBoxRCQ28OSNative4IBox;2A.;\\",128,0,0,0
+.stabs "IBox::899=##900=*896;:__Q28OSNative4IBoxRCQ28OSNative4IBox;2A.901=##900;:__Q28OSNative4IBox;2A.;;",128,0,902,0
+.stabs "Window:Tt831=s136NextWindow:830,0,32;LeftEdge:213,32,16;\\",128,0,0,0
+.stabs "TopEdge:213,48,16;Width:213,64,16;Height:213,80,16;\\",128,0,0,0
+.stabs "MouseY:213,96,16;MouseX:213,112,16;MinWidth:213,128,16;\\",128,0,0,0
+.stabs "MinHeight:213,144,16;MaxWidth:214,160,16;MaxHeight:214,176,16;\\",128,0,0,0
+.stabs "Flags:211,192,32;MenuStrip:811,224,32;Title:220,256,32;\\",128,0,0,0
+.stabs "FirstRequest:823,288,32;DMRequest:823,320,32;ReqCount:213,352,16;\\",128,0,0,0
+.stabs "WScreen:743,368,32;RPort:416,400,32;BorderLeft:216,432,8;\\",128,0,0,0
+.stabs "BorderTop:216,440,8;BorderRight:216,448,8;BorderBottom:216,456,8;\\",128,0,0,0
+.stabs "BorderRPort:416,464,32;FirstGadget:824,496,32;Parent:830,528,32;\\",128,0,0,0
+.stabs "Descendant:830,560,32;Pointer:470,592,32;PtrHeight:216,624,8;\\",128,0,0,0
+.stabs "PtrWidth:216,632,8;XOffset:216,640,8;YOffset:216,648,8;\\",128,0,0,0
+.stabs "IDCMPFlags:211,656,32;UserPort:311,688,32;WindowPort:311,720,32;\\",128,0,0,0
+.stabs "MessageKey:883,752,32;DetailPen:217,784,8;BlockPen:217,792,8;\\",128,0,0,0
+.stabs "CheckMark:832,800,32;ScreenTitle:220,832,32;GZZMouseX:213,864,16;\\",128,0,0,0
+.stabs "GZZMouseY:213,880,16;GZZWidth:213,896,16;GZZHeight:213,912,16;\\",128,0,0,0
+.stabs "ExtData:393,928,32;UserData:648,960,32;WLayer:413,992,32;\\",128,0,0,0
+.stabs "IFont:672,1024,32;MoreFlags:211,1056,32;__as::902=##903=&831;:Q28OSNative6WindowRCQ28OSNative6Window;2A.;\\",128,0,0,0
+.stabs "Window::904=##830;:__Q28OSNative6WindowRCQ28OSNative6Window;2A.905=##830;:__Q28OSNative6Window;2A.;;",128,0,1018,0
+.stabs "NewWindow:Tt906=s48LeftEdge:213,0,16;TopEdge:213,16,16;\\",128,0,0,0
+.stabs "Width:213,32,16;Height:213,48,16;DetailPen:217,64,8;\\",128,0,0,0
+.stabs "BlockPen:217,72,8;IDCMPFlags:211,80,32;Flags:211,112,32;\\",128,0,0,0
+.stabs "FirstGadget:824,144,32;CheckMark:832,176,32;Title:220,208,32;\\",128,0,0,0
+.stabs "Screen:743,240,32;BitMap:399,272,32;MinWidth:213,304,16;\\",128,0,0,0
+.stabs "MinHeight:213,320,16;MaxWidth:214,336,16;MaxHeight:214,352,16;\\",128,0,0,0
+.stabs "Type:214,368,16;__as::907=##908=&906;:Q28OSNative9NewWindowRCQ28OSNative9NewWindow;2A.;\\",128,0,0,0
+.stabs "NewWindow::909=##910=*906;:__Q28OSNative9NewWindowRCQ28OSNative9NewWindow;2A.911=##910;:__Q28OSNative9NewWindow;2A.;;",128,0,1148,0
+.stabs "ExtNewWindow:Tt912=s52LeftEdge:213,0,16;TopEdge:213,16,16;\\",128,0,0,0
+.stabs "Width:213,32,16;Height:213,48,16;DetailPen:217,64,8;\\",128,0,0,0
+.stabs "BlockPen:217,72,8;IDCMPFlags:211,80,32;Flags:211,112,32;\\",128,0,0,0
+.stabs "FirstGadget:824,144,32;CheckMark:832,176,32;Title:220,208,32;\\",128,0,0,0
+.stabs "Screen:743,240,32;BitMap:399,272,32;MinWidth:213,304,16;\\",128,0,0,0
+.stabs "MinHeight:213,320,16;MaxWidth:214,336,16;MaxHeight:214,352,16;\\",128,0,0,0
+.stabs "Type:214,368,16;Extension:531,384,32;__as::913=##914=&912;:Q28OSNative12ExtNewWindowRCQ28OSNative12ExtNewWindow;2A.;\\",128,0,0,0
+.stabs "ExtNewWindow::915=##916=*912;:__Q28OSNative12ExtNewWindowRCQ28OSNative12ExtNewWindow;2A.\\",128,0,0,0
+.stabs "917=##916;:__Q28OSNative12ExtNewWindow;2A.;;",128,0,1196,0
+.stabs "DrawInfo:Tt918=s50dri_Version:214,0,16;dri_NumPens:214,16,16;\\",128,0,0,0
+.stabs "dri_Pens:470,32,32;dri_Font:672,64,32;dri_Depth:214,96,16;\\",128,0,0,0
+.stabs "dri_Resolution:919=s4X:214,0,16;Y:214,16,16;\\",128,0,0,0
+.stabs "__as::920=#919,921=&919,922=*919,923=&919,20;:__as__Q38OSNative8DrawInfo4$_13RCQ38OSNative8DrawInfo4$_13;2A.;\\",128,0,0,0
+.stabs "$_13::924=#919,922,922,923,20;:__Q38OSNative8DrawInfo4$_13RCQ38OSNative8DrawInfo4$_13;2A.\\",128,0,0,0
+.stabs "925=#919,922,922,20;:__Q38OSNative8DrawInfo4$_13;2A.;;,112,32;dri_Flags:211,144,32;\\",128,0,0,0
+.stabs "dri_CheckMark:832,176,32;dri_AmigaKey:832,208,32;\\",128,0,0,0
+.stabs "dri_Reserved:926=ar1;0;4;5,240,160;__as::927=##928=&918;:Q28OSNative8DrawInfoRCQ28OSNative8DrawInfo;2A.;\\",128,0,0,0
+.stabs "DrawInfo::929=##930=*918;:__Q28OSNative8DrawInfoRCQ28OSNative8DrawInfo;2A.931=##930;:__Q28OSNative8DrawInfo;2A.;;",128,0,89,0
+.stabs "Screen:Tt744=s346NextScreen:743,0,32;FirstWindow:830,32,32;\\",128,0,0,0
+.stabs "LeftEdge:213,64,16;TopEdge:213,80,16;Width:213,96,16;\\",128,0,0,0
+.stabs "Height:213,112,16;MouseY:213,128,16;MouseX:213,144,16;\\",128,0,0,0
+.stabs "Flags:214,160,16;Title:220,176,32;DefaultTitle:220,208,32;\\",128,0,0,0
+.stabs "BarHeight:216,240,8;BarVBorder:216,248,8;BarHBorder:216,256,8;\\",128,0,0,0
+.stabs "MenuVBorder:216,264,8;MenuHBorder:216,272,8;WBorTop:216,280,8;\\",128,0,0,0
+.stabs "WBorLeft:216,288,8;WBorRight:216,296,8;WBorBottom:216,304,8;\\",128,0,0,0
+.stabs "Font:688,320,32;ViewPort:476,352,320;RastPort:417,672,800;\\",128,0,0,0
+.stabs "BitMap:394,1472,320;LayerInfo:420,1792,816;FirstGadget:824,2608,32;\\",128,0,0,0
+.stabs "DetailPen:217,2640,8;BlockPen:217,2648,8;SaveColor0:214,2656,16;\\",128,0,0,0
+.stabs "BarLayer:413,2672,32;ExtData:393,2704,32;UserData:393,2736,32;\\",128,0,0,0
+.stabs "__as::932=##933=&744;:Q28OSNative6ScreenRCQ28OSNative6Screen;2A.;Screen::934=##743;:__Q28OSNative6ScreenRCQ28OSNative6Screen;2A.\\",128,0,0,0
+.stabs "935=##743;:__Q28OSNative6Screen;2A.;;",128,0,187,0
+.stabs "NewScreen:Tt936=s32LeftEdge:213,0,16;TopEdge:213,16,16;\\",128,0,0,0
+.stabs "Width:213,32,16;Height:213,48,16;Depth:213,64,16;\\",128,0,0,0
+.stabs "DetailPen:217,80,8;BlockPen:217,88,8;ViewModes:214,96,16;\\",128,0,0,0
+.stabs "Type:214,112,16;Font:688,128,32;DefaultTitle:220,160,32;\\",128,0,0,0
+.stabs "Gadgets:824,192,32;CustomBitMap:399,224,32;__as::937=##938=&936;:Q28OSNative9NewScreenRCQ28OSNative9NewScreen;2A.;\\",128,0,0,0
+.stabs "NewScreen::939=##940=*936;:__Q28OSNative9NewScreenRCQ28OSNative9NewScreen;2A.941=##940;:__Q28OSNative9NewScreen;2A.;;",128,0,500,0
+.stabs "ExtNewScreen:Tt942=s36LeftEdge:213,0,16;TopEdge:213,16,16;\\",128,0,0,0
+.stabs "Width:213,32,16;Height:213,48,16;Depth:213,64,16;\\",128,0,0,0
+.stabs "DetailPen:217,80,8;BlockPen:217,88,8;ViewModes:214,96,16;\\",128,0,0,0
+.stabs "Type:214,112,16;Font:688,128,32;DefaultTitle:220,160,32;\\",128,0,0,0
+.stabs "Gadgets:824,192,32;CustomBitMap:399,224,32;Extension:531,256,32;\\",128,0,0,0
+.stabs "__as::943=##944=&942;:Q28OSNative12ExtNewScreenRCQ28OSNative12ExtNewScreen;2A.;ExtNewScreen::945=##946=*942;:__Q28OSNative12ExtNewScreenRCQ28OSNative12ExtNewScreen;2A.\\",128,0,0,0
+.stabs "947=##946;:__Q28OSNative12ExtNewScreen;2A.;;",128,0,528,0
+.stabs "PubScreenNode:Tt948=s30psn_Node:231,0,112;psn_Screen:743,112,32;\\",128,0,0,0
+.stabs "psn_Flags:214,144,16;psn_Size:213,160,16;psn_VisitorCount:213,176,16;\\",128,0,0,0
+.stabs "psn_SigTask:261,192,32;psn_SigBit:217,224,8;__as::949=##950=&948;:Q28OSNative13PubScreenNodeRCQ28OSNative13PubScreenNode;2A.;\\",128,0,0,0
+.stabs "PubScreenNode::951=##952=*948;:__Q28OSNative13PubScreenNodeRCQ28OSNative13PubScreenNode;2A.\\",128,0,0,0
+.stabs "953=##952;:__Q28OSNative13PubScreenNode;2A.;;",128,0,557,0
+.stabs "ScreenBuffer:Tt954=s8sb_BitMap:399,0,32;sb_DBufInfo:644,32,32;\\",128,0,0,0
+.stabs "__as::955=##956=&954;:Q28OSNative12ScreenBufferRCQ28OSNative12ScreenBuffer;2A.;ScreenBuffer::957=##958=*954;:__Q28OSNative12ScreenBufferRCQ28OSNative12ScreenBuffer;2A.\\",128,0,0,0
+.stabs "959=##958;:__Q28OSNative12ScreenBuffer;2A.;;",128,0,649,0
+.stabs "Preferences:Tt960=s232FontHeight:216,0,8;PrinterPort:217,8,8;\\",128,0,0,0
+.stabs "BaudRate:214,16,16;KeyRptSpeed:724,32,64;KeyRptDelay:724,96,64;\\",128,0,0,0
+.stabs "DoubleClick:724,160,64;PointerMatrix:961=ar1;0;35;9,224,576;\\",128,0,0,0
+.stabs "XOffset:216,800,8;YOffset:216,808,8;color17:214,816,16;\\",128,0,0,0
+.stabs "color18:214,832,16;color19:214,848,16;PointerTicks:214,864,16;\\",128,0,0,0
+.stabs "color0:214,880,16;color1:214,896,16;color2:214,912,16;\\",128,0,0,0
+.stabs "color3:214,928,16;ViewXOffset:216,944,8;ViewYOffset:216,952,8;\\",128,0,0,0
+.stabs "ViewInitX:213,960,16;ViewInitY:213,976,16;EnableCLI:229,992,16;\\",128,0,0,0
+.stabs "PrinterType:214,1008,16;PrinterFilename:962=ar1;0;29;11,1024,240;\\",128,0,0,0
+.stabs "PrintPitch:214,1264,16;PrintQuality:214,1280,16;PrintSpacing:214,1296,16;\\",128,0,0,0
+.stabs "PrintLeftMargin:214,1312,16;PrintRightMargin:214,1328,16;\\",128,0,0,0
+.stabs "PrintImage:214,1344,16;PrintAspect:214,1360,16;PrintShade:214,1376,16;\\",128,0,0,0
+.stabs "PrintThreshold:213,1392,16;PaperSize:214,1408,16;PaperLength:214,1424,16;\\",128,0,0,0
+.stabs "PaperType:214,1440,16;SerRWBits:217,1456,8;SerStopBuf:217,1464,8;\\",128,0,0,0
+.stabs "SerParShk:217,1472,8;LaceWB:217,1480,8;Pad:963=ar1;0;11;11,1488,96;\\",128,0,0,0
+.stabs "PrtDevName:964=ar1;0;15;11,1584,128;DefaultPrtUnit:217,1712,8;\\",128,0,0,0
+.stabs "DefaultSerUnit:217,1720,8;RowSizeChange:216,1728,8;\\",128,0,0,0
+.stabs "ColumnSizeChange:216,1736,8;PrintFlags:214,1744,16;\\",128,0,0,0
+.stabs "PrintMaxWidth:214,1760,16;PrintMaxHeight:214,1776,16;\\",128,0,0,0
+.stabs "PrintDensity:217,1792,8;PrintXOffset:217,1800,8;wb_Width:214,1808,16;\\",128,0,0,0
+.stabs "wb_Height:214,1824,16;wb_Depth:217,1840,8;ext_size:217,1848,8;\\",128,0,0,0
+.stabs "__as::965=##966=&960;:Q28OSNative11PreferencesRCQ28OSNative11Preferences;2A.;Preferences::967=##968=*960;:__Q28OSNative11PreferencesRCQ28OSNative11Preferences;2A.\\",128,0,0,0
+.stabs "969=##968;:__Q28OSNative11Preferences;2A.;;",128,0,148,0
+.stabs "Remember:Tt970=s12NextRemember:971=*970,0,32;RememberSize:211,32,32;\\",128,0,0,0
+.stabs "Memory:393,64,32;__as::972=##973=&970;:Q28OSNative8RememberRCQ28OSNative8Remember;2A.;\\",128,0,0,0
+.stabs "Remember::974=##971;:__Q28OSNative8RememberRCQ28OSNative8Remember;2A.975=##971;:__Q28OSNative8Remember;2A.;;",128,0,1435,0
+.stabs "ColorSpec:Tt976=s8ColorIndex:213,0,16;Red:214,16,16;\\",128,0,0,0
+.stabs "Green:214,32,16;Blue:214,48,16;__as::977=##978=&976;:Q28OSNative9ColorSpecRCQ28OSNative9ColorSpec;2A.;\\",128,0,0,0
+.stabs "ColorSpec::979=##980=*976;:__Q28OSNative9ColorSpecRCQ28OSNative9ColorSpec;2A.981=##980;:__Q28OSNative9ColorSpec;2A.;;",128,0,1452,0
+.stabs "EasyStruct:Tt982=s20es_StructSize:211,0,32;es_Flags:211,32,32;\\",128,0,0,0
+.stabs "es_Title:220,64,32;es_TextFormat:220,96,32;es_GadgetFormat:220,128,32;\\",128,0,0,0
+.stabs "__as::983=##984=&982;:Q28OSNative10EasyStructRCQ28OSNative10EasyStruct;2A.;EasyStruct::985=##986=*982;:__Q28OSNative10EasyStructRCQ28OSNative10EasyStruct;2A.\\",128,0,0,0
+.stabs "987=##986;:__Q28OSNative10EasyStruct;2A.;;",128,0,1463,0
+.stabs "TabletData:Tt890=s24td_XFraction:214,0,16;td_YFraction:214,16,16;\\",128,0,0,0
+.stabs "td_TabletX:211,32,32;td_TabletY:211,64,32;td_RangeX:211,96,32;\\",128,0,0,0
+.stabs "td_RangeY:211,128,32;td_TagList:531,160,32;__as::988=##989=&890;:Q28OSNative10TabletDataRCQ28OSNative10TabletData;2A.;\\",128,0,0,0
+.stabs "TabletData::990=##889;:__Q28OSNative10TabletDataRCQ28OSNative10TabletData;2A.991=##889;:__Q28OSNative10TabletData;2A.;;",128,0,1671,0
+.stabs "TabletHookData:Tt992=s16thd_Screen:743,0,32;thd_Width:211,32,32;\\",128,0,0,0
+.stabs "thd_Height:211,64,32;thd_ScreenChanged:210,96,32;\\",128,0,0,0
+.stabs "__as::993=##994=&992;:Q28OSNative14TabletHookDataRCQ28OSNative14TabletHookData;2A.;\\",128,0,0,0
+.stabs "TabletHookData::995=##996=*992;:__Q28OSNative14TabletHookDataRCQ28OSNative14TabletHookData;2A.\\",128,0,0,0
+.stabs "997=##996;:__Q28OSNative14TabletHookData;2A.;;",128,0,1708,0
+.stabs "Object:t998=211",128,0,19,0
+.stabs "ClassID:t999=220",128,0,21,0
+.stabs "_Msg:Tt1000=s4MethodID:211,0,32;__as::1001=##1002=&1000;:Q28OSNative4_MsgRCQ28OSNative4_Msg;2A.;\\",128,0,0,0
+.stabs "_Msg::1003=##1004=*1000;:__Q28OSNative4_MsgRCQ28OSNative4_Msg;2A.1005=##1004;:__Q28OSNative4_Msg;2A.;;",128,0,32,0
+.stabs "Msg:t1006=1004",128,0,32,0
+.stabs "opSet:Tt1007=s12MethodID:211,0,32;ops_AttrList:531,32,32;\\",128,0,0,0
+.stabs "ops_GInfo:1008=*1009=xsGadgetInfo:,64,32;__as::1010=##1011=&1007;:Q28OSNative5opSetRCQ28OSNative5opSet;2A.;\\",128,0,0,0
+.stabs "opSet::1012=##1013=*1007;:__Q28OSNative5opSetRCQ28OSNative5opSet;2A.1014=##1013;:__Q28OSNative5opSet;2A.;;",128,0,84,0
+.stabs "opUpdate:Tt1015=s16MethodID:211,0,32;opu_AttrList:531,32,32;\\",128,0,0,0
+.stabs "opu_GInfo:1008,64,32;opu_Flags:211,96,32;__as::1016=##1017=&1015;:Q28OSNative8opUpdateRCQ28OSNative8opUpdate;2A.;\\",128,0,0,0
+.stabs "opUpdate::1018=##1019=*1015;:__Q28OSNative8opUpdateRCQ28OSNative8opUpdate;2A.1020=##1019;:__Q28OSNative8opUpdate;2A.;;",128,0,95,0
+.stabs "opGet:Tt1021=s12MethodID:211,0,32;opg_AttrID:211,32,32;\\",128,0,0,0
+.stabs "opg_Storage:1022=*211,64,32;__as::1023=##1024=&1021;:Q28OSNative5opGetRCQ28OSNative5opGet;2A.;\\",128,0,0,0
+.stabs "opGet::1025=##1026=*1021;:__Q28OSNative5opGetRCQ28OSNative5opGet;2A.1027=##1026;:__Q28OSNative5opGet;2A.;;",128,0,113,0
+.stabs "opAddTail:Tt1028=s8MethodID:211,0,32;opat_List:247,32,32;\\",128,0,0,0
+.stabs "__as::1029=##1030=&1028;:Q28OSNative9opAddTailRCQ28OSNative9opAddTail;2A.;opAddTail::1031=##1032=*1028;:__Q28OSNative9opAddTailRCQ28OSNative9opAddTail;2A.\\",128,0,0,0
+.stabs "1033=##1032;:__Q28OSNative9opAddTail;2A.;;",128,0,119,0
+.stabs "opMember:Tt1034=s8MethodID:211,0,32;opam_Object:1035=*998,32,32;\\",128,0,0,0
+.stabs "__as::1036=##1037=&1034;:Q28OSNative8opMemberRCQ28OSNative8opMember;2A.;opMember::1038=##1039=*1034;:__Q28OSNative8opMemberRCQ28OSNative8opMember;2A.\\",128,0,0,0
+.stabs "1040=##1039;:__Q28OSNative8opMember;2A.;;",128,0,126,0
+.stabs "IClass:Tt1041=s52cl_Dispatcher:401,0,160;cl_Reserved:211,160,32;\\",128,0,0,0
+.stabs "cl_Super:1042=*1041,192,32;cl_ID:999,224,32;cl_InstOffset:214,256,16;\\",128,0,0,0
+.stabs "cl_InstSize:214,272,16;cl_UserData:211,288,32;cl_SubclassCount:211,320,32;\\",128,0,0,0
+.stabs "cl_ObjectCount:211,352,32;cl_Flags:211,384,32;__as::1043=##1044=&1041;:Q28OSNative6IClassRCQ28OSNative6IClass;2A.;\\",128,0,0,0
+.stabs "IClass::1045=##1042;:__Q28OSNative6IClassRCQ28OSNative6IClass;2A.1046=##1042;:__Q28OSNative6IClass;2A.;;",128,0,51,0
+.stabs "Class:t1047=1041",128,0,51,0
+.stabs "_Object:Tt1048=s12o_Node:237,0,64;o_Class:1042,64,32;\\",128,0,0,0
+.stabs "__as::1049=##1050=&1048;:Q28OSNative7_ObjectRCQ28OSNative7_Object;2A.;_Object::1051=##1052=*1048;:__Q28OSNative7_ObjectRCQ28OSNative7_Object;2A.\\",128,0,0,0
+.stabs "1053=##1052;:__Q28OSNative7_Object;2A.;;",128,0,84,0
+.stabs "ClassLibrary:Tt1054=s40cl_Lib:319,0,272;cl_Pad:214,272,16;\\",128,0,0,0
+.stabs "cl_Class:1055=*1047,288,32;__as::1056=##1057=&1054;:Q28OSNative12ClassLibraryRCQ28OSNative12ClassLibrary;2A.;\\",128,0,0,0
+.stabs "ClassLibrary::1058=##1059=*1054;:__Q28OSNative12ClassLibraryRCQ28OSNative12ClassLibrary;2A.\\",128,0,0,0
+.stabs "1060=##1059;:__Q28OSNative12ClassLibrary;2A.;;",128,0,111,0
+.stabs "GadgetInfo:Tt1009=s58gi_Screen:743,0,32;gi_Window:830,32,32;\\",128,0,0,0
+.stabs "gi_Requester:823,64,32;gi_RastPort:416,96,32;gi_Layer:413,128,32;\\",128,0,0,0
+.stabs "gi_Domain:896,160,64;gi_Pens:1061=s2DetailPen:217,0,8;\\",128,0,0,0
+.stabs "BlockPen:217,8,8;__as::1062=#1061,1063=&1061,1064=*1061,1065=&1061,20;:__as__Q38OSNative10GadgetInfo4$_14RCQ38OSNative10GadgetInfo4$_14;2A.;\\",128,0,0,0
+.stabs "$_14::1066=#1061,1064,1064,1065,20;:__Q38OSNative10GadgetInfo4$_14RCQ38OSNative10GadgetInfo4$_14;2A.\\",128,0,0,0
+.stabs "1067=#1061,1064,1064,20;:__Q38OSNative10GadgetInfo4$_14;2A.;;,224,16;\\",128,0,0,0
+.stabs "gi_DrInfo:930,240,32;gi_Reserved:1068=ar1;0;5;5,272,192;\\",128,0,0,0
+.stabs "__as::1069=##1070=&1009;:Q28OSNative10GadgetInfoRCQ28OSNative10GadgetInfo;2A.;GadgetInfo::1071=##1008;:__Q28OSNative10GadgetInfoRCQ28OSNative10GadgetInfo;2A.\\",128,0,0,0
+.stabs "1072=##1008;:__Q28OSNative10GadgetInfo;2A.;;",128,0,65,0
+.stabs "PGX:Tt1073=s16pgx_Container:896,0,64;pgx_NewKnob:896,64,64;\\",128,0,0,0
+.stabs "__as::1074=##1075=&1073;:Q28OSNative3PGXRCQ28OSNative3PGX;2A.;PGX::1076=##1077=*1073;:__Q28OSNative3PGXRCQ28OSNative3PGX;2A.\\",128,0,0,0
+.stabs "1078=##1077;:__Q28OSNative3PGX;2A.;;",128,0,72,0
+.stabs "uint8:t1079=11",128,0,59,0
+.stabs "uint16:t1080=9",128,0,60,0
+.stabs "uint32:t1081=5",128,0,61,0
+.stabs "uint64:t1082=7",128,0,62,0
+.stabs "sint8:t1083=10",128,0,63,0
+.stabs "sint16:t1084=8",128,0,64,0
+.stabs "sint32:t1085=3",128,0,65,0
+.stabs "sint64:t1086=6",128,0,66,0
+.stabs "float32:t1087=12",128,0,67,0
+.stabs "float64:t1088=13",128,0,68,0
+.stabs "floatF:t1089=12",128,0,69,0
+.stabs "Runnable:Tt1090=s4$vf1090:91,0;__as::1091=##1092=&1090;:RC8Runnable;2A.;Runnable::1093=##1094=*1090;:RC8Runnable;2A.\\",128,0,0,0
+.stabs "1095=##1094;:;2A.;_dfRTTI::1096=##20;:;0A*2;1090;;run::1097=##1085;:;2A*3;1090;;\\",128,0,0,0
+.stabs "Runnable::1098=#1090,20,1094,1,20;:_$_8Runnable;2A*4;1090;;;~%1090;",128,0,28,0
+.stabs "Startup:Tt1099=s1numArgs:/01085:_7Startup$numArgs;argPtrs:/01100=*61:_7Startup$argPtrs;\\",128,0,0,0
+.stabs "__as::1101=##1102=&1099;:RC7Startup;2A.;Startup::1103=##1104=*1099;:RC7Startup;2A.1105=##1104;:;2A.;\\",128,0,0,0
+.stabs "init::1106=f20:iPPc;2A?;done::257:;2A?;getNumArgs::1107=f1085:;1A?;getArg::1108=f99:Ul;1A?;\\",128,0,0,0
+.stabs "getArgString::1109=f99:PCcT1Us;1A?;getArgInteger::1110=f1085:PCcllUs;1A?;getArgUnsigned::1111=f1081:PCcUllUs;1A?;\\",128,0,0,0
+.stabs "getArgReal::1112=f1088:PCcdUs;1A?;getArgSwitch::1113=f19:PCcUs;1A?;locateArgument::1114=f1085:PCcUs;0A?;;",128,0,50,0
+.stabs "Application:Tt1115=s6!2,020,1090;0032,1099;currentStage:/01116=xeAppStage::_11Application$currentStage;\\",128,0,0,0
+.stabs "stages:/01117=ar1;0;4;99:_11Application$stages;Application::1118=#1115,20,1119=*1115,1,20;:_$_11Application;2A*4;1090;;\\",128,0,0,0
+.stabs "_dfRTTI::1120=##20;:;0A*2;1090;;getNumArgs::1107:;2A?;getArg::1108:Ul;2A?;getArgString::1109:PCcT1Us;2A?;\\",128,0,0,0
+.stabs "getArgInteger::1110:PCcllUs;2A?;getArgUnsigned::1111:PCcUllUs;2A?;getArgInteger::1121=f1085:PCclUs;2A?;\\",128,0,0,0
+.stabs "getArgHex::1122=f1081:PCcUlUs;2A?;getArgOct::1122:PCcUlUs;2A?;getArgBin::1122:PCcUlUs;2A?;\\",128,0,0,0
+.stabs "getArgReal::1112:PCcdUs;2A?;getArgSwitch::1113:PCcUs;2A?;createInstance::1123=f1119:;2A?;\\",128,0,0,0
+.stabs "destroyInstance::1124=f20:P11Application;2A?;getStage::1125=f99:;2A?;Application::1126=##1119;:;1A.\\",128,0,0,0
+.stabs "1127=##1119;:RC11Application;0A.;__as::1128=##1129=&1115;:RC11Application;0A.;setStage::1130=f20:Q211Application8AppStage;0A?;;~%1090;",128,0,119,0
+.stabs "TooFewArguments:Tt1131=s4!1,020,90;__as::1132=##1133=&1131;:Q211Application15TooFewArgumentsRCQ211Application15TooFewArguments;2A.;\\",128,0,0,0
+.stabs "TooFewArguments::1134=##1135=*1131;:__Q211Application15TooFewArgumentsRCQ211Application15TooFewArguments;2A.\\",128,0,0,0
+.stabs "1136=##1135;:__Q211Application15TooFewArguments;2A.;_dfRTTI::1137=##20;:Q211Application15TooFewArguments;0A*2;90;;;~%90;",128,0,128,0
+.stabs "MissingArgument:Tt1138=s8!1,020,164;__as::1139=##1140=&1138;:Q211Application15MissingArgumentRCQ211Application15MissingArgument;2A.;\\",128,0,0,0
+.stabs "MissingArgument::1141=##1142=*1138;:__Q211Application15MissingArgumentRCQ211Application15MissingArgument;2A.;\\",128,0,0,0
+.stabs "_dfRTTI::1143=##20;:Q211Application15MissingArgument;0A*2;90;;MissingArgument::1144=##1142;:__Q211Application15MissingArgumentPCc;2A.;;~%90;",128,0,133,0
+.stabs "InvalidArgument:Tt1145=s8!1,020,164;__as::1146=##1147=&1145;:Q211Application15InvalidArgumentRCQ211Application15InvalidArgument;2A.;\\",128,0,0,0
+.stabs "InvalidArgument::1148=##1149=*1145;:__Q211Application15InvalidArgumentRCQ211Application15InvalidArgument;2A.;\\",128,0,0,0
+.stabs "_dfRTTI::1150=##20;:Q211Application15InvalidArgument;0A*2;90;;InvalidArgument::1151=##1149;:__Q211Application15InvalidArgumentPCc;2A.;;~%90;",128,0,139,0
+.stabs "va_list:t1152=61",128,0,43,0
+.stabs "FILE:t1153=1154=xsfilehandle:",128,0,24,0
+.stabs "fpos_t:t1155=1",128,0,105,0
+.stabs "SystemLog:Tt1156=s1verbosity:/01157=xeVerbosity::_9SystemLog$verbosity;\\",128,0,0,0
+.stabs "logFile:/01158=*1153:_9SystemLog$logFile;logSemaphore:/0359:_9SystemLog$logSemaphore;\\",128,0,0,0
+.stabs "loggingClassName:/099:_9SystemLog$loggingClassName;__as::1159=##1160=&1156;:RC9SystemLog;2A.;\\",128,0,0,0
+.stabs "SystemLog::1161=##1162=*1156;:RC9SystemLog;2A.1163=##1162;:;2A.;write::1164=f20:Q29SystemLog5LevelPCce;2A?;\\",128,0,0,0
+.stabs "setVerbosity::1165=f1157:Q29SystemLog9Verbosity;2A?;lock::257:;1A?;printf::1164:Q29SystemLog5LevelPCce;1A?;\\",128,0,0,0
+.stabs "unlock::257:;1A?;init::257:;0A?;done::257:;0A?;;",128,0,60,0
+.stabs "RawMemHandler:Tt1166=s1puddleSize:/177:_13RawMemHandler$puddleSize;\\",128,0,0,0
+.stabs "threshSize:/177:_13RawMemHandler$threshSize;memPool:/1209:_13RawMemHandler$memPool;\\",128,0,0,0
+.stabs "poolSemaphore:/1359:_13RawMemHandler$poolSemaphore;loggingClassName:/099:_13RawMemHandler$loggingClassName;\\",128,0,0,0
+.stabs "__as::1167=##1168=&1166;:RC13RawMemHandler;2A.;RawMemHandler::1169=##1170=*1166;:RC13RawMemHandler;2A.\\",128,0,0,0
+.stabs "1171=##1170;:;2A.;alloc::1172=f209:UlUl;1A?;free::1173=f20:PvUl;1A?;copy::1174=f20:PvPCvUl;1A?;\\",128,0,0,0
+.stabs "swap16::1174:PvPCvUl;1A?;swap32::1174:PvPCvUl;1A?;swap64::1174:PvPCvUl;1A?;zero::1173:PvUl;1A?;\\",128,0,0,0
+.stabs "set::1175=f20:PviUl;1A?;set16::1176=f20:PvUsUl;1A?;set32::1177=f20:PvUlUl;1A?;\\",128,0,0,0
+.stabs "set64::1178=f20:PvRCUxUl;1A?;getRemainingFreeSize::1179=f77:;1A?;debug::257:;1A?;\\",128,0,0,0
+.stabs "init::257:;1A?;done::257:;1A?;validAllocator::1180=f19:;1A?;lockAllocator::257:;1A?;\\",128,0,0,0
+.stabs "unlockAllocator::257:;1A?;;",128,0,70,0
+.stabs "Mem:Tt1181=s2!2,000,1166;008,1156;head:/01182=*1183=xsMemInfo::_3Mem$head;\\",128,0,0,0
+.stabs "memIdentifier:/01081:_3Mem$memIdentifier;numAlloc:/077:_3Mem$numAlloc;\\",128,0,0,0
+.stabs "peakAlloc:/077:_3Mem$peakAlloc;totSize:/077:_3Mem$totSize;\\",128,0,0,0
+.stabs "peakSize:/077:_3Mem$peakSize;totRequested:/077:_3Mem$totRequested;\\",128,0,0,0
+.stabs "peakRequested:/077:_3Mem$peakRequested;loggingClassName:/099:_3Mem$loggingClassName;\\",128,0,0,0
+.stabs "__as::1184=##1185=&1181;:RC3Mem;2A.;Mem::1186=##1187=*1181;:RC3Mem;2A.1188=##1187;:;2A.;\\",128,0,0,0
+.stabs "alloc::1189=f209:UlUl;2A?;free::1190=f20:Pv;2A?;quickStringCopy::1191=f20:PcPCc;2A?;\\",128,0,0,0
+.stabs "copy::1174:PvPCvUl;2A?;swap16::1174:PvPCvUl;2A?;swap32::1174:PvPCvUl;2A?;swap64::1174:PvPCvUl;2A?;\\",128,0,0,0
+.stabs "zero::1173:PvUl;2A?;set::1175:PviUl;2A?;set16::1176:PvUsUl;2A?;set32::1177:PvUlUl;2A?;\\",128,0,0,0
+.stabs "set64::1178:PvRCUxUl;2A?;getNumAllocations::1179:;2A?;getPeakAllocations::1179:;2A?;\\",128,0,0,0
+.stabs "getTotalSize::1179:;2A?;getPeakSize::1179:;2A?;getTotalRequestedSize::1179:;2A?;getPeakRequestedSize::1179:;2A?;\\",128,0,0,0
+.stabs "getRemainingFreeSize::1179:;2A?;debug::257:;2A?;init::257:;0A?;done::257:;0A?;;",128,0,85,0
+.stabs "Exhausted:Tt1192=s12!1,020,180;allocSize:/077,64,32;\\",128,0,0,0
+.stabs "__as::1193=##1194=&1192;:Q23Mem9ExhaustedRCQ23Mem9Exhausted;2A.;Exhausted::1195=##1196=*1192;:__Q23Mem9ExhaustedRCQ23Mem9Exhausted;2A.;\\",128,0,0,0
+.stabs "_dfRTTI::1197=##20;:Q23Mem9Exhausted;0A*2;90;;log::1198=##20;:Q23Mem9Exhausted;2B*4;90;;\\",128,0,0,0
+.stabs "size::1199=##77;:Q23Mem9Exhausted;2B.;Exhausted::1200=##1196;:__Q23Mem9ExhaustedUl;2A.;;~%90;",128,0,102,0
+.stabs "VLinkNode:Tt1201=s16prev:1202=*1201,0,32;next:1202,32,32;\\",128,0,0,0
+.stabs "nextFree:1202,64,32;item:209,96,32;__as::1203=##1204=&1201;:Q311EXNGPrivate10VLinkCache9VLinkNodeRCQ311EXNGPrivate10VLinkCache9VLinkNode;2A.;\\",128,0,0,0
+.stabs "VLinkNode::1205=##1202;:__Q311EXNGPrivate10VLinkCache9VLinkNodeRCQ311EXNGPrivate10VLinkCache9VLinkNode;2A.\\",128,0,0,0
+.stabs "1206=##1202;:__Q311EXNGPrivate10VLinkCache9VLinkNode;2A.;;",128,0,20,0
+.stabs "VLinkBlock:Tt1207=s136prev:1208=*1207,0,32;next:1208,32,32;\\",128,0,0,0
+.stabs "nodes:1209=ar1;0;7;1201,64,1024;__as::1210=##1211=&1207;:Q311EXNGPrivate10VLinkCache10VLinkBlockRCQ311EXNGPrivate10VLinkCache10VLinkBlock;2A.;\\",128,0,0,0
+.stabs "VLinkBlock::1212=##1208;:__Q311EXNGPrivate10VLinkCache10VLinkBlockRCQ311EXNGPrivate10VLinkCache10VLinkBlock;2A.\\",128,0,0,0
+.stabs "1213=##1208;:__Q311EXNGPrivate10VLinkCache10VLinkBlock;2A.;;",128,0,35,0
+.stabs "VLinkCache:Tt1214=s1head:/01208:_Q211EXNGPrivate10VLinkCache$head;\\",128,0,0,0
+.stabs "nextFreeNode:/01202:_Q211EXNGPrivate10VLinkCache$nextFreeNode;\\",128,0,0,0
+.stabs "totalNodesUsed:/01081:_Q211EXNGPrivate10VLinkCache$totalNodesUsed;\\",128,0,0,0
+.stabs "totalNodesAllocated:/01081:_Q211EXNGPrivate10VLinkCache$totalNodesAllocated;\\",128,0,0,0
+.stabs "__as::1215=##1216=&1214;:Q211EXNGPrivate10VLinkCacheRCQ211EXNGPrivate10VLinkCache;2A.;\\",128,0,0,0
+.stabs "VLinkCache::1217=##1218=*1214;:__Q211EXNGPrivate10VLinkCacheRCQ211EXNGPrivate10VLinkCache;2A.\\",128,0,0,0
+.stabs "1219=##1218;:__Q211EXNGPrivate10VLinkCache;2A.;createLink::1220=f1202:Q211EXNGPrivate10VLinkCache;2A?;\\",128,0,0,0
+.stabs "destroyLink::1221=f20:Q211EXNGPrivate10VLinkCachePQ311EXNGPrivate10VLinkCache9VLinkNode;2A?;\\",128,0,0,0
+.stabs "expungeCache::1222=f1081:Q211EXNGPrivate10VLinkCache;2A?;destroyCache::257:Q211EXNGPrivate10VLinkCache;0A?;\\",128,0,0,0
+.stabs "expandCache::1180:Q211EXNGPrivate10VLinkCache;0A?;blockUsage::1223=f1081:Q211EXNGPrivate10VLinkCachePQ311EXNGPrivate10VLinkCache10VLinkBlock;0A?;;",128,0,45,0
+.stabs "NewListTestApp:Tt1224=s6!1,020,1115;__as::1225=##1226=&1224;:RC14NewListTestApp;2A.;\\",128,0,0,0
+.stabs "NewListTestApp::1227=##1228=*1224;:RC14NewListTestApp;2A.;run::1229=##1085;:;2A*3;1090;;\\",128,0,0,0
+.stabs "NewListTestApp::1230=##1228;:;2A.1231=#1224,20,1228,1,20;:_$_14NewListTestApp;2A*4;1090;;;~%1090;",128,0,28,0
+	.even
+.globl _createInstance__11Application
+_createInstance__11Application:
+	.stabd 68,0,31
+	link a5,#-60
+	fmovem #0xfc,sp@-
+	moveml #0x3f3a,sp@-
+	jbsr ___get_eh_context
+	movel d0,a5@(-56)
+LBB2:
+	.stabd 68,0,32
+	pea 6:w
+	jbsr ___builtin_new
+	movel d0,a5@(-52)
+	movel a5@(-56),a0
+	addql #4,a0
+	movel a0@,a5@(-24)
+	clrl a5@(-20)
+	movel a5,a5@(-16)
+	movel #L167,a5@(-12)
+	movel sp,a5@(-8)
+	movel a0,a5@(-60)
+	jra L166
+	.even
+L167:
+	movel a5@(-56),a0
+	addql #4,a0
+	movel a0,a5@(-60)
+	jra L164
+	.even
+L166:
+	lea a5@(-24),a1
+	movel a1,a0@
+	movel a5@(-52),sp@-
+	jbsr ___14NewListTestApp
+LBB3:
+	movel a5@(-60),a1
+	movel a1@,a0
+	movel a0@,a1@
+LBE3:
+	jra L178
+LBE2:
+	.even
+L164:
+	movel a5@(-60),a0
+	movel a0@,a5@(-48)
+	clrl a5@(-44)
+	movel a5,a5@(-40)
+	movel #L173,a5@(-36)
+	movel sp,a5@(-32)
+	jra L172
+	.even
+L173:
+	jra L179
+	.even
+L172:
+	lea a5@(-48),a0
+	movel a5@(-60),a1
+	movel a0,a1@
+	moveq #1,d0
+	jeq L175
+	movel a5@(-52),sp@-
+	jbsr ___builtin_delete
+	addql #4,sp
+L175:
+	movel a5@(-56),a1
+	addql #4,a1
+	movel a1@,a0
+	movel a0@,a1@
+	jbsr ___sjthrow
+	.even
+L179:
+L170:
+	jbsr ___terminate
+	.even
+L178:
+	.stabd 68,0,33
+	moveml a5@(-172),#0x5cfc
+	fmovem a5@(-132),#0x3f
+	unlk a5
+	rts
+.stabs "createInstance__11Application:F1119",36,0,31,_createInstance__11Application
+.stabn 192,0,0,LBB2
+.stabn 192,0,0,LBB3
+.stabn 224,0,0,LBE3
+.stabn 224,0,0,LBE2
+	.even
+.globl _destroyInstance__11ApplicationP11Application
+_destroyInstance__11ApplicationP11Application:
+	.stabd 68,0,36
+	pea a5@
+	movel sp,a5
+	movel a5@(8),a1
+LBB4:
+	.stabd 68,0,37
+	tstl a1
+	jeq L188
+	movel a1@,a0
+	pea 3:w
+	movel a1,sp@-
+	movel a0@(16),a0
+	jbsr a0@
+L188:
+LBE4:
+	.stabd 68,0,38
+	unlk a5
+	rts
+.stabs "destroyInstance__11ApplicationP11Application:F20",36,0,36,_destroyInstance__11ApplicationP11Application
+.stabs "app:p1119",160,0,36,8
+.stabs "app:r1119",64,0,36,9
+.stabn 192,0,0,LBB4
+.stabn 224,0,0,LBE4
+LC0:
+	.ascii "Created NewListTestApp\12\0"
+	.even
+.globl ___14NewListTestApp
+___14NewListTestApp:
+	.stabd 68,0,41
+	link a5,#-100
+	fmovem #0xfc,sp@-
+	moveml #0x3f3a,sp@-
+	jbsr ___get_eh_context
+	movel d0,d1
+.stabs "exng2:include/systemlib/application.hpp",132,0,0,Ltext1
+Ltext1:
+	.stabd 68,0,102
+LBB5:
+LBB6:
+.stabs "exng2:include/systemlib/runnable.hpp",132,0,0,Ltext2
+Ltext2:
+	.stabd 68,0,28
+	movel a5@(8),a0
+	movel #___vt_8Runnable,a0@
+.stabs "exng2:include/systemlib/application.hpp",132,0,0,Ltext3
+Ltext3:
+	.stabd 68,0,102
+LBE6:
+	movel d1,a0
+	addql #4,a0
+	movel a0@,a5@(-24)
+	clrl a5@(-20)
+	movel a5,a5@(-16)
+	movel #L194,a5@(-12)
+	movel sp,a5@(-8)
+L194:
+	lea a5@(-24),a1
+	movel a1,a0@
+	movel a5@(8),a0
+	movel #___vt_11Application,a0@
+LBB7:
+LBE7:
+	movel d1,a0
+	addql #4,a0
+	movel a0@,a1
+	movel a1@,a0@
+.stabs "exng2:include/systemlib/runnable.hpp",132,0,0,Ltext4
+Ltext4:
+	.stabd 68,0,27
+LBB8:
+LBB9:
+LBE9:
+LBE8:
+.stabs "exng2:include/systemlib/application.hpp",132,0,0,Ltext5
+Ltext5:
+	.stabd 68,0,102
+LBE5:
+.stabs "application.cpp",132,0,0,Ltext6
+Ltext6:
+	.stabd 68,0,41
+	movel a0@,a5@(-72)
+	clrl a5@(-68)
+	movel a5,a5@(-64)
+	movel #L208,a5@(-60)
+	movel sp,a5@(-56)
+	movel a0,a5@(-100)
+	jra L207
+	.even
+L208:
+	jra L222
+	.even
+L207:
+	lea a5@(-72),a1
+	movel a1,a0@
+	movel a5@(8),a0
+	movel #___vt_14NewListTestApp,a0@
+LBB10:
+	.stabd 68,0,42
+	pea LC0
+	pea 3:w
+	jbsr _write__9SystemLogQ29SystemLog5LevelPCce
+LBE10:
+	movel a5@(-100),a1
+	movel a1@,a0
+	movel a0@,a1@
+	movel a5@(8),d0
+	jra L221
+	.even
+L222:
+L205:
+	movel a5@(-100),a0
+	movel a0@,a5@(-96)
+	clrl a5@(-92)
+	movel a5,a5@(-88)
+	movel #L213,a5@(-84)
+	movel sp,a5@(-80)
+	jra L212
+	.even
+L213:
+	jra L223
+	.even
+L212:
+	lea a5@(-96),a0
+	movel a5@(-100),a1
+	movel a0,a1@
+	.stabd 68,0,37
+LBB11:
+.stabs "exng2:include/systemlib/runnable.hpp",132,0,0,Ltext7
+Ltext7:
+	.stabd 68,0,27
+LBB12:
+	movel a5@(8),a1
+	movel #___vt_8Runnable,a1@
+LBB13:
+LBE13:
+LBE12:
+.stabs "application.cpp",132,0,0,Ltext8
+Ltext8:
+	.stabd 68,0,37
+LBE11:
+	.stabd 68,0,44
+	movel a5@(-100),a1
+	movel a1@,a0
+	movel a0@,a1@
+	jbsr ___sjthrow
+	.even
+L223:
+L210:
+	jbsr ___terminate
+	.even
+L221:
+	moveml a5@(-212),#0x5cfc
+	fmovem a5@(-172),#0x3f
+	unlk a5
+	rts
+.stabs "__14NewListTestApp:F1228",36,0,41,___14NewListTestApp
+.stabs "this:p1228",160,0,41,8
+.stabs "this:1119",128,0,41,8
+.stabn 192,0,0,LBB5
+.stabs "this:1094",128,0,102,8
+.stabn 192,0,0,LBB6
+.stabn 224,0,0,LBE6
+.stabn 192,0,0,LBB7
+.stabn 224,0,0,LBE7
+.stabs "this:1094",128,0,102,8
+.stabn 192,0,0,LBB8
+.stabn 192,0,0,LBB9
+.stabn 224,0,0,LBE9
+.stabn 224,0,0,LBE8
+.stabn 224,0,0,LBE5
+.stabn 192,0,0,LBB10
+.stabn 224,0,0,LBE10
+.stabs "this:1119",128,0,44,8
+.stabn 192,0,0,LBB11
+.stabs "this:1094",128,0,37,8
+.stabn 192,0,0,LBB12
+.stabn 192,0,0,LBB13
+.stabn 224,0,0,LBE13
+.stabn 224,0,0,LBE12
+.stabn 224,0,0,LBE11
+LC1:
+	.ascii "Destroyed NewListTestApp\12\0"
+	.even
+.globl __$_14NewListTestApp
+__$_14NewListTestApp:
+	.stabd 68,0,47
+	pea a5@
+	movel sp,a5
+	movel a2,sp@-
+	movel d2,sp@-
+	movel a5@(8),a2
+	movel a5@(12),d2
+	movel #___vt_14NewListTestApp,a2@
+LBB14:
+	.stabd 68,0,48
+	pea LC1
+	pea 3:w
+	jbsr _write__9SystemLogQ29SystemLog5LevelPCce
+LBE14:
+	addql #8,sp
+	.stabd 68,0,37
+LBB15:
+.stabs "exng2:include/systemlib/runnable.hpp",132,0,0,Ltext9
+Ltext9:
+	.stabd 68,0,27
+LBB16:
+	movel #___vt_8Runnable,a2@
+LBB17:
+LBE17:
+	btst #0,d2
+	jeq L231
+	movel a2,sp@-
+	jbsr ___builtin_delete
+LBE16:
+.stabs "application.cpp",132,0,0,Ltext10
+Ltext10:
+	.stabd 68,0,37
+L231:
+LBE15:
+	.stabd 68,0,49
+	movel a5@(-8),d2
+	movel a5@(-4),a2
+	unlk a5
+	rts
+.stabs "_$_14NewListTestApp:F20",36,0,47,__$_14NewListTestApp
+.stabs "this:p1228",160,0,47,8
+.stabs "__in_chrg:p1",160,0,47,12
+.stabs "this:r1228",64,0,47,10
+.stabs "__in_chrg:r1",64,0,47,2
+.stabn 192,0,0,LBB14
+.stabn 224,0,0,LBE14
+.stabs "this:r1119",64,0,49,10
+.stabs "__in_chrg:r1",64,0,49,2
+.stabn 192,0,0,LBB15
+.stabs "__in_chrg:r1",64,0,37,2
+.stabs "this:r1094",64,0,37,10
+.stabn 192,0,0,LBB16
+.stabn 192,0,0,LBB17
+.stabn 224,0,0,LBE17
+.stabn 224,0,0,LBE16
+.stabn 224,0,0,LBE15
+.lcomm _node.228,256
+	.even
+.globl _run__14NewListTestApp
+_run__14NewListTestApp:
+	.stabd 68,0,52
+	pea a5@
+	movel sp,a5
+	moveml #0x3038,sp@-
+	movel a5@(8),d2
+LBB18:
+	.stabd 68,0,55
+LBB19:
+	lea _createLink__Q211EXNGPrivate10VLinkCache,a4
+	lea _destroyLink__Q211EXNGPrivate10VLinkCachePQ311EXNGPrivate10VLinkCache9VLinkNode,a3
+	moveq #63,d3
+	lea _node.228,a2
+	.even
+L236:
+	.stabd 68,0,56
+	jbsr a4@
+	movel d0,a0
+	movel a0,a2@
+	.stabd 68,0,57
+	jeq L240
+	.stabd 68,0,58
+	movel d2,a0@(12)
+L240:
+	.stabd 68,0,61
+	movel a2@,sp@-
+	jbsr a3@
+	.stabd 68,0,63
+	addql #4,sp
+	.stabd 68,0,56
+	jbsr a4@
+	movel d0,a0
+	movel a0,a2@(4)
+	.stabd 68,0,57
+	jeq L243
+	.stabd 68,0,58
+	movel d2,a0@(12)
+L243:
+	.stabd 68,0,61
+	movel a2@(4),sp@-
+	jbsr a3@
+	.stabd 68,0,63
+	addql #4,sp
+	.stabd 68,0,56
+	jbsr a4@
+	movel d0,a0
+	movel a0,a2@(8)
+	.stabd 68,0,57
+	jeq L246
+	.stabd 68,0,58
+	movel d2,a0@(12)
+L246:
+	.stabd 68,0,61
+	movel a2@(8),sp@-
+	jbsr a3@
+	.stabd 68,0,63
+	addql #4,sp
+	.stabd 68,0,56
+	jbsr a4@
+	movel d0,a0
+	movel a0,a2@(12)
+	.stabd 68,0,57
+	jeq L249
+	.stabd 68,0,58
+	movel d2,a0@(12)
+L249:
+	.stabd 68,0,61
+	movel a2@(12),sp@-
+	jbsr a3@
+	.stabd 68,0,63
+	addql #4,sp
+	addw #16,a2
+	subql #4,d3
+	jpl L236
+LBE19:
+	.stabd 68,0,64
+	clrl d0
+LBE18:
+	.stabd 68,0,65
+	moveml a5@(-20),#0x1c0c
+	unlk a5
+	rts
+.stabs "run__14NewListTestApp:F1085",36,0,52,_run__14NewListTestApp
+.stabs "this:p1228",160,0,52,8
+.stabs "this:r1228",64,0,52,2
+.stabs "node:V1232=ar1;0;63;1202",40,0,53,_node.228
+.stabn 192,0,0,LBB18
+.stabs "i:r1085",64,0,55,3
+.stabn 192,0,0,LBB19
+.stabn 224,0,0,LBE19
+.stabn 224,0,0,LBE18
+.globl ___vt_14NewListTestApp
+.stabs "__vt_14NewListTestApp:G1233=ar1;0;5;22",32,0,28,0
+	.even
+___vt_14NewListTestApp:
+	.long 0
+	.long ___tf14NewListTestApp
+	.long __dfRTTI__11Application
+	.long _run__14NewListTestApp
+	.long __$_14NewListTestApp
+	.skip 4
+.stabs "__ti14NewListTestApp:G964",32,0,65,0
+.comm ___ti14NewListTestApp,16
+	.even
+LC2:
+	.long ___ti11Application
+	.byte 0x0
+	.byte 0x0
+	.byte 0x0
+	.byte 0x1
+LC3:
+	.ascii "14NewListTestApp\0"
+	.even
+.globl ___tf14NewListTestApp
+___tf14NewListTestApp:
+	.stabd 68,0,65
+	pea a5@
+	movel sp,a5
+	movel a2,sp@-
+	lea ___ti14NewListTestApp,a2
+	tstl a2@
+	jne L252
+	jbsr ___tf11Application
+	pea 1:w
+	pea LC2
+	pea LC3
+	movel a2,sp@-
+	jbsr ___rtti_class
+L252:
+	movel a2,d0
+	movel a5@(-4),a2
+	unlk a5
+	rts
+.stabs "__tf14NewListTestApp:F1234=&1235=xstype_info:",36,0,28,___tf14NewListTestApp

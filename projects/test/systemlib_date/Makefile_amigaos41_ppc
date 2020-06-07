@@ -1,0 +1,33 @@
+
+# Project: test
+
+# Explanations for the stuff used on the following lines:
+# $@ -	Full name of the target - the object-file on the left of the ':'
+# $< -	The first dependency of the object-file which is the
+#	corresponding C++-file if you generate these dependendy-lines
+#	with "g++ -MM *.cpp".
+#
+# The variables CXX and RM and many more are already predefined in the
+# make program.
+
+EXNG2		 = ////exng2/
+PLATFORM = amigaos41_ppc
+INCDIR   = $(EXNG2)include/
+LIBDIR	 = $(EXNG2)lib/$(PLATFORM)/
+BINDIR	 = $(EXNG2)bin/$(PLATFORM)/
+OBJDIR	 = obj/$(PLATFORM)/
+BIN      = testdate_exe
+
+CXXFLAGS = -O3 -Wall -W -Wno-unused-parameter -I$(INCDIR) -I$(INCDIR)platforms/$(PLATFORM) -DXP_PLATFORM="$(PLATFORM)/" -fomit-frame-pointer -use-dynld
+LDFLAGS  = -L$(LIBDIR) -lexng2system -lauto
+OBJ      = $(OBJDIR)testdate.o
+
+$(BIN): $(OBJ) Makefile_amigaos41_ppc
+	$(CXX) $(CXXFLAGS) ${LDFLAGS} $(OBJ) -o $(BINDIR)$(BIN)
+
+$(OBJDIR)testdate.o: testdate.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+clean:
+	$(RM) $(TARGET) $(OBJDIR)*.o
+

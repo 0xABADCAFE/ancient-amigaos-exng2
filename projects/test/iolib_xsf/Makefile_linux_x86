@@ -1,0 +1,29 @@
+
+# Project: test
+
+# Explanations for the stuff used on the following lines:
+# $@ -	Full name of the target - the object-file on the left of the ':'
+# $< -	The first dependency of the object-file which is the
+#	corresponding C++-file if you generate these dependendy-lines
+#	with "g++ -MM *.cpp".
+#
+# The variables CXX and RM and many more are already predefined in the
+# make program.
+
+LIBDIR   = /extropia/exng2/lib/linux_x86/
+BINDIR	 = /extropia/exng2/bin/linux_x86/
+OBJDIR	 = ./obj/linux_x86/
+BIN      = xsfiotest_exe
+CXXFLAGS = -O3 -Wall -W -Wno-unused-parameter -I/extropia/exng2/include -I/extropia/exng2/include/platforms/linux_x86 -DXP_PLATFORM="linux_x86/" -fomit-frame-pointer
+LDFLAGS  = -L$(LIBDIR) -lexng2system -lexng2io
+OBJ      = $(OBJDIR)application.o
+
+$(BIN): $(OBJ) Makefile_linux_x86
+	$(CXX) $(CXXFLAGS) ${LDFLAGS} $(OBJ) -o $(BINDIR)$(BIN)
+
+$(OBJDIR)application.o: application.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+clean:
+	$(RM) $(TARGET) $(OBJDIR)*.o
+
